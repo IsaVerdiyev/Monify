@@ -1,5 +1,4 @@
-﻿using Monify.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,19 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Monify
+namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : UserControl
     {
-        MainView mainView;
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
-            mainView = new MainView();
-            MainGrid.Children.Add(mainView);
         }
     }
 }

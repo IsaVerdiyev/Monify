@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:Monify"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/CommonDictionary.xaml"/>
+                <ResourceDictionary Source="Resources/MainViewDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
