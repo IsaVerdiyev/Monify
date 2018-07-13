@@ -1,12 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 
 namespace Monify.Services
 {
-    class ObservableObject
+    abstract class ObservableObject : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        void OnPropertyChanged(string prop)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
+        void SetProperty<T>(T field, T value, [CallerMemberName] string prop = "")
+        {
+            field = value;
+            OnPropertyChanged(prop);
+        }
     }
 }
