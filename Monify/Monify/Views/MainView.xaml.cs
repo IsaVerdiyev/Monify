@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Monify.Converters;
+using Monify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,11 @@ namespace Monify.Views
     /// </summary>
     public partial class MainView : UserControl
     {
+        
         public MainView()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

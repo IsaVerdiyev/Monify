@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monify.Views"
-            
+           
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid 
-        Height="500">
+        Height="550">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="300" MaxHeight="300"/>
@@ -49,7 +49,16 @@
             HorizontalAlignment="Stretch"
             ShowsPreview="False"/>
         <DockPanel Grid.Row="1">
-            <Button Height="300">slkdj</Button>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
+                <TextBlock HorizontalAlignment="Center"
+                           Margin="130, 0">
+                    <Run Text="{Binding Path=dayOfWeek, Mode=OneWay}"/>
+                    <Run>,</Run>
+                    <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
+                </TextBlock>
+            </StackPanel>
+            
         </DockPanel>
         <StackPanel Grid.Row="3"
             Height="400">

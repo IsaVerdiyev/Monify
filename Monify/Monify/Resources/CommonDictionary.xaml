@@ -4,6 +4,7 @@
                     xmlns:converters="clr-namespace:Monify.Converters">
 
     <converters:HeightToFontSizeConverter x:Key="heightToSizeConverter"/>
+    
 
     <Style  x:Key="RoundButton" TargetType="Button">
         <Setter Property="Template">

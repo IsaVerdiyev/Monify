@@ -19,7 +19,7 @@ namespace Monify.Services
             expenses = new ObservableCollection<Expense>();
         }
 
-        static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
+        public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
         public ObservableCollection<Expense> Expenses {
             get => expenses;
             set => expenses = value;

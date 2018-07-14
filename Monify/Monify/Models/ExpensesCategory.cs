@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Monify.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,20 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
-    class ExpensesCategory
+    class ExpensesCategory: ObservableObject
     {
-        public string Name { get; set; }
-        public string ImagePath { get; set; }
+        string name;
+
+        public string Name {
+            get => name;
+            set => SetProperty(name, value);
+        }
+
+        string imagePath;
+
+        public string ImagePath {
+            get => imagePath;
+            set => SetProperty(imagePath, value);
+        }
     }
 }

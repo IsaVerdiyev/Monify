@@ -13,7 +13,7 @@ namespace Monify.Services
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
-        void SetProperty<T>(T field, T value, [CallerMemberName] string prop = "")
+        public void SetProperty<T>(T field, T value, [CallerMemberName] string prop = "")
         {
             field = value;
             OnPropertyChanged(prop);
