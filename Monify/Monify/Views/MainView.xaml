@@ -82,6 +82,10 @@
                 </DockPanel>
 
             </Button>
+            <ListBox 
+                MinHeight="400" 
+                MaxHeight="400" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
         <DockPanel Grid.Row="4"
                     LastChildFill="False">

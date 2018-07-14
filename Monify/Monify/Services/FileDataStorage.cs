@@ -12,17 +12,70 @@ namespace Monify.Services
     {
         static FileDataStorage storage;
 
-        ObservableCollection<Expense> expenses;
+        ObservableCollection<OperationCategory> operationCategories;
+        ObservableCollection<OperationType> operationTypes;
+        ObservableCollection<Operation> operations;
+        ObservableCollection<Account> accounts;
+        ObservableCollection<AccountType> accountTypes;
 
         private FileDataStorage()
         {
-            expenses = new ObservableCollection<Expense>();
+            operationTypes = new ObservableCollection<OperationType>
+            {
+                new OperationType{Name = "Expense"} ,
+                new OperationType{Name = "Profit"}
+            };
+
+            operationCategories = new ObservableCollection<OperationCategory>
+            {
+                new OperationCategory{
+                    Name = "hygiene",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                new OperationCategory
+                {
+                    Name = "Food",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                  new OperationCategory{
+                    Name = "Accommodation",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Health",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Cafe",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Car",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Clothes",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Pets",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Presents",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Entertainments",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }, new OperationCategory{
+                    Name = "Communication",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                }
+            };
         }
 
         public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
-        public ObservableCollection<Expense> Expenses {
-            get => expenses;
-            set => expenses = value;
-        }
+       
+        public ObservableCollection<Account> Accounts { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<AccountType> AccountTypes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<OperationType> OperationTypes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<OperationCategory> OperationCategories { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<Operation> Operations { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ObservableCollection<>
     }
 }

@@ -58,8 +58,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\HeightToFontSizeConverter.cs" />
-    <Compile Include="Models\Expense.cs" />
-    <Compile Include="Models\ExpensesCategory.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\Operation.cs" />
+    <Compile Include="Models\OperationCategory.cs" />
+    <Compile Include="Models\OperationType.cs" />
     <Compile Include="Services\FileDataStorage.cs" />
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />

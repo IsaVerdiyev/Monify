@@ -11,7 +11,7 @@ namespace Monify.ViewModels
     {
         IStorage storage;
 
-        DateTime dateTime;
+        
 
         public MainViewModel()
         {
