@@ -4,24 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monify.Views"
-           
+             xmlns:sys ="clr-namespace:System;assembly=mscorlib" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid 
-        Height="550">
+    <UserControl.Resources>
+        <sys:Double x:Key="param">5</sys:Double>
+    </UserControl.Resources>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="300" MaxHeight="300"/>
+            <RowDefinition Height="1.5*"
+                           MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
+            <RowDefinition Height="5*"
+                           MinHeight="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" MinHeight="32"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"
+                           MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
         </Grid.RowDefinitions>
         <DockPanel
             LastChildFill="False"
             Background="Green">
             <Button DockPanel.Dock="Left" 
-                Width="50"
-                FontSize="20"
+                Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                FontSize="30"
                 Background="Transparent"
                 Foreground="White">
                 ☰
@@ -35,7 +40,7 @@
             </TextBlock>
             <Button 
                 DockPanel.Dock="Right"
-                Width="50"
+                Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
                 Background="Transparent"
                 Foreground="White"
                 FontSize="20">
@@ -45,11 +50,12 @@
         <GridSplitter 
             Grid.Row="2"
             Height="3"
-            
             HorizontalAlignment="Stretch"
             ShowsPreview="False"/>
-        <DockPanel Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
+        <DockPanel 
+            Grid.Row="1">
+            <StackPanel DockPanel.Dock="Top"
+                Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                 <TextBlock HorizontalAlignment="Center"
                            Margin="130, 0">
@@ -58,11 +64,12 @@
                     <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                 </TextBlock>
             </StackPanel>
-            
+            <ListBox 
+                     x:Name="operationCategoriesListBox"></ListBox>
+
         </DockPanel>
-        <StackPanel Grid.Row="3"
-            Height="400">
-            <Button>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Button Height="48">
                 <DockPanel 
                 HorizontalAlignment="Stretch"
                 Width="{Binding Path=Parent.ActualWidth, RelativeSource={RelativeSource Self}}">
@@ -78,17 +85,11 @@
                     Balance - 
                     <Run >23</Run>
                     </TextBlock>
-
                 </DockPanel>
-
             </Button>
-            <ListBox 
-                MinHeight="400" 
-                MaxHeight="400" 
-                ScrollViewer.VerticalScrollBarVisibility="Auto"/>
         </StackPanel>
         <DockPanel Grid.Row="4"
-                    LastChildFill="False">
+                    LastChildFill="False" Grid.ColumnSpan="2">
             <Button DockPanel.Dock="Left" Style="{StaticResource BottomExpenseProfitButtons}">-</Button>
             <Button DockPanel.Dock="Right" Style="{StaticResource BottomExpenseProfitButtons}">+</Button>
         </DockPanel>

@@ -20,16 +20,30 @@ namespace Monify.Services
 
         private FileDataStorage()
         {
-            operationTypes = new ObservableCollection<OperationType>
+            Initialize();
+        }
+
+        public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
+       
+        public ObservableCollection<Account> Accounts { get => accounts; set => accounts = value; }
+        public ObservableCollection<AccountType> AccountTypes { get => accountTypes; set => accountTypes = value; }
+        public ObservableCollection<OperationType> OperationTypes { get => operationTypes; set => operationTypes = value; }
+        public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories; set => operationCategories = value; }
+        public ObservableCollection<Operation> Operations { get => operations; set => operations = value; }
+
+       
+        public void Initialize()
+        {
+            OperationTypes = new ObservableCollection<OperationType>
             {
                 new OperationType{Name = "Expense"} ,
                 new OperationType{Name = "Profit"}
             };
 
-            operationCategories = new ObservableCollection<OperationCategory>
+            OperationCategories = new ObservableCollection<OperationCategory>
             {
                 new OperationCategory{
-                    Name = "hygiene",
+                    Name = "Hygiene",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
                 },
                 new OperationCategory
@@ -37,45 +51,73 @@ namespace Monify.Services
                     Name = "Food",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
                 },
-                  new OperationCategory{
+                new OperationCategory{
                     Name = "Accommodation",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+
+                new OperationCategory{
                     Name = "Health",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Cafe",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Car",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Clothes",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Pets",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Presents",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Entertainments",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
-                }, new OperationCategory{
+                },
+                new OperationCategory{
                     Name = "Communication",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                new OperationCategory{
+                    Name = "Sports",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                new OperationCategory{
+                    Name = "Taxi",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                new OperationCategory{
+                    Name = "Transport",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                },
+                new OperationCategory{
+                    Name = "Deposits",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
+                },
+                new OperationCategory{
+                    Name = "Salary",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
+                },
+                new OperationCategory{
+                    Name = "Saving",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
                 }
             };
+            AccountTypes = new ObservableCollection<AccountType>
+            {
+                new AccountType{Name = "Cash"},
+                new AccountType{Name = "Payment Card"}
+            };
         }
-
-        public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
-       
-        public ObservableCollection<Account> Accounts { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<AccountType> AccountTypes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<OperationType> OperationTypes { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<OperationCategory> OperationCategories { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<Operation> Operations { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public ObservableCollection<>
     }
 }

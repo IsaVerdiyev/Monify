@@ -27,8 +27,7 @@ namespace Monify.Services
             if (openFileDialogue.ShowDialog() == true)
             {
 
-                storage.Expenses = JsonConvert.DeserializeObject<ObservableCollection<Expense>>(File.ReadAllText(openFileDialogue.FileName));
-                
+                storage = JsonConvert.DeserializeObject<IStorage>(File.ReadAllText(openFileDialogue.FileName));
             }
         }
 
@@ -39,7 +38,7 @@ namespace Monify.Services
             saveFileDialog.Filter = "json files | *.json";
             if (saveFileDialog.ShowDialog() == true)
             {
-                string saveContents = JsonConvert.SerializeObject(storage.Expenses);
+                string saveContents = JsonConvert.SerializeObject(storage);
                 File.WriteAllText(saveFileDialog.FileName, saveContents);
             }
         }

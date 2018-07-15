@@ -27,5 +27,10 @@ namespace Monify.Models
             get => operationTypeIndex;
             set => operationTypeIndex = value;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

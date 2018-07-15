@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Monify"
         mc:Ignorable="d"
-        Title="MainWindow" Height="594.678" Width="408"
+        Title="MainWindow" Height="489.894" Width="408"
         ResizeMode="NoResize">
     <Grid x:Name="MainGrid">
     </Grid>
