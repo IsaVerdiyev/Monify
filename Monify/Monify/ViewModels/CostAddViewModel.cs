@@ -9,11 +9,12 @@ namespace Monify.ViewModels
 {
     class CostAddViewModel
     {
-        IStorage storage;
+        public IStorage Storage { get; }
 
         public CostAddViewModel()
         {
-            storage = StorageGetter.Storage;
+            Storage = StorageGetter.Storage;
+            
         }
 
         public DateTime CurrentDate { get => DateTime.Now; }

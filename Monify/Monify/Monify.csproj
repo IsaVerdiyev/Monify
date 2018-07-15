@@ -73,7 +73,6 @@
     <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="Services\StorageGetter.cs" />
-    <Compile Include="ViewModels\CostAddCategoriesViewModel.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">

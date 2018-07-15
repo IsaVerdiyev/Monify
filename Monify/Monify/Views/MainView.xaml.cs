@@ -22,11 +22,13 @@ namespace Monify.Views
     /// </summary>
     public partial class MainView : UserControl
     {
+        Window window;
         
-        public MainView()
+        public MainView(Window window)
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            this.window = window;
+            DataContext = new MainViewModel(window);
 
             operationCategoriesListBox.ItemsSource = ((MainViewModel)DataContext).Storage.OperationCategories;
             

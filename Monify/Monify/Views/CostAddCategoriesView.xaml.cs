@@ -21,11 +21,11 @@ namespace Monify.Views
     /// </summary>
     public partial class CostAddCategoriesView : UserControl
     {
-        public CostAddCategoriesView()
+        internal CostAddCategoriesView(CostAddViewModel costAddViewModel)
         {
             InitializeComponent();
-            DataContext = new CostAddCategoriesViewModel();
-            categoriesListBox.ItemsSource = ((CostAddCategoriesViewModel)DataContext).Storage.OperationCategories;
+            DataContext = costAddViewModel;
+            categoriesListBox.ItemsSource = ((CostAddViewModel)DataContext).Storage.OperationCategories;
         }
     }
 }

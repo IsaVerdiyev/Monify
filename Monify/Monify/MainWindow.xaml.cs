@@ -25,7 +25,7 @@ namespace Monify
         public MainWindow()
         {
             InitializeComponent();
-            mainView = new MainView();
+            mainView = new MainView(this);
             MainGrid.Children.Add(mainView);
         }
     }

@@ -90,7 +90,11 @@
         </StackPanel>
         <DockPanel Grid.Row="4"
                     LastChildFill="False" Grid.ColumnSpan="2">
-            <Button DockPanel.Dock="Left" Style="{StaticResource BottomExpenseProfitButtons}">-</Button>
+            <Button DockPanel.Dock="Left" 
+                    Style="{StaticResource BottomExpenseProfitButtons}"
+                    Command="{Binding AddCost}">
+                -
+            </Button>
             <Button DockPanel.Dock="Right" Style="{StaticResource BottomExpenseProfitButtons}">+</Button>
         </DockPanel>
     </Grid>
