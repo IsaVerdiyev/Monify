@@ -25,7 +25,7 @@
             LastChildFill="False"
             Background="Green">
             <Button DockPanel.Dock="Left" 
-                Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                Style="{StaticResource HorizontalSameSizeControl}"
                 FontSize="30"
                 Background="Transparent"
                 Foreground="White">
@@ -40,7 +40,7 @@
             </TextBlock>
             <Button 
                 DockPanel.Dock="Right"
-                Width="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"
+                Style="{StaticResource HorizontalSameSizeControl}"
                 Background="Transparent"
                 Foreground="White"
                 FontSize="20">
@@ -68,7 +68,7 @@
                      x:Name="operationCategoriesListBox"></ListBox>
 
         </DockPanel>
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="3">
             <Button Height="48">
                 <DockPanel 
                 HorizontalAlignment="Stretch"

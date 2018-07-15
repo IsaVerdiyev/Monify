@@ -73,6 +73,9 @@
     <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\CostAddView.xaml.cs">
+      <DependentUpon>CostAddView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\MainViewDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CostAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

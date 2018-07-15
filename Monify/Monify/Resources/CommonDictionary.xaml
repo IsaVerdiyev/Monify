@@ -45,6 +45,10 @@
         <Setter Property="Width" Value="Auto"/>
     </Style>
 
+    <Style x:Key="HorizontalSameSizeControl" TargetType="Control">
+        <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
+    </Style>
+
     
 
 
