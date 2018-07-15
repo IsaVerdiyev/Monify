@@ -9,12 +9,12 @@ namespace Monify.ViewModels
 {
     class MainViewModel: ObservableObject
     {
-        public IStorage storage;
+        public IStorage Storage { get; }
 
 
         public MainViewModel()
         {
-            storage = StorageGetter.Storage;
+            Storage = StorageGetter.Storage;
            
         }
 

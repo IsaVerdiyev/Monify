@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Monify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,16 +17,15 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for CostAddView.xaml
+    /// Interaction logic for CostAddCategoriesView.xaml
     /// </summary>
-    public partial class CostAddView : UserControl
+    public partial class CostAddCategoriesView : UserControl
     {
-        public CostAddView()
+        public CostAddCategoriesView()
         {
             InitializeComponent();
-            CostAddNumbersView numbersView = new CostAddNumbersView();
-            mainGrid.Children.Add(numbersView);
-            Grid.SetRow(numbersView, 3);
+            DataContext = new CostAddCategoriesViewModel();
+            categoriesListBox.ItemsSource = ((CostAddCategoriesViewModel)DataContext).Storage.OperationCategories;
         }
     }
 }

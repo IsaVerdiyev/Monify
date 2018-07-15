@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for CostAddView.xaml
+    /// Interaction logic for CostAddNumbersView.xaml
     /// </summary>
-    public partial class CostAddView : UserControl
+    public partial class CostAddNumbersView : UserControl
     {
-        public CostAddView()
+        public CostAddNumbersView()
         {
             InitializeComponent();
-            CostAddNumbersView numbersView = new CostAddNumbersView();
-            mainGrid.Children.Add(numbersView);
-            Grid.SetRow(numbersView, 3);
         }
     }
 }
