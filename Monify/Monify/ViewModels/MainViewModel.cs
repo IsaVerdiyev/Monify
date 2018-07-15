@@ -14,7 +14,7 @@ namespace Monify.ViewModels
 
         public MainViewModel()
         {
-            storage = FileDataStorage.Storage;
+            storage = StorageGetter.Storage;
            
         }
 

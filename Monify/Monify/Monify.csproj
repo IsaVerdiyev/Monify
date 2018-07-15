@@ -72,6 +72,7 @@
     <Compile Include="Services\JsonSaveLoader.cs" />
     <Compile Include="Services\ObservableObject.cs" />
     <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="Services\StorageGetter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\CostAddView.xaml.cs">
       <DependentUpon>CostAddView.xaml</DependentUpon>
