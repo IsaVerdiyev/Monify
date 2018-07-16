@@ -70,9 +70,9 @@
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
     <Compile Include="Services\JsonSaveLoader.cs" />
-    <Compile Include="Services\ObservableObject.cs" />
-    <Compile Include="Services\RelayCommand.cs" />
-    <Compile Include="Services\StorageGetter.cs" />
+    <Compile Include="Tools\ObservableObject.cs" />
+    <Compile Include="Tools\RelayCommand.cs" />
+    <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 
-namespace Monify.Services
+namespace Monify.Tools
 {
     abstract class ObservableObject : INotifyPropertyChanged
     {

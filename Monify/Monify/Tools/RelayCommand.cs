@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Monify.Services
+namespace Monify.Tools
 {
     class RelayCommand : ICommand
     {
