@@ -3,6 +3,7 @@ using Monify.Tools;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,8 @@ namespace Monify.ViewModels
 
         RelayCommand addCost;
 
-        public RelayCommand AddCost { get
+        public RelayCommand AddCost {
+            get
             {
                 return addCost ??
                     (addCost = new RelayCommand(obj =>
@@ -39,6 +41,21 @@ namespace Monify.ViewModels
                         window.MainGrid.Children.Add(new CostAddView());
                     }
                     ));
-            } }
+            }
+        }
+
+        RelayCommand popUpStatisticsVisibilitySettings;
+
+        public RelayCommand PopUpStatisticsVisibilitySettings
+        {
+            get
+            {
+                return popUpStatisticsVisibilitySettings ??
+                    (popUpStatisticsVisibilitySettings = new RelayCommand(obj =>
+                    {
+                        ((MainView)(window.MainGrid.Children[0])).VisibilitySettingsStackPanel.Margin = new Thickness(0, 0, 0, 0);
+                    }));
+            }
+        }
     }
 }

@@ -9,28 +9,51 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <sys:Double x:Key="param">5</sys:Double>
+        <Storyboard x:Key="VisibilitySettingsAnimation">
+            <DoubleAnimation Storyboard.TargetName="VisibilitySettingsStackPanel" 
+                                                     Storyboard.TargetProperty="Margin" 
+                                                     To="0" 
+                                                     Duration="0:0:1"/>
+        </Storyboard>
+        <Style x:Key="VisibilitySettingsButton"  TargetType="Button"
+                    BasedOn="{StaticResource HorizontalSameSizeControl}">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Click">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard Storyboard="{StaticResource VisibilitySettingsAnimation}">
+                           
+                            
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"
+            <RowDefinition Height="71*"
                            MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
-            <RowDefinition Height="5*"
+            <RowDefinition Height="16*"
                            MinHeight="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
+            <RowDefinition Height="219*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"
+            <RowDefinition Height="47*"/>
+            <RowDefinition Height="94*"
                            MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
         </Grid.RowDefinitions>
         <DockPanel
             LastChildFill="False"
             Background="Green">
-            <Button DockPanel.Dock="Left" 
-                Style="{StaticResource HorizontalSameSizeControl}"
-                FontSize="30"
-                Background="Transparent"
-                Foreground="White">
+            <Button DockPanel.Dock="Left"
+                    Style="{StaticResource VisibilitySettingsButton}">
                 ☰
             </Button>
+
             <TextBlock>
                 <Run
                     FontFamily="Tahoma"
@@ -48,12 +71,25 @@
             </Button>
         </DockPanel>
         <GridSplitter 
-            Grid.Row="2"
+            Grid.Row="3"
             Height="3"
             HorizontalAlignment="Stretch"
             ShowsPreview="False"/>
-        <DockPanel 
-            Grid.Row="1">
+        <DockPanel Grid.Row="1"
+                   Margin="-40, 0, 0, 0" Grid.RowSpan="2">
+
+            <!--</DockPanel.Margin>-->
+            <StackPanel DockPanel.Dock="Left" 
+                        x:Name="VisibilitySettingsStackPanel">
+                <ComboBox>
+                    <ComboBoxItem>All accounts</ComboBoxItem>
+                </ComboBox>
+                <Button>Day</Button>
+                <Button>Week</Button>
+                <Button>Month</Button>
+                <Button>Year</Button>
+                <Button>All</Button>
+            </StackPanel>
             <StackPanel DockPanel.Dock="Top"
                 Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
@@ -68,7 +104,7 @@
                      x:Name="operationCategoriesListBox"></ListBox>
 
         </DockPanel>
-        <StackPanel Grid.Row="3">
+        <StackPanel Grid.Row="4">
             <Button Height="48">
                 <DockPanel 
                 HorizontalAlignment="Stretch"
@@ -88,8 +124,8 @@
                 </DockPanel>
             </Button>
         </StackPanel>
-        <DockPanel Grid.Row="4"
-                    LastChildFill="False" Grid.ColumnSpan="2">
+        <DockPanel Grid.Row="5"
+                    LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"
                     Command="{Binding AddCost}">
