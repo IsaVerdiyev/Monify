@@ -10,8 +10,8 @@
     <UserControl.Resources>
         <sys:Double x:Key="param">5</sys:Double>
         <Storyboard x:Key="VisibilitySettingsAnimation">
-            <DoubleAnimation Storyboard.TargetName="VisibilitySettingsStackPanel" 
-                                                     Storyboard.TargetProperty="Margin" 
+            <DoubleAnimation 
+                                                     Storyboard.TargetProperty="UIElement.Margin" 
                                                      To="0" 
                                                      Duration="0:0:1"/>
         </Storyboard>
@@ -22,16 +22,6 @@
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="White"/>
             </Style.Setters>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="Click">
-                    <EventTrigger.Actions>
-                        <BeginStoryboard Storyboard="{StaticResource VisibilitySettingsAnimation}">
-                           
-                            
-                        </BeginStoryboard>
-                    </EventTrigger.Actions>
-                </EventTrigger>
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid>
@@ -50,8 +40,24 @@
             LastChildFill="False"
             Background="Green">
             <Button DockPanel.Dock="Left"
-                    Style="{StaticResource VisibilitySettingsButton}">
+                    FontSize="30"
+                    Background="Transparent"
+                    Foreground="White">
                 ☰
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                        <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
+                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,0,0" />
+                                    </ThicknessAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Button.Triggers>
             </Button>
 
             <TextBlock>
