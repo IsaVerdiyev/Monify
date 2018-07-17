@@ -9,12 +9,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <sys:Double x:Key="param">5</sys:Double>
-        <Storyboard x:Key="VisibilitySettingsAnimation">
-            <DoubleAnimation 
-                                                     Storyboard.TargetProperty="UIElement.Margin" 
-                                                     To="0" 
-                                                     Duration="0:0:1"/>
-        </Storyboard>
+        
+        
         <Style x:Key="VisibilitySettingsButton"  TargetType="Button"
                     BasedOn="{StaticResource HorizontalSameSizeControl}">
             <Style.Setters>
@@ -50,7 +46,9 @@
                         <EventTrigger.Actions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel"
+                                                                      Storyboard.TargetProperty="Margin" 
+                                                                      BeginTime="00:00:00">
                                         <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
                                         <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,-40,0" >
                                         </SplineThicknessKeyFrame>
@@ -76,6 +74,21 @@
                 Foreground="White"
                 FontSize="20">
                 ┇
+                <Button.Triggers>
+                    <EventTrigger RoutedEvent="Button.Click">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="OtherSettingsStackPanel"
+                                                   Storyboard.TargetProperty="Margin" 
+                                                                      BeginTime="00:00:00">
+                                    <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
+                                    <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="-70,0,70,0" >
+                                    </SplineThicknessKeyFrame>
+                                </ThicknessAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Button.Triggers>
             </Button>
         </DockPanel>
         <GridSplitter 
@@ -87,7 +100,7 @@
                     Grid.RowSpan="3">
 
             <!--</DockPanel.Margin>-->
-            <StackPanel Width="Auto" DockPanel.Dock="Left" 
+            <StackPanel DockPanel.Dock="Left" 
                         x:Name="VisibilitySettingsStackPanel"
                         Margin="-40, 0, 0, 0"
                         Panel.ZIndex="1">
@@ -99,6 +112,15 @@
                 <Button>Month</Button>
                 <Button>Year</Button>
                 <Button>All</Button>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right"
+                        x:Name="OtherSettingsStackPanel"
+                        Margin="0, 0, -70, 0"
+                        Panel.ZIndex="1">
+                <Button>Categories</Button>
+                <Button>Accounts</Button>
+                <Button>Currencies</Button>
+                <Button>Settings</Button>
             </StackPanel>
             <StackPanel 
                 MinWidth="{Binding Path=Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
