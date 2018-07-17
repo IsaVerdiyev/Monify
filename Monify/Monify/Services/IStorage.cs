@@ -10,7 +10,7 @@ namespace Monify.Services
 {
     interface IStorage
     {
-        ObservableCollection<Account> Accounts { get; set; }
+        ObservableCollection<IAccount> Accounts { get; set; }
         ObservableCollection<AccountType> AccountTypes { get; set; }
         ObservableCollection<OperationType> OperationTypes { get; set; }
         ObservableCollection<OperationCategory> OperationCategories { get; set; }

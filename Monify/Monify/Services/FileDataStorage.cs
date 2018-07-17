@@ -15,7 +15,7 @@ namespace Monify.Services
         ObservableCollection<OperationCategory> operationCategories;
         ObservableCollection<OperationType> operationTypes;
         ObservableCollection<Operation> operations;
-        ObservableCollection<Account> accounts;
+        ObservableCollection<IAccount> accounts;
         ObservableCollection<AccountType> accountTypes;
 
         private FileDataStorage()
@@ -25,7 +25,7 @@ namespace Monify.Services
 
         public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
        
-        public ObservableCollection<Account> Accounts { get => accounts; set => accounts = value; }
+        public ObservableCollection<IAccount> Accounts { get => accounts; set => accounts = value; }
         public ObservableCollection<AccountType> AccountTypes { get => accountTypes; set => accountTypes = value; }
         public ObservableCollection<OperationType> OperationTypes { get => operationTypes; set => operationTypes = value; }
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories; set => operationCategories = value; }

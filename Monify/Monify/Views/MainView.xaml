@@ -104,8 +104,7 @@
                         x:Name="VisibilitySettingsStackPanel"
                         Margin="-40, 0, 0, 0"
                         Panel.ZIndex="1">
-                <ComboBox>
-                    <ComboBoxItem>All accounts</ComboBoxItem>
+                <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts, UpdateSourceTrigger=PropertyChanged}" >
                 </ComboBox>
                 <Button>Day</Button>
                 <Button>Week</Button>
@@ -129,13 +128,13 @@
                     <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                     <TextBlock HorizontalAlignment="Center"
                            Margin="130, 0">
-                    <Run Text="{Binding Path=dayOfWeek, Mode=OneWay}"/>
+                    <Run Text="{Binding Path=DayOfWeek, Mode=OneWay}"/>
                     <Run>,</Run>
                     <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                     </TextBlock>
                 </StackPanel>
                 <ListBox 
-                     x:Name="operationCategoriesListBox"></ListBox>
+                     x:Name="operationCategoriesListBox" ItemsSource="{Binding Path=Storage.OperationCategories}"></ListBox>
             </StackPanel>
         </DockPanel>
         <StackPanel Grid.Row="5">

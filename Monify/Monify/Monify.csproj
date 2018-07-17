@@ -63,6 +63,7 @@
     <Compile Include="Converters\MainViewConverters\HeightToMaximumHeightConverter.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationCategory.cs" />
     <Compile Include="Models\OperationType.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
     <Compile Include="Services\JsonSaveLoader.cs" />
+    <Compile Include="Tools\AllUsers.cs" />
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />

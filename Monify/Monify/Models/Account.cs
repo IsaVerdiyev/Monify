@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
-    class Account: ObservableObject
+    class Account: ObservableObject, IAccount
     {
         int iterator = 0;
         int index;
@@ -34,6 +34,7 @@ namespace Monify.Models
             set => accountTypeIndex = value;
         }
 
+        
         public string Name
         {
             get => name;

@@ -1,8 +1,10 @@
-﻿using Monify.Services;
+﻿using Monify.Models;
+using Monify.Services;
 using Monify.Tools;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
@@ -28,9 +30,23 @@ namespace Monify.ViewModels
 
         public DateTime Yesterday { get => CurrentDate.AddDays(-1); }
 
-        public DayOfWeek dayOfWeek { get => CurrentDate.DayOfWeek; }
+        public DayOfWeek DayOfWeek { get => CurrentDate.DayOfWeek; }
 
-       
+        public IAccount SelectedAccount { get; set; }
+
+        ObservableCollection<IAccount> accounts;
+
+        public ObservableCollection<IAccount> Accounts
+        {
+            get
+            {
+                accounts = Storage.Accounts;
+                accounts.Insert(0, new AllUsers());
+                return accounts;
+                
+            }
+        }
+
         RelayCommand addCost;
 
         public RelayCommand AddCost {

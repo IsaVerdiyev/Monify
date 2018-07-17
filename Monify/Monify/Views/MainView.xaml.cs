@@ -30,7 +30,7 @@ namespace Monify.Views
 
             DataContext = (MainViewModel)ViewModelsStorage.ViewModels[VM.MainViewModel];
 
-            operationCategoriesListBox.ItemsSource = ((MainViewModel)DataContext).Storage.OperationCategories;
+
             
 
 
