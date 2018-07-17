@@ -104,7 +104,7 @@
                         x:Name="VisibilitySettingsStackPanel"
                         Margin="-40, 0, 0, 0"
                         Panel.ZIndex="1">
-                <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts, UpdateSourceTrigger=PropertyChanged}" >
+                <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts}" >
                 </ComboBox>
                 <Button>Day</Button>
                 <Button>Week</Button>

@@ -118,6 +118,12 @@ namespace Monify.Services
                 new AccountType{Name = "Cash"},
                 new AccountType{Name = "Payment Card"}
             };
+
+            Accounts = new ObservableCollection<IAccount>();
+
+            Operations = new ObservableCollection<Operation>();
+
+
         }
     }
 }
