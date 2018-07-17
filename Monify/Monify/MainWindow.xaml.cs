@@ -1,4 +1,6 @@
-﻿using Monify.Views;
+﻿using Monify.Tools;
+using Monify.ViewModels;
+using Monify.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +23,14 @@ namespace Monify
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainView mainView;
         public MainWindow()
         {
             InitializeComponent();
-            mainView = new MainView(this);
-            MainGrid.Children.Add(mainView);
+            DataContext = (WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel]);
+            ((WindowViewModel)(DataContext)).CurrentControl = new MainView();
+
+            //mainView = new MainView(this);
+            //MainGrid.Children.Add(mainView);
         }
     }
 }

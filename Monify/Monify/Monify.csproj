@@ -73,8 +73,11 @@
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />
+    <Compile Include="Tools\ViewModelsStorage.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
+    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">
       <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
     </Compile>

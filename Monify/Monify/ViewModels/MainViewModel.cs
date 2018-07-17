@@ -8,19 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class MainViewModel: ObservableObject
+    class MainViewModel: ObservableObject, IViewModel
     {
         public IStorage Storage { get; }
 
-        MainWindow window;
+      
 
-        public MainViewModel(Window window)
+        public MainViewModel()
         {
             Storage = StorageGetter.Storage;
-            this.window = (MainWindow)window;
+           
         }
 
         public DateTime CurrentDate { get => DateTime.Now; }
@@ -29,6 +30,7 @@ namespace Monify.ViewModels
 
         public DayOfWeek dayOfWeek { get => CurrentDate.DayOfWeek; }
 
+       
         RelayCommand addCost;
 
         public RelayCommand AddCost {
@@ -37,25 +39,14 @@ namespace Monify.ViewModels
                 return addCost ??
                     (addCost = new RelayCommand(obj =>
                     {
-                        window.MainGrid.Children.Clear();
-                        window.MainGrid.Children.Add(new CostAddView());
+                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new CostAddView();
                     }
                     ));
             }
         }
 
-        RelayCommand popUpStatisticsVisibilitySettings;
+        
 
-        public RelayCommand PopUpStatisticsVisibilitySettings
-        {
-            get
-            {
-                return popUpStatisticsVisibilitySettings ??
-                    (popUpStatisticsVisibilitySettings = new RelayCommand(obj =>
-                    {
-                        ((MainView)(window.MainGrid.Children[0])).VisibilitySettingsStackPanel.Margin = new Thickness(0, 0, 0, 0);
-                    }));
-            }
-        }
+       
     }
 }

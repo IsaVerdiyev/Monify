@@ -52,7 +52,8 @@
                                 <Storyboard>
                                     <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
                                         <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,-40,0" />
+                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,-40,0" >
+                                        </SplineThicknessKeyFrame>
                                     </ThicknessAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>

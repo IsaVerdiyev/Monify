@@ -8,5 +8,7 @@
         Title="MainWindow" Height="489.894" Width="408"
         ResizeMode="NoResize">
     <Grid x:Name="MainGrid">
+        <ContentControl Content="{Binding CurrentControl}"/>
+       
     </Grid>
 </Window>

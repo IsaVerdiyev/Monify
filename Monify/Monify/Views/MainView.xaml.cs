@@ -1,4 +1,5 @@
 ﻿using Monify.Converters;
+using Monify.Tools;
 using Monify.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,12 @@ namespace Monify.Views
     /// </summary>
     public partial class MainView : UserControl
     {
-        Window window;
         
-        public MainView(Window window)
+        public MainView()
         {
             InitializeComponent();
-            this.window = window;
-            DataContext = new MainViewModel(window);
+
+            DataContext = (MainViewModel)ViewModelsStorage.ViewModels[VM.MainViewModel];
 
             operationCategoriesListBox.ItemsSource = ((MainViewModel)DataContext).Storage.OperationCategories;
             

@@ -26,7 +26,7 @@ namespace Monify.Models
 
         public double Balance {
             get => balance;
-            set => SetProperty(balance, value);
+            set => SetProperty(ref balance, value);
         }
 
         public int AccountTypeIndex {
@@ -43,7 +43,7 @@ namespace Monify.Models
         public string ImagePath
         {
             get => imagePath;
-            set => SetProperty(imagePath, value);
+            set => SetProperty(ref imagePath, value);
         }
 
 

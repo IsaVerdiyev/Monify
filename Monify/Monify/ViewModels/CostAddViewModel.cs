@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Monify.ViewModels
 {
-    class CostAddViewModel
+    class CostAddViewModel:IViewModel
     {
         public IStorage Storage { get; }
 
