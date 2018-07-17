@@ -30,7 +30,8 @@
                            MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
             <RowDefinition Height="16*"
                            MinHeight="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
-            <RowDefinition Height="219*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="202*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="47*"/>
             <RowDefinition Height="94*"
@@ -51,7 +52,7 @@
                                 <Storyboard>
                                     <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
                                         <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,0,0" />
+                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,-40,0" />
                                     </ThicknessAnimationUsingKeyFrames>
                                 </Storyboard>
                             </BeginStoryboard>
@@ -77,16 +78,18 @@
             </Button>
         </DockPanel>
         <GridSplitter 
-            Grid.Row="3"
+            Grid.Row="4"
             Height="3"
             HorizontalAlignment="Stretch"
             ShowsPreview="False"/>
         <DockPanel Grid.Row="1"
-                   Margin="-40, 0, 0, 0" Grid.RowSpan="2">
+                    Grid.RowSpan="3">
 
             <!--</DockPanel.Margin>-->
-            <StackPanel DockPanel.Dock="Left" 
-                        x:Name="VisibilitySettingsStackPanel">
+            <StackPanel Width="Auto" DockPanel.Dock="Left" 
+                        x:Name="VisibilitySettingsStackPanel"
+                        Margin="-40, 0, 0, 0"
+                        Panel.ZIndex="1">
                 <ComboBox>
                     <ComboBoxItem>All accounts</ComboBoxItem>
                 </ComboBox>
@@ -96,21 +99,23 @@
                 <Button>Year</Button>
                 <Button>All</Button>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Top"
+            <StackPanel 
+                MinWidth="{Binding Path=Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+                <StackPanel DockPanel.Dock="Top"
                 Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
-                <TextBlock HorizontalAlignment="Center"
+                    <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
+                    <TextBlock HorizontalAlignment="Center"
                            Margin="130, 0">
                     <Run Text="{Binding Path=dayOfWeek, Mode=OneWay}"/>
                     <Run>,</Run>
                     <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
-                </TextBlock>
-            </StackPanel>
-            <ListBox 
+                    </TextBlock>
+                </StackPanel>
+                <ListBox 
                      x:Name="operationCategoriesListBox"></ListBox>
-
+            </StackPanel>
         </DockPanel>
-        <StackPanel Grid.Row="4">
+        <StackPanel Grid.Row="5">
             <Button Height="48">
                 <DockPanel 
                 HorizontalAlignment="Stretch"
@@ -130,7 +135,7 @@
                 </DockPanel>
             </Button>
         </StackPanel>
-        <DockPanel Grid.Row="5"
+        <DockPanel Grid.Row="6"
                     LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"
