@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
+using System.Windows.Media.Animation;
 
 namespace Monify.ViewModels
 {
@@ -47,13 +49,13 @@ namespace Monify.ViewModels
             }
         }
 
-        RelayCommand addCost;
+        RelayCommand addCostCommand;
 
-        public RelayCommand AddCost {
+        public RelayCommand AddCostCommand {
             get
             {
-                return addCost ??
-                    (addCost = new RelayCommand(obj =>
+                return addCostCommand ??
+                    (addCostCommand = new RelayCommand(obj =>
                     {
                         ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new CostAddView();
                     }
@@ -61,8 +63,158 @@ namespace Monify.ViewModels
             }
         }
 
-        
+        RelayCommand hideVisibilitySettingsCommand;
 
-       
+        public RelayCommand HideVisibilitySettingsCommand
+        {
+            get
+            {
+                return hideVisibilitySettingsCommand ??
+                    (hideVisibilitySettingsCommand = new RelayCommand(obj =>
+                    {
+                        MainView userControl = obj as MainView;
+                        if (userControl != null)
+                        {
+                            var storyboard = new Storyboard();
+                            var animation = new ThicknessAnimation();
+                            animation.BeginTime = new TimeSpan(0);
+                            Storyboard.SetTargetName(animation, userControl.VisibilitySettingsStackPanel.Name);
+                            Storyboard.SetTargetProperty(animation, new PropertyPath(StackPanel.MarginProperty));
+                            animation.To = new Thickness(
+                                -userControl.VisibilitySettingsStackPanel.ActualWidth, 0, 0, 0
+                                );
+                            animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+                            storyboard.Children.Add(animation);
+                            storyboard.Begin(userControl);
+                        }
+                    }
+                    ));
+            }
+        }
+
+        RelayCommand showVisibilitySettingsCommand;
+
+        public RelayCommand ShowVisibilitySettingsCommand
+        {
+            get
+            {
+                return showVisibilitySettingsCommand ??
+                    (showVisibilitySettingsCommand = new RelayCommand(obj =>
+                    {
+                        MainView userControl = obj as MainView;
+                        if (userControl != null)
+                        {
+                            var storyboard = new Storyboard();
+                            var animation = new ThicknessAnimation();
+                            animation.BeginTime = new TimeSpan(0);
+                            Storyboard.SetTargetName(animation, userControl.VisibilitySettingsStackPanel.Name);
+                            Storyboard.SetTargetProperty(animation, new PropertyPath(StackPanel.MarginProperty));
+                            animation.To = new Thickness(
+                                0, 0, -userControl.VisibilitySettingsStackPanel.ActualWidth, 0
+                                );
+                            animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+                            storyboard.Children.Add(animation);
+                            storyboard.Begin(userControl);
+                        }
+                    }));
+            }
+        }
+
+
+        RelayCommand showOtherSettingsCommand;
+
+        public RelayCommand ShowOtherSettingsCommand
+        {
+            get
+            {
+                return showOtherSettingsCommand ??
+                    (showOtherSettingsCommand = new RelayCommand(obj =>
+                    {
+                        MainView userControl = obj as MainView;
+                        if (userControl != null)
+                        {
+                            var storyboard = new Storyboard();
+                            var animation = new ThicknessAnimation();
+                            animation.BeginTime = new TimeSpan(0);
+                            Storyboard.SetTargetName(animation, userControl.OtherSettingsStackPanel.Name);
+                            Storyboard.SetTargetProperty(animation, new PropertyPath(StackPanel.MarginProperty));
+                            animation.To = new Thickness(
+                                -userControl.OtherSettingsStackPanel.ActualWidth, 0, 0, 0
+                                );
+                            animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+                            storyboard.Children.Add(animation);
+                            storyboard.Begin(userControl);
+                        }
+                    }));
+            }
+        }
+
+        RelayCommand hideOtherSettingsCommand;
+
+        public RelayCommand HideOtherSettingsCommand
+        {
+            get
+            {
+                return hideOtherSettingsCommand ??
+                    (hideOtherSettingsCommand = new RelayCommand(obj =>
+                    {
+                        MainView userControl = obj as MainView;
+                        if (userControl != null)
+                        {
+                            var storyboard = new Storyboard();
+                            var animation = new ThicknessAnimation();
+                            animation.BeginTime = new TimeSpan(0);
+                            Storyboard.SetTargetName(animation, userControl.OtherSettingsStackPanel.Name);
+                            Storyboard.SetTargetProperty(animation, new PropertyPath(StackPanel.MarginProperty));
+                            animation.To = new Thickness(
+                                0, 0, -userControl.OtherSettingsStackPanel.ActualWidth, 0
+                                );
+                            animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+                            storyboard.Children.Add(animation);
+                            storyboard.Begin(userControl);
+                        }
+                    }));
+            }
+        }
+
+
+        RelayCommand visibilitSettingsButtonCommands;
+
+        public RelayCommand VisibilitySettingsButtonCommands
+        {
+            get
+            {
+                return visibilitSettingsButtonCommands ??
+                    (visibilitSettingsButtonCommands = new RelayCommand(obj =>
+                    {
+                        ShowVisibilitySettingsCommand.Execute(obj);
+                        HideOtherSettingsCommand.Execute(obj);
+                    }));
+            }
+        }
+
+
+        private RelayCommand otherSettingsButtonCommands;
+
+        public RelayCommand OtherSettingsButtonCommands
+        {
+            get {
+                return otherSettingsButtonCommands ??
+                    (otherSettingsButtonCommands = new RelayCommand(obj =>
+                    {
+                        ShowOtherSettingsCommand.Execute(obj);
+                        HideVisibilitySettingsCommand.Execute(obj);
+                    }));
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }

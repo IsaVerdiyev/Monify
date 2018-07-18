@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Monify.Views"
              xmlns:sys ="clr-namespace:System;assembly=mscorlib" 
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="MainViewUserControl">
     <UserControl.Resources>
         <sys:Double x:Key="param">5</sys:Double>
         
@@ -39,25 +39,10 @@
             <Button DockPanel.Dock="Left"
                     FontSize="30"
                     Background="Transparent"
-                    Foreground="White">
+                    Foreground="White"
+                    Command="{Binding VisibilitySettingsButtonCommands}"
+                    CommandParameter="{Binding ElementName=MainViewUserControl}">
                 ☰
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <EventTrigger.Actions>
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="VisibilitySettingsStackPanel"
-                                                                      Storyboard.TargetProperty="Margin" 
-                                                                      BeginTime="00:00:00">
-                                        <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                                        <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="40,0,-40,0" >
-                                        </SplineThicknessKeyFrame>
-                                    </ThicknessAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger.Actions>
-                    </EventTrigger>
-                </Button.Triggers>
             </Button>
 
             <TextBlock>
@@ -72,7 +57,9 @@
                 Style="{StaticResource HorizontalSameSizeControl}"
                 Background="Transparent"
                 Foreground="White"
-                FontSize="20">
+                FontSize="20"
+                Command="{Binding OtherSettingsButtonCommands}"
+                CommandParameter="{Binding ElementName=MainViewUserControl}">
                 ┇
                 <Button.Triggers>
                     <EventTrigger RoutedEvent="Button.Click">
@@ -161,7 +148,7 @@
                     LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"
-                    Command="{Binding AddCost}">
+                    Command="{Binding AddCostCommand}">
                 -
             </Button>
             <Button DockPanel.Dock="Right" Style="{StaticResource BottomExpenseProfitButtons}">+</Button>
