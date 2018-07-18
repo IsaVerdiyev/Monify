@@ -22,17 +22,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="71*"
-                           MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
-            <RowDefinition Height="16*"
-                           MinHeight="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
-            <RowDefinition Height="17*"/>
-            <RowDefinition Height="22*"/>
-            <RowDefinition Height="180*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="47*"/>
-            <RowDefinition Height="94*"
-                           MaxHeight="{Binding Path=Height, RelativeSource={RelativeSource Self}}"/>
+            <RowDefinition Height="*" x:Name="OperationsListRow"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <DockPanel
             LastChildFill="False"
@@ -79,19 +73,11 @@
                 </Button.Triggers>
             </Button>
         </DockPanel>
-        <GridSplitter 
-            Grid.Row="5"
-            Height="3"
-            HorizontalAlignment="Stretch"
-            ShowsPreview="False"/>
-        <DockPanel Grid.Row="1"
-                    Grid.RowSpan="4">
-
-            <!--</DockPanel.Margin>-->
+        <DockPanel Grid.Row="1">
             <StackPanel DockPanel.Dock="Left" 
                         x:Name="VisibilitySettingsStackPanel"
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
-                        Panel.ZIndex="1" Height="235" VerticalAlignment="Bottom">
+                        Panel.ZIndex="1">
                 <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts}" >
                 </ComboBox>
                 <Button>Day</Button>
@@ -109,43 +95,57 @@
                 <Button>Currencies</Button>
                 <Button>Settings</Button>
             </StackPanel>
-            <StackPanel 
-                MinWidth="{Binding Path=Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=UserControl}}">
+
+
+            <DockPanel x:Name="OperationsStatisticsDockPanel">
                 <StackPanel DockPanel.Dock="Top"
-                Orientation="Horizontal">
+                            Orientation="Horizontal">
                     <TextBlock Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                     <TextBlock HorizontalAlignment="Center"
-                           Margin="130, 0">
-                    <Run Text="{Binding Path=DayOfWeek, Mode=OneWay}"/>
-                    <Run>,</Run>
-                    <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
+                                Margin="130, 0">
+                            <Run Text="{Binding Path=DayOfWeek, Mode=OneWay}"/>
+                            <Run>,</Run>
+                            <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                     </TextBlock>
                 </StackPanel>
-                <ListBox 
-                     x:Name="operationCategoriesListBox" ItemsSource="{Binding Path=Storage.OperationCategories}"></ListBox>
-            </StackPanel>
+               
+                <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             ItemsSource="{Binding Path=Storage.OperationCategories}"/>
+
+                
+            </DockPanel>
         </DockPanel>
-        <StackPanel Grid.Row="6">
-            <Button Height="48">
-                <DockPanel 
-                HorizontalAlignment="Stretch"
+        <GridSplitter 
+            Grid.Row="2"
+            Height="3"
+            HorizontalAlignment="Stretch"
+            ShowsPreview="False"/>
+        <StackPanel Grid.Row="3"
+                    Height="{Binding ElementName=operationCategoriesListBox, Path=Height}"
+                    Background="Aqua">
+            
+                <Button Height="{Binding ElementName=OperationsListRow, Path=ActualHeight, Mode=OneTime}">
+                    <DockPanel 
+                Height="{Binding Path=Height, ElementName=OperationsListRow}"
                 Width="{Binding Path=Parent.ActualWidth, RelativeSource={RelativeSource Self}}">
-                    <TextBlock 
+                        <TextBlock 
                     
                     DockPanel.Dock="Left"> ☰</TextBlock>
-                    <TextBlock 
+                        <TextBlock 
                     
                     DockPanel.Dock="Right"> ☰</TextBlock>
-                    <TextBlock
+                        <TextBlock
                     HorizontalAlignment="Center"
                     FontSize="20">
                     Balance - 
                     <Run >23</Run>
-                    </TextBlock>
-                </DockPanel>
-            </Button>
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <ListBox></ListBox>
+            
         </StackPanel>
-        <DockPanel Grid.Row="7"
+        <DockPanel Grid.Row="4"
                     LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"

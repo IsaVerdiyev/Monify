@@ -115,6 +115,7 @@ namespace Monify.ViewModels
                             animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
                             storyboard.Children.Add(animation);
                             storyboard.Begin(userControl);
+                        
                         }
                     }));
             }
@@ -209,12 +210,18 @@ namespace Monify.ViewModels
         }
 
 
+        private RelayCommand hideSideMenusButtonCommand;
 
-
-
-
-
-
-
+        public RelayCommand HideSideMenuButtonCommand
+        {
+            get {
+                return hideSideMenusButtonCommand ??
+                    (hideSideMenusButtonCommand = new RelayCommand(obj =>
+                    {
+                        HideVisibilitySettingsCommand.Execute(obj);
+                        HideOtherSettingsCommand.Execute(obj);
+                    }));
+            }
+        }
     }
 }
