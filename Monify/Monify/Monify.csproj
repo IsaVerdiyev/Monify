@@ -60,7 +60,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\HeightToFontSizeConverter.cs" />
-    <Compile Include="Converters\MainViewConverters\HeightToMaximumHeightConverter.cs" />
+    <Compile Include="Converters\MainViewConverters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\IAccount.cs" />
