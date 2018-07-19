@@ -21,7 +21,8 @@
                TextElement.Foreground="White">
             <Button
                 DockPanel.Dock="Left"
-                Background="Transparent">
+                Background="Transparent"
+                Command="{Binding ReturnToMainViewCommand}">
                 ⬅
             </Button>
             <TextBlock

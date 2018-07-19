@@ -79,6 +79,7 @@
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">
       <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
