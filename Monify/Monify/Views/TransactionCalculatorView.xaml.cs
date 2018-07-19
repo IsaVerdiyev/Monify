@@ -1,5 +1,4 @@
-﻿using Monify.Tools;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,13 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for CostAddNumbersView.xaml
+    /// Interaction logic for TransactionCalculatorView.xaml
     /// </summary>
-    public partial class CalculatorView : UserControl
+    public partial class TransactionCalculatorView : UserControl
     {
-        public CalculatorView()
+        public TransactionCalculatorView()
         {
             InitializeComponent();
-            DataContext = ViewModelsStorage.ViewModels[VM.CalculatorViewModel].ResetToInitialState();
         }
     }
 }

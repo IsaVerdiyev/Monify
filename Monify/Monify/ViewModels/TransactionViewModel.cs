@@ -40,7 +40,7 @@ namespace Monify.ViewModels
         public IViewModel ResetToInitialState()
         {
             CurrentControl = new TransactionAccountChooseSubView();
-            ((CalculatorViewModel)ViewModelsStorage.ViewModels[VM.CalculatorViewModel]).OperationButtonName = "Add Transaction";
+            
 
             return this;
         }

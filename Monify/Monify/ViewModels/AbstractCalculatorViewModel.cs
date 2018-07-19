@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace Monify.ViewModels
 {
-    class CalculatorViewModel : ObservableObject, IViewModel
+    abstract class AbstractCalculatorViewModel: ObservableObject,  IViewModel
     {
         public IViewModel ResetToInitialState()
         {
             return this;
         }
 
-        string operationButtonName;
 
-        public String OperationButtonName { get => operationButtonName; set => SetProperty(ref operationButtonName, value); }
+        decimal amount;
+
+        public Decimal Amount { get => amount; set => SetProperty(ref amount, value); }
     }
 }

@@ -42,8 +42,7 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
-            CurrentControl = new CalculatorView();
-            ((CalculatorViewModel)ViewModelsStorage.ViewModels[VM.CalculatorViewModel]).OperationButtonName = "Choose category";
+            CurrentControl = new CostProfitCalculatorView();
 
             return this;
         }

@@ -76,17 +76,20 @@
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
-    <Compile Include="ViewModels\CalculatorViewModel.cs" />
+    <Compile Include="ViewModels\AbstractCalculatorViewModel.cs" />
+    <Compile Include="ViewModels\CostProfitCalculatorViewModel.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\TransactionAccountChooseSubViewModel.cs" />
+    <Compile Include="ViewModels\TransactionCaculatorViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">
       <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CalculatorView.xaml.cs">
-      <DependentUpon>CalculatorView.xaml</DependentUpon>
+    <Compile Include="Views\CostProfitCalculatorView.xaml.cs">
+      <DependentUpon>CostProfitCalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CostAddView.xaml.cs">
       <DependentUpon>CostAddView.xaml</DependentUpon>
@@ -96,6 +99,9 @@
     </Compile>
     <Compile Include="Views\TransactionAccountChooseSubView.xaml.cs">
       <DependentUpon>TransactionAccountChooseSubView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionCalculatorView.xaml.cs">
+      <DependentUpon>TransactionCalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionView.xaml.cs">
       <DependentUpon>TransactionView.xaml</DependentUpon>
@@ -124,7 +130,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CalculatorView.xaml">
+    <Page Include="Views\CostProfitCalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TransactionAccountChooseSubView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionCalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -43,7 +43,8 @@
                 Style="{StaticResource HorizontalAutoSizedRoundButtons}"
                 Margin="20"
                 Foreground="White"
-                Background="Green">
+                Background="Green"
+                Command="{Binding SwitchToTransactionCalculatorViewCommand}">
             ☰
         </Button>
 
