@@ -1,4 +1,5 @@
-﻿using Monify.ViewModels;
+﻿using Monify.Tools;
+using Monify.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,8 @@ namespace Monify.Views
         public CostAddView()
         {
             InitializeComponent();
-            CostAddNumbersView numbersView = new CostAddNumbersView();
-            mainGrid.Children.Add(numbersView);
-            Grid.SetRow(numbersView, 3);
+            DataContext = (CostAddViewModel)ViewModelsStorage.ViewModels[VM.CostAddViewModel];
+            ((CostAddViewModel)DataContext).CurrentControl = new CostAddNumbersView();
         }
     }
 }

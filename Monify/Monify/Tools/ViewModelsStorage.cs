@@ -10,7 +10,8 @@ namespace Monify.Tools
     enum VM{
         WindowViewModel,
         MainViewModel,
-        TransactionViewModel
+        TransactionViewModel,
+        CostAddViewModel
     }
 
     static class ViewModelsStorage
@@ -25,7 +26,8 @@ namespace Monify.Tools
                     {
                         {VM.WindowViewModel, new WindowViewModel() },
                         {VM.MainViewModel, new MainViewModel() },
-                        {VM.TransactionViewModel, new TransactionViewModel() }
+                        {VM.TransactionViewModel, new TransactionViewModel() },
+                        {VM.CostAddViewModel, new CostAddViewModel() }
                     }
 
                     );

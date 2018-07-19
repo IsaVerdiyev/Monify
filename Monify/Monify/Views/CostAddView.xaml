@@ -9,15 +9,33 @@
              Margin="5">
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="2.5*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="15.34.43"
+        <DockPanel Background="Green"
+               TextElement.Foreground="White">
+            <Button
+                DockPanel.Dock="Left"
+                Background="Transparent"
+                Command="{Binding ReturnToMainViewCommand}">
+                ⬅
+            </Button>
+            <TextBlock
+                Background="Transparent"
+                TextAlignment="Center">
+                New cost
+            </TextBlock>
+        </DockPanel>
+        
+        <TextBlock
+            Grid.Row="1"
+            Text="15.34.43"
                    TextAlignment="Center"/>
 
-        <DockPanel Grid.Row="1"
+        <DockPanel Grid.Row="2"
                     Background="Green">
             <Button DockPanel.Dock="Left"
                 Style="{StaticResource HorizontalSameSizeControl}"
@@ -29,10 +47,11 @@
                 TextAlignment="Center"></TextBlock>
         </DockPanel>
 
-        <DockPanel Grid.Row="2">
+        <DockPanel Grid.Row="3">
             <Button DockPanel.Dock="Left">sldkj</Button>
             <TextBox></TextBox>
         </DockPanel>
-
+        <ContentControl Grid.Row="4"
+            Content="{Binding CurrentControl}"/>
     </Grid>
 </UserControl>
