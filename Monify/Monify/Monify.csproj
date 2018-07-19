@@ -67,6 +67,7 @@
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationCategory.cs" />
     <Compile Include="Models\OperationType.cs" />
+    <Compile Include="Services\Calculator.cs" />
     <Compile Include="Services\FileDataStorage.cs" />
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
@@ -86,6 +87,9 @@
     <Compile Include="ViewModels\TransactionCaculatorViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
+    <Compile Include="Views\CalculatorView.xaml.cs">
+      <DependentUpon>CalculatorView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">
       <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
     </Compile>
@@ -124,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\MainViewDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

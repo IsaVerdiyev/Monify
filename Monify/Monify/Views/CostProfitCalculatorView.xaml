@@ -11,25 +11,9 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <UniformGrid
-                     Rows="4" Columns="4">
-            <Button>1</Button>
-            <Button>2</Button>
-            <Button>3</Button>
-            <Button>+</Button>
-            <Button>4</Button>
-            <Button>5</Button>
-            <Button>6</Button>
-            <Button>-</Button>
-            <Button>7</Button>
-            <Button>8</Button>
-            <Button>9</Button>
-            <Button>*</Button>
-            <Button>.</Button>
-            <Button>0</Button>
-            <Button>=</Button>
-            <Button>÷</Button>
-        </UniformGrid>
+        <ContentControl>
+            <local:CalculatorView/>
+        </ContentControl>
         <Button Grid.Row="1" 
                 Content="Choose Category"
                 Command="{Binding ChooseCategoryButtonCommand}"/>
