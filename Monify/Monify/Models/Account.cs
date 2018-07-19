@@ -10,7 +10,7 @@ namespace Monify.Models
 {
     class Account: ObservableObject, IAccount
     {
-        int iterator = 0;
+        static int iterator = 0;
         int index;
         double balance;
         int accountTypeIndex;

@@ -8,7 +8,7 @@ namespace Monify.Models
 {
     class OperationType
     {
-        int iterator = 0;
+        static int iterator = 0;
         int index;
         string name;
 

@@ -14,7 +14,8 @@ namespace Monify.Tools
         CostAddViewModel,
         CostProfitCalculatorViewModel,
         TransactionCalculatorViewModel,
-        TransactionAccountChooseSubViewModel
+        TransactionAccountChooseSubViewModel,
+        CostAddCategoriesViewModel
     }
 
     static class ViewModelsStorage
@@ -33,7 +34,8 @@ namespace Monify.Tools
                         {VM.CostAddViewModel, new CostAddViewModel() },
                         {VM.CostProfitCalculatorViewModel, new CostProfitCalculatorViewModel() },
                         {VM.TransactionCalculatorViewModel, new TransactionViewModel() },
-                        {VM.TransactionAccountChooseSubViewModel, new  TransactionAccountChooseSubViewModel()}
+                        {VM.TransactionAccountChooseSubViewModel, new  TransactionAccountChooseSubViewModel()},
+                        {VM.CostAddCategoriesViewModel, new CostAddCategoriesViewModel() }
                     }
 
                     );

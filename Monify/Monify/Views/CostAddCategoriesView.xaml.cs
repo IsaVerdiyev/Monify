@@ -1,4 +1,5 @@
-﻿using Monify.ViewModels;
+﻿using Monify.Tools;
+using Monify.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Monify.Views
         internal CostAddCategoriesView()
         {
             InitializeComponent();
+            DataContext = (CostAddCategoriesViewModel)ViewModelsStorage.ViewModels[VM.CostAddCategoriesViewModel].ResetToInitialState();
         }
     }
 }

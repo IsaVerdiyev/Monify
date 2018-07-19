@@ -77,6 +77,7 @@
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
     <Compile Include="ViewModels\AbstractCalculatorViewModel.cs" />
+    <Compile Include="ViewModels\CostAddCategoriesViewModel.cs" />
     <Compile Include="ViewModels\CostProfitCalculatorViewModel.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
