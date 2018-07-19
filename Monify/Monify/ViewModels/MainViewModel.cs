@@ -223,5 +223,17 @@ namespace Monify.ViewModels
                     }));
             }
         }
+
+        private RelayCommand openTransactionMenuCommand;
+
+        public RelayCommand OpenTransactionMenuCommand
+        {
+            get { return openTransactionMenuCommand ??
+                    (openTransactionMenuCommand = new RelayCommand(obj =>
+                    {
+                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new TransactionView();
+                    })); }
+        }
+
     }
 }

@@ -56,21 +56,15 @@
                 Command="{Binding OtherSettingsButtonCommands}"
                 CommandParameter="{Binding ElementName=MainViewUserControl}">
                 ┇
-                <Button.Triggers>
-                    <EventTrigger RoutedEvent="Button.Click">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="OtherSettingsStackPanel"
-                                                   Storyboard.TargetProperty="Margin" 
-                                                                      BeginTime="00:00:00">
-                                    <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,0,0,0" />
-                                    <SplineThicknessKeyFrame KeyTime="00:00:0.5" Value="-70,0,70,0" >
-                                    </SplineThicknessKeyFrame>
-                                </ThicknessAnimationUsingKeyFrames>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Button.Triggers>
+            </Button>
+            <Button 
+                DockPanel.Dock="Right"
+                Style="{StaticResource HorizontalSameSizeControl}"
+                Background="Transparent"
+                Foreground="White"
+                FontSize="20"
+                Command="{Binding OpenTransactionMenuCommand}">
+                ⇄
             </Button>
         </DockPanel>
         <DockPanel Grid.Row="1">
