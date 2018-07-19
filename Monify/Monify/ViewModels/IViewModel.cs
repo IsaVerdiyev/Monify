@@ -8,5 +8,6 @@ namespace Monify.ViewModels
 {
     interface IViewModel
     {
+        IViewModel ResetToInitialState();
     }
 }

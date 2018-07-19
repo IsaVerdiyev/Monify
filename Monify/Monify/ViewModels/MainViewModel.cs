@@ -235,5 +235,9 @@ namespace Monify.ViewModels
                     })); }
         }
 
+        public IViewModel ResetToInitialState()
+        {
+            return this;
+        }
     }
 }

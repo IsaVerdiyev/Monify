@@ -76,6 +76,7 @@
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
+    <Compile Include="ViewModels\CalculatorViewModel.cs" />
     <Compile Include="ViewModels\CostAddViewModel.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -84,14 +85,17 @@
     <Compile Include="Views\CostAddCategoriesView.xaml.cs">
       <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CostAddNumbersView.xaml.cs">
-      <DependentUpon>CostAddNumbersView.xaml</DependentUpon>
+    <Compile Include="Views\CalculatorView.xaml.cs">
+      <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CostAddView.xaml.cs">
       <DependentUpon>CostAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TransactionAccountChooseSubView.xaml.cs">
+      <DependentUpon>TransactionAccountChooseSubView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionView.xaml.cs">
       <DependentUpon>TransactionView.xaml</DependentUpon>
@@ -120,7 +124,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CostAddNumbersView.xaml">
+    <Page Include="Views\CalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -129,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TransactionAccountChooseSubView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

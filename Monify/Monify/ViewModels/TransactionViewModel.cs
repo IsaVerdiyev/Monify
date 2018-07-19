@@ -6,14 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class TransactionViewModel: IViewModel
+    class TransactionViewModel: ObservableObject, IViewModel
     {
         public IStorage Storage { get; }
 
+        UserControl currentControl;
 
+        public UserControl CurrentControl { get => currentControl; set => SetProperty(ref currentControl, value); }
 
         public TransactionViewModel()
         {
@@ -32,6 +35,14 @@ namespace Monify.ViewModels
                         ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new MainView();
                     }));
             }
+        }
+
+        public IViewModel ResetToInitialState()
+        {
+            CurrentControl = new TransactionAccountChooseSubView();
+            ((CalculatorViewModel)ViewModelsStorage.ViewModels[VM.CalculatorViewModel]).OperationButtonName = "Add Transaction";
+
+            return this;
         }
     }
 }

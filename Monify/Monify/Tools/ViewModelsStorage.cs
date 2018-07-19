@@ -11,7 +11,8 @@ namespace Monify.Tools
         WindowViewModel,
         MainViewModel,
         TransactionViewModel,
-        CostAddViewModel
+        CostAddViewModel,
+        CalculatorViewModel
     }
 
     static class ViewModelsStorage
@@ -27,7 +28,8 @@ namespace Monify.Tools
                         {VM.WindowViewModel, new WindowViewModel() },
                         {VM.MainViewModel, new MainViewModel() },
                         {VM.TransactionViewModel, new TransactionViewModel() },
-                        {VM.CostAddViewModel, new CostAddViewModel() }
+                        {VM.CostAddViewModel, new CostAddViewModel() },
+                        {VM.CalculatorViewModel, new CalculatorViewModel() }
                     }
 
                     );

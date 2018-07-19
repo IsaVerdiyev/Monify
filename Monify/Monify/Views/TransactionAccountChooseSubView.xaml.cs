@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for CostAddNumbersView.xaml
+    /// Interaction logic for TransactionAccountChooseSubView.xaml
     /// </summary>
-    public partial class CostAddNumbersView : UserControl
+    public partial class TransactionAccountChooseSubView : UserControl
     {
-        public CostAddNumbersView()
+        public TransactionAccountChooseSubView()
         {
             InitializeComponent();
         }

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Monify.Views.TransactionAccountChooseSubView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Monify.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel >
+            <Label>🖊</Label>
+            <TextBox></TextBox>
+        </DockPanel>
+
+        <ComboBox Grid.Row="1"
+                  Width="100"
+                  Margin="0, 10">
+
+        </ComboBox>
+
+        <TextBlock Grid.Row="2"
+                   Foreground="Green"
+                   TextAlignment="Center"
+                   FontSize="18">
+            ↓
+        </TextBlock>
+
+        <ComboBox Grid.Row="3"
+                  Width="100"
+                  Margin="0, 10">
+
+        </ComboBox>
+
+        <Button Grid.Row="4"
+                Style="{StaticResource HorizontalAutoSizedRoundButtons}"
+                Margin="20"
+                Foreground="White"
+                Background="Green">
+            ☰
+        </Button>
+
+    </Grid>
+</UserControl>

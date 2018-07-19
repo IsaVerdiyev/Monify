@@ -11,11 +11,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="3*"/>
             <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="11*"/>
         </Grid.RowDefinitions>
         <DockPanel Background="Green"
                TextElement.Foreground="White">
@@ -60,37 +56,9 @@
                 s;lkdj
             </TextBlock>
         </DockPanel>
-        <DockPanel Grid.Row="3">
-            <Label>🖊</Label>
-            <TextBox></TextBox>
-        </DockPanel>
 
-        <ComboBox Grid.Row="4"
-                  Width="100"
-                  Margin="0, 10">
-            
-        </ComboBox>
+        <ContentControl Grid.Row="3"
+                          Content="{Binding CurrentControl}"/>
 
-        <TextBlock Grid.Row="5"
-                   Foreground="Green"
-                   TextAlignment="Center"
-                   FontSize="18">
-            ↓
-        </TextBlock>
-
-        <ComboBox Grid.Row="6"
-                  Width="100"
-                  Margin="0, 10">
-
-        </ComboBox>
-
-        <Button Grid.Row="7"
-                Style="{StaticResource HorizontalAutoSizedRoundButtons}"
-                Margin="20"
-                Foreground="White"
-                Background="Green">
-            ☰
-        </Button>
-                   
     </Grid>
 </UserControl>
