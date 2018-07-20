@@ -20,9 +20,9 @@ namespace Monify.Views
     /// <summary>
     /// Interaction logic for CostAddCategoriesView.xaml
     /// </summary>
-    public partial class CostAddCategoriesView : UserControl
+    public partial class ExpenseAddCategoriesView : UserControl
     {
-        internal CostAddCategoriesView()
+        internal ExpenseAddCategoriesView()
         {
             InitializeComponent();
         }

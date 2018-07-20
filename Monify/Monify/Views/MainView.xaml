@@ -146,7 +146,9 @@
                     Command="{Binding AddExpenseCommand}">
                 -
             </Button>
-            <Button DockPanel.Dock="Right" Style="{StaticResource BottomExpenseProfitButtons}">+</Button>
+            <Button DockPanel.Dock="Right" 
+                    Style="{StaticResource BottomExpenseProfitButtons}"
+                    Command="{Binding AddProfitCommand}">+</Button>
         </DockPanel>
     </Grid>
 </UserControl>

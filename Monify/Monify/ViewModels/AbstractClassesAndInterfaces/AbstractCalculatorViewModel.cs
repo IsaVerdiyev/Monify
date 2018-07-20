@@ -1,4 +1,5 @@
-﻿using Monify.Services;
+﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
+using Monify.Services;
 using Monify.Services.CalculatorService;
 using Monify.Tools;
 using System;
@@ -10,7 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace Monify.ViewModels
+namespace Monify.AbstractClassesAndInterfaces.ViewModels
 {
 
     abstract class AbstractCalculatorViewModel: ObservableObject,  IViewModel, ICalculatorUser
@@ -84,7 +85,7 @@ namespace Monify.ViewModels
                         {
                             operation = new MultiplyOperation { FirstArgument = result, SecondArgument = second };
                         }
-                        else if (opText == "/")
+                        else if (opText == "÷")
                         {
                             operation = new DevideOperation { FirstArgument = result, SecondArgument = second };
                         }

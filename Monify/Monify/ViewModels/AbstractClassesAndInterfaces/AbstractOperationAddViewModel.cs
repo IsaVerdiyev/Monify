@@ -1,6 +1,8 @@
-﻿using Monify.Services;
+﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
+using Monify.Services;
 using Monify.Services.CalculatorService;
 using Monify.Tools;
+using Monify.ViewModels;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Monify.ViewModels
+namespace Monify.AbstractClassesAndInterfaces.ViewModels
 {
     abstract class AbstractOperationAddViewModel: AbstractCalculatorViewModel
     {

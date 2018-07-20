@@ -88,11 +88,11 @@
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
-    <Compile Include="ViewModels\AbstractCalculatorViewModel.cs" />
+    <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractCalculatorViewModel.cs" />
     <Compile Include="ViewModels\ExpenseAddViewModel.cs" />
-    <Compile Include="ViewModels\AbstractOperationAddViewModel.cs" />
-    <Compile Include="ViewModels\IGetSpecifiedGategories.cs" />
-    <Compile Include="ViewModels\IViewModel.cs" />
+    <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractOperationAddViewModel.cs" />
+    <Compile Include="ViewModels\AbstractClassesAndInterfaces\IGetSpecifiedGategories.cs" />
+    <Compile Include="ViewModels\AbstractClassesAndInterfaces\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProfitAddViewModel.cs" />
     <Compile Include="ViewModels\TransactionAccountChooseSubViewModel.cs" />
@@ -101,17 +101,20 @@
     <Compile Include="Views\CalculatorView.xaml.cs">
       <DependentUpon>CalculatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CostAddCategoriesView.xaml.cs">
-      <DependentUpon>CostAddCategoriesView.xaml</DependentUpon>
+    <Compile Include="Views\ExpenseAddCategoriesView.xaml.cs">
+      <DependentUpon>ExpenseAddCategoriesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CostProfitCalculatorView.xaml.cs">
-      <DependentUpon>CostProfitCalculatorView.xaml</DependentUpon>
+    <Compile Include="Views\ExpenseProfitCalculatorView.xaml.cs">
+      <DependentUpon>ExpenseProfitCalculatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CostAddView.xaml.cs">
-      <DependentUpon>CostAddView.xaml</DependentUpon>
+    <Compile Include="Views\ExpenseAddView.xaml.cs">
+      <DependentUpon>ExpenseAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfitAddView.xaml.cs">
+      <DependentUpon>ProfitAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionAccountChooseSubView.xaml.cs">
       <DependentUpon>TransactionAccountChooseSubView.xaml</DependentUpon>
@@ -146,19 +149,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CostAddCategoriesView.xaml">
+    <Page Include="Views\ExpenseAddCategoriesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CostProfitCalculatorView.xaml">
+    <Page Include="Views\ExpenseProfitCalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CostAddView.xaml">
+    <Page Include="Views\ExpenseAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfitAddView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
