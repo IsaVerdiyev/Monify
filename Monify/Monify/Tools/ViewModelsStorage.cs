@@ -32,7 +32,7 @@ namespace Monify.Tools
                         {VM.MainViewModel, new MainViewModel() },
                         {VM.TransactionViewModel, new TransactionViewModel() },
                         {VM.CostAddViewModel, new CostAddViewModel() },
-                        {VM.CostProfitCalculatorViewModel, new CostProfitCalculatorViewModel() },
+                       
                         {VM.TransactionCalculatorViewModel, new TransactionViewModel() },
                         {VM.TransactionAccountChooseSubViewModel, new  TransactionAccountChooseSubViewModel()},
                         {VM.CostAddCategoriesViewModel, new CostAddCategoriesViewModel() }

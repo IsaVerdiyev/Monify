@@ -9,22 +9,86 @@
     <Grid>
         <UniformGrid
                      Rows="4" Columns="4">
-            <Button>1</Button>
-            <Button>2</Button>
-            <Button>3</Button>
-            <Button>+</Button>
-            <Button>4</Button>
-            <Button>5</Button>
-            <Button>6</Button>
-            <Button>-</Button>
-            <Button>7</Button>
-            <Button>8</Button>
-            <Button>9</Button>
-            <Button>*</Button>
-            <Button>.</Button>
-            <Button>0</Button>
-            <Button>=</Button>
-            <Button>÷</Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}" 
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                1
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                2
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                3
+            </Button>
+            <Button 
+                Command="{Binding CalculatorArithmeticOperationButtonCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                +
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                4
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                5
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                6
+            </Button>
+            <Button 
+                Command="{Binding CalculatorArithmeticOperationButtonCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                -
+            </Button>
+            <Button 
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                7
+            </Button>
+            <Button
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                8
+            </Button>
+            <Button
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                9
+            </Button>
+            <Button
+                Command="{Binding CalculatorArithmeticOperationButtonCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                *
+            </Button>
+            <Button
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                .
+            </Button>
+            <Button
+                Command="{Binding CalculatorNumberButtonClickCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                0
+            </Button>
+            <Button
+                Command="{Binding CalculatorArithmeticOperationButtonCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                =
+            </Button>
+            <Button
+                Command="{Binding CalculatorArithmeticOperationButtonCommand}"
+                CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}">
+                ÷
+            </Button>
         </UniformGrid>
     </Grid>
 </UserControl>

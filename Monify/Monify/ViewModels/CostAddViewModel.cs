@@ -1,4 +1,5 @@
 ﻿using Monify.Services;
+using Monify.Services.CalculatorService;
 using Monify.Tools;
 using Monify.Views;
 using System;
@@ -10,14 +11,13 @@ using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class CostAddViewModel:ObservableObject, IViewModel
+    class CostAddViewModel: AbstractCalculatorViewModel
     {
         public IStorage Storage { get; }
 
         public CostAddViewModel()
         {
             Storage = StorageGetter.Storage;
-            
         }
 
         UserControl currentControl;
@@ -40,11 +40,15 @@ namespace Monify.ViewModels
             }
         }
 
-        public IViewModel ResetToInitialState()
+        public override IViewModel ResetToInitialState()
         {
             CurrentControl = new CostProfitCalculatorView();
-
+            CalculatorState = new InitialCalculatorState(this);
+            CalculatorHistory = null;
+            TextBoxNumber = "";
             return this;
         }
+
+        
     }
 }

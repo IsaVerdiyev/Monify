@@ -44,7 +44,9 @@
                 Style="{StaticResource HorizontalSameSizeControl}"
                 ></Button>
             <TextBlock 
-                TextAlignment="Center"></TextBlock>
+                TextAlignment="Center" 
+                Text="{Binding TextBoxNumber, Mode=OneWay}"
+                VerticalAlignment="Center"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3">
