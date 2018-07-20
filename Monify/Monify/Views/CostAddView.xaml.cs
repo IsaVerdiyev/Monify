@@ -25,7 +25,7 @@ namespace Monify.Views
         public CostAddView()
         {
             InitializeComponent();
-            DataContext = (CostAddViewModel)ViewModelsStorage.ViewModels[VM.CostAddViewModel].ResetToInitialState();
+            DataContext = (ExpenseAddViewModel)ViewModelsStorage.Add(typeof(ExpenseAddViewModel).Name, $"{typeof(ExpenseAddViewModel).Namespace}.{typeof(ExpenseAddViewModel).Name}");
         }
     }
 }

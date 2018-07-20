@@ -23,7 +23,7 @@ namespace Monify.ViewModels
                 return switchToTransactionCalculatorViewCommand ??
                     (switchToTransactionCalculatorViewCommand = new RelayCommand(obj =>
                     {
-                        ((TransactionViewModel)ViewModelsStorage.ViewModels[VM.TransactionViewModel]).CurrentControl = new TransactionCalculatorView();
+                        ((TransactionViewModel)ViewModelsStorage.GetViewModel(typeof(TransactionViewModel).Name)).CurrentControl = new TransactionCalculatorView();
                     }));
             }
         }

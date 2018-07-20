@@ -28,10 +28,11 @@ namespace Monify.Views
         {
             InitializeComponent();
 
-            DataContext = (MainViewModel)ViewModelsStorage.ViewModels[VM.MainViewModel].ResetToInitialState();
+            DataContext = (MainViewModel)ViewModelsStorage.Add(typeof(MainViewModel).Name, $"{typeof(MainViewModel).Namespace}.{typeof(MainViewModel).Name}");
 
 
-            
+
+
 
 
         }

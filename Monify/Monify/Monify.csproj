@@ -89,10 +89,12 @@
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
     <Compile Include="ViewModels\AbstractCalculatorViewModel.cs" />
-    <Compile Include="ViewModels\CostAddCategoriesViewModel.cs" />
-    <Compile Include="ViewModels\CostAddViewModel.cs" />
+    <Compile Include="ViewModels\ExpenseAddViewModel.cs" />
+    <Compile Include="ViewModels\AbstractOperationAddViewModel.cs" />
+    <Compile Include="ViewModels\IGetSpecifiedGategories.cs" />
     <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProfitAddViewModel.cs" />
     <Compile Include="ViewModels\TransactionAccountChooseSubViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />

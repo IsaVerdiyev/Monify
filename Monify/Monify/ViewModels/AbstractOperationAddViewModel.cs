@@ -11,13 +11,14 @@ using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class CostAddViewModel: AbstractCalculatorViewModel
+    abstract class AbstractOperationAddViewModel: AbstractCalculatorViewModel
     {
         public IStorage Storage { get; }
 
-        public CostAddViewModel()
+        public AbstractOperationAddViewModel()
         {
             Storage = StorageGetter.Storage;
+            ResetToInitialState();
         }
 
         UserControl currentControl;
@@ -35,14 +36,16 @@ namespace Monify.ViewModels
                 return returnToMainViewCommand ??
                     (returnToMainViewCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new MainView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new MainView();
                     }));
             }
         }
 
         public override IViewModel ResetToInitialState()
         {
+          
             CurrentControl = new CostProfitCalculatorView();
+            CurrentControl.DataContext = this;
             CalculatorState = new InitialCalculatorState(this);
             CalculatorHistory = null;
             TextBoxNumber = "";

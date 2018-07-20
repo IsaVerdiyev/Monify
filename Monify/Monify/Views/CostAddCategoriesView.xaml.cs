@@ -25,7 +25,6 @@ namespace Monify.Views
         internal CostAddCategoriesView()
         {
             InitializeComponent();
-            DataContext = (CostAddCategoriesViewModel)ViewModelsStorage.ViewModels[VM.CostAddCategoriesViewModel].ResetToInitialState();
         }
     }
 }

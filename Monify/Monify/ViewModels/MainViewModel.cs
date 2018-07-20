@@ -25,7 +25,7 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
-           
+            ResetToInitialState();
         }
 
         public DateTime CurrentDate { get => DateTime.Now; }
@@ -49,15 +49,15 @@ namespace Monify.ViewModels
             }
         }
 
-        RelayCommand addCostCommand;
+        RelayCommand addExpenseCommand;
 
-        public RelayCommand AddCostCommand {
+        public RelayCommand AddExpenseCommand {
             get
             {
-                return addCostCommand ??
-                    (addCostCommand = new RelayCommand(obj =>
+                return addExpenseCommand ??
+                    (addExpenseCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new CostAddView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new CostAddView();
                     }
                     ));
             }
@@ -231,7 +231,7 @@ namespace Monify.ViewModels
             get { return openTransactionMenuCommand ??
                     (openTransactionMenuCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new TransactionView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new TransactionView();
                     })); }
         }
 

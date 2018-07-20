@@ -25,7 +25,6 @@ namespace Monify.Views
         public TransactionAccountChooseSubView()
         {
             InitializeComponent();
-            DataContext = (TransactionAccountChooseSubViewModel)ViewModelsStorage.ViewModels[VM.TransactionAccountChooseSubViewModel];
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Monify
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = (WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel]);
+            DataContext = (WindowViewModel)ViewModelsStorage.Add(typeof(WindowViewModel).Name, $"{typeof(WindowViewModel).Namespace}.{typeof(WindowViewModel).Name}");
             ((WindowViewModel)(DataContext)).CurrentControl = new MainView();
 
             //mainView = new MainView(this);

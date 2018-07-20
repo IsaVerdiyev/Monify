@@ -16,11 +16,18 @@ namespace Monify.ViewModels
 
         UserControl currentControl;
 
-        public UserControl CurrentControl { get => currentControl; set => SetProperty(ref currentControl, value); }
+        public UserControl CurrentControl {
+            get => currentControl;
+            set {
+                SetProperty(ref currentControl, value);
+                currentControl.DataContext = this;
+            }
+        }
 
         public TransactionViewModel()
         {
             Storage = StorageGetter.Storage;
+            ResetToInitialState();
         }
 
         RelayCommand returnToMainViewCommand;
@@ -32,7 +39,7 @@ namespace Monify.ViewModels
                 return returnToMainViewCommand ??
                     (returnToMainViewCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.ViewModels[VM.WindowViewModel])).CurrentControl = new MainView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new MainView();
                     }));
             }
         }
@@ -40,7 +47,6 @@ namespace Monify.ViewModels
         public IViewModel ResetToInitialState()
         {
             CurrentControl = new TransactionAccountChooseSubView();
-            
 
             return this;
         }

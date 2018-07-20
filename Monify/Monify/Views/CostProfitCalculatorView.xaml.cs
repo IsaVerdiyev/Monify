@@ -24,7 +24,7 @@ namespace Monify.Views
         public CostProfitCalculatorView()
         {
             InitializeComponent();
-            DataContext = ViewModelsStorage.ViewModels[VM.CostAddViewModel];
+            
         }
     }
 }

@@ -7,38 +7,38 @@ using System.Threading.Tasks;
 
 namespace Monify.Tools
 {
-    enum VM{
-        WindowViewModel,
-        MainViewModel,
-        TransactionViewModel,
-        CostAddViewModel,
-        CostProfitCalculatorViewModel,
-        TransactionCalculatorViewModel,
-        TransactionAccountChooseSubViewModel,
-        CostAddCategoriesViewModel
-    }
 
     static class ViewModelsStorage
     {
-        static Dictionary<VM, IViewModel> viewModels;
+        static Dictionary<string, IViewModel> viewModels;
 
 
-        public static Dictionary<VM, IViewModel> ViewModels {
+        static Dictionary<string, IViewModel> ViewModels {
             get {
                 return viewModels ??
-                    (viewModels = new Dictionary<VM, IViewModel>()
-                    {
-                        {VM.WindowViewModel, new WindowViewModel() },
-                        {VM.MainViewModel, new MainViewModel() },
-                        {VM.TransactionViewModel, new TransactionViewModel() },
-                        {VM.CostAddViewModel, new CostAddViewModel() },
-                       
-                        {VM.TransactionCalculatorViewModel, new TransactionViewModel() },
-                        {VM.TransactionAccountChooseSubViewModel, new  TransactionAccountChooseSubViewModel()},
-                        {VM.CostAddCategoriesViewModel, new CostAddCategoriesViewModel() }
-                    }
+                    (viewModels = new Dictionary<string, IViewModel>());
+            }
+        }
 
-                    );
-            } }
+        public static IViewModel Add(string key, string fullname)
+        {
+            if (!ViewModels.ContainsKey(key))
+            {
+                Type type = Type.GetType(fullname, true);
+                IViewModel viewModel = Activator.CreateInstance(type) as IViewModel;
+                ViewModels.Add(key, viewModel);
+               
+            }
+            else
+            {
+                ViewModels[key].ResetToInitialState();
+            }
+            return ViewModels[key];
+        }
+
+        public static IViewModel GetViewModel(string key)
+        {
+            return ViewModels[key];
+        }
     }
 }

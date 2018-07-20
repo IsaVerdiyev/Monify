@@ -26,7 +26,7 @@ namespace Monify.Views
         {
             InitializeComponent();
 
-            DataContext = (TransactionViewModel)ViewModelsStorage.ViewModels[VM.TransactionViewModel].ResetToInitialState();
+            DataContext = (TransactionViewModel)ViewModelsStorage.Add(typeof(TransactionViewModel).Name, $"{typeof(TransactionViewModel).Namespace}.{typeof(TransactionViewModel).Name}");
         }
     }
 }

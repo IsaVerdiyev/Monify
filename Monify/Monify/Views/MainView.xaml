@@ -143,7 +143,7 @@
                     LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"
-                    Command="{Binding AddCostCommand}">
+                    Command="{Binding AddExpenseCommand}">
                 -
             </Button>
             <Button DockPanel.Dock="Right" Style="{StaticResource BottomExpenseProfitButtons}">+</Button>
