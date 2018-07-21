@@ -85,7 +85,15 @@
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
                         Panel.ZIndex="1">
                 <Button>Categories</Button>
-                <Button>Accounts</Button>
+                <Button Content="Accounts"
+                        Command="{Binding ShowHideAccountsCommand}"
+                        CommandParameter="{Binding ElementName=AccountsStackPanel}"/>
+
+                <StackPanel x:Name="AccountsStackPanel" 
+                    Visibility="Collapsed" >
+                    <Button Margin="2"> Add Account </Button>
+                    <ListBox ItemsSource="{Binding Storage.Accounts}"/>
+                </StackPanel>
                 <Button>Currencies</Button>
                 <Button>Settings</Button>
             </StackPanel>

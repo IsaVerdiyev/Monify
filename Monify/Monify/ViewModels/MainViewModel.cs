@@ -43,7 +43,7 @@ namespace Monify.ViewModels
         {
             get
             {
-                accounts = Storage.Accounts;
+                accounts = new ObservableCollection<IAccount>(Storage.Accounts);
                 accounts.Insert(0, new AllUsers());
                 return accounts;
                 
@@ -248,6 +248,28 @@ namespace Monify.ViewModels
                     {
                         ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new TransactionView();
                     })); }
+        }
+
+        RelayCommand showHideAccountsCommand;
+
+        public RelayCommand ShowHideAccountsCommand
+        {
+            get
+            {
+                return showHideAccountsCommand ??
+                    (showHideAccountsCommand = new RelayCommand(obj =>
+                    {
+                        StackPanel listBox = obj as StackPanel;
+                        if (listBox.Visibility == Visibility.Collapsed)
+                        {
+                            listBox.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            listBox.Visibility = Visibility.Collapsed;
+                        }
+                    }));
+            }
         }
 
         public IViewModel ResetToInitialState()
