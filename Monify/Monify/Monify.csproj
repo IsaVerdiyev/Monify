@@ -63,7 +63,6 @@
     <Compile Include="Converters\MainViewConverters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\AbstractAccount.cs" />
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\Operation.cs" />
@@ -92,6 +91,7 @@
     <Compile Include="Tools\StorageGetter.cs" />
     <Compile Include="Tools\ViewModelsStorage.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractCalculatorViewModel.cs" />
+    <Compile Include="ViewModels\AddAccountViewModel.cs" />
     <Compile Include="ViewModels\ExpenseAddViewModel.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractOperationAddViewModel.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\IGetSpecifiedGategories.cs" />

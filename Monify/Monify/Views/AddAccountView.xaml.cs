@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Monify.Tools;
+using Monify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,8 @@ namespace Monify.Views
         public AddAccountView()
         {
             InitializeComponent();
+
+            DataContext = (AddAccountViewModel)ViewModelsStorage.Add(typeof(AddAccountViewModel).Name, $"{typeof(AddAccountViewModel).Namespace}.{typeof(AddAccountViewModel).Name}");
         }
     }
 }

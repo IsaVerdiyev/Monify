@@ -21,5 +21,10 @@ namespace Monify.Models
         public int Index { get => index; }
         public string Code { get => code; set => code = value; }
         public double Value { get => value; set => this.value = value; }
+
+        public override string ToString()
+        {
+            return Code;
+        }
     }
 }

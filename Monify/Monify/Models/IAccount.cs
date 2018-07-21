@@ -11,6 +11,6 @@ namespace Monify.Models
         string Name { get; set; }
         double Balance { get; set; }
         int? CurrencyIndex { get; set; }
-        
+        string Icon { get; set; }
     }
 }

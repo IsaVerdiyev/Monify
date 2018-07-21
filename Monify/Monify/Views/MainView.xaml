@@ -22,11 +22,13 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="195*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*" x:Name="OperationsListRow"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="50*" x:Name="OperationsListRow"/>
+            <RowDefinition Height="100*"/>
         </Grid.RowDefinitions>
         <DockPanel
             LastChildFill="False"
@@ -67,11 +69,12 @@
                 ⇄
             </Button>
         </DockPanel>
-        <DockPanel Grid.Row="1">
+        <DockPanel Grid.Row="1" Grid.RowSpan="3">
             <StackPanel DockPanel.Dock="Left" 
                         x:Name="VisibilitySettingsStackPanel"
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
-                        Panel.ZIndex="1">
+                        Panel.ZIndex="1"
+                        Width="100">
                 <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts}" >
                 </ComboBox>
                 <Button>Day</Button>
@@ -83,7 +86,8 @@
             <StackPanel DockPanel.Dock="Right"
                         x:Name="OtherSettingsStackPanel"
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
-                        Panel.ZIndex="1">
+                        Panel.ZIndex="1"
+                        Width="100">
                 <Button>Categories</Button>
                 <Button Content="Accounts"
                         Command="{Binding ShowHideAccountsCommand}"/>
@@ -91,7 +95,7 @@
                 <StackPanel x:Name="AccountsStackPanel" 
                     Visibility="{Binding AccountsControlVisibility}" >
                     <Button Margin="2"
-                            Command="{Binding AddAccountCommand}"> Add Account </Button>
+                            Command="{Binding AddAccountCommand}">Add Account</Button>
                     <ListBox ItemsSource="{Binding Storage.Accounts}"/>
                 </StackPanel>
                 <Button>Currencies</Button>
@@ -110,44 +114,44 @@
                             <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
                     </TextBlock>
                 </StackPanel>
-               
+
                 <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
                              ItemsSource="{Binding Path=Storage.OperationCategories}"/>
 
-                
+
             </DockPanel>
         </DockPanel>
         <GridSplitter 
-            Grid.Row="2"
+            Grid.Row="4"
             Height="3"
             HorizontalAlignment="Stretch"
             ShowsPreview="False"/>
-        <StackPanel Grid.Row="3"
+        <StackPanel Grid.Row="5"
                     Height="{Binding ElementName=operationCategoriesListBox, Path=Height}"
                     Background="Aqua">
-            
-                <Button Height="{Binding ElementName=OperationsListRow, Path=ActualHeight, Mode=OneTime}">
-                    <DockPanel 
+
+            <Button Height="{Binding ElementName=OperationsListRow, Path=ActualHeight, Mode=OneTime}">
+                <DockPanel 
                 Height="{Binding Path=Height, ElementName=OperationsListRow}"
                 Width="{Binding Path=Parent.ActualWidth, RelativeSource={RelativeSource Self}}">
-                        <TextBlock 
+                    <TextBlock 
                     
                     DockPanel.Dock="Left"> ☰</TextBlock>
-                        <TextBlock 
+                    <TextBlock 
                     
                     DockPanel.Dock="Right"> ☰</TextBlock>
-                        <TextBlock
+                    <TextBlock
                     HorizontalAlignment="Center"
                     FontSize="20">
                     Balance - 
                     <Run >23</Run>
-                        </TextBlock>
-                    </DockPanel>
-                </Button>
-                <ListBox></ListBox>
-            
+                    </TextBlock>
+                </DockPanel>
+            </Button>
+            <ListBox></ListBox>
+
         </StackPanel>
-        <DockPanel Grid.Row="4"
+        <DockPanel Grid.Row="6"
                     LastChildFill="False">
             <Button DockPanel.Dock="Left" 
                     Style="{StaticResource BottomExpenseProfitButtons}"

@@ -24,5 +24,10 @@ namespace Monify.Models
             get => name;
             set => name = value;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

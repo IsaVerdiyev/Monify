@@ -13,11 +13,14 @@ namespace Monify.Models
     {
         static int iterator = 0;
         int index;
-        int accountTypeIndex;
         int? currencyIndex;
         protected double balance;
         string name;
         string imagePath;
+
+        string icon;
+
+        public string Icon { get => icon; set => SetProperty(ref icon, value); }
 
         public AbstractAccount()
         {
@@ -28,11 +31,6 @@ namespace Monify.Models
 
         public abstract double Balance { get; set; }
 
-        public int AccountTypeIndex
-        {
-            get => accountTypeIndex;
-            set => accountTypeIndex = value;
-        }
 
 
         public string Name
