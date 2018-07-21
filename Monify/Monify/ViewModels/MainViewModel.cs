@@ -37,6 +37,10 @@ namespace Monify.ViewModels
 
         public IAccount SelectedAccount { get; set; }
 
+        Visibility accountsControlVisibility;
+
+        public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
+
         ObservableCollection<IAccount> accounts;
 
         public ObservableCollection<IAccount> Accounts
@@ -259,14 +263,13 @@ namespace Monify.ViewModels
                 return showHideAccountsCommand ??
                     (showHideAccountsCommand = new RelayCommand(obj =>
                     {
-                        StackPanel listBox = obj as StackPanel;
-                        if (listBox.Visibility == Visibility.Collapsed)
+                        if(AccountsControlVisibility == Visibility.Collapsed)
                         {
-                            listBox.Visibility = Visibility.Visible;
+                            AccountsControlVisibility = Visibility.Visible;
                         }
-                        else
+                        else if (AccountsControlVisibility == Visibility.Visible)
                         {
-                            listBox.Visibility = Visibility.Collapsed;
+                            AccountsControlVisibility = Visibility.Collapsed;
                         }
                     }));
             }
@@ -274,6 +277,7 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
+            AccountsControlVisibility = Visibility.Collapsed;
             return this;
         }
     }

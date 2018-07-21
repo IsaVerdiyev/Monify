@@ -86,11 +86,10 @@
                         Panel.ZIndex="1">
                 <Button>Categories</Button>
                 <Button Content="Accounts"
-                        Command="{Binding ShowHideAccountsCommand}"
-                        CommandParameter="{Binding ElementName=AccountsStackPanel}"/>
+                        Command="{Binding ShowHideAccountsCommand}"/>
 
                 <StackPanel x:Name="AccountsStackPanel" 
-                    Visibility="Collapsed" >
+                    Visibility="{Binding AccountsControlVisibility}" >
                     <Button Margin="2"> Add Account </Button>
                     <ListBox ItemsSource="{Binding Storage.Accounts}"/>
                 </StackPanel>
