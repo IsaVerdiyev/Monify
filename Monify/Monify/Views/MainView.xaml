@@ -90,7 +90,8 @@
 
                 <StackPanel x:Name="AccountsStackPanel" 
                     Visibility="{Binding AccountsControlVisibility}" >
-                    <Button Margin="2"> Add Account </Button>
+                    <Button Margin="2"
+                            Command="{Binding AddAccountCommand}"> Add Account </Button>
                     <ListBox ItemsSource="{Binding Storage.Accounts}"/>
                 </StackPanel>
                 <Button>Currencies</Button>

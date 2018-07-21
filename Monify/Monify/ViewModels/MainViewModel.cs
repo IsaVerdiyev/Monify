@@ -275,6 +275,21 @@ namespace Monify.ViewModels
             }
         }
 
+        private RelayCommand addAccountCommand;
+
+        public RelayCommand AddAccountCommand
+        {
+            get {
+                return addAccountCommand ??
+                    (addAccountCommand = new RelayCommand(obj =>
+                    {
+                        ((WindowViewModel)ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name)).CurrentControl = new AddAccountView();
+                    }));
+            }
+            
+        }
+
+
         public IViewModel ResetToInitialState()
         {
             AccountsControlVisibility = Visibility.Collapsed;
