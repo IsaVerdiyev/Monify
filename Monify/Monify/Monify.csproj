@@ -61,8 +61,10 @@
     </ApplicationDefinition>
     <Compile Include="Converters\HeightToFontSizeConverter.cs" />
     <Compile Include="Converters\MainViewConverters\PropertyMarginConverterForHidingControl.cs" />
+    <Compile Include="Models\AbstractAccount.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountType.cs" />
+    <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\IAccount.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationCategory.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Services\CalculatorService\SecondArgumentEnteringCalculatorState.cs" />
     <Compile Include="Services\CalculatorService\SubstractOperation.cs" />
     <Compile Include="Services\CalculatorService\SumOperation.cs" />
+    <Compile Include="Services\CurrencyConverter.cs" />
     <Compile Include="Services\FileDataStorage.cs" />
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />

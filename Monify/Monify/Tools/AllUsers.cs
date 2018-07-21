@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace Monify.Tools
 {
-    class AllUsers : IAccount
+    class AllUsers : AbstractAccount
     {
         IStorage storage;
-        public string Name { get; set ; }
 
-        public AllUsers()
+
+        public AllUsers():base()
         {
             storage = StorageGetter.Storage;
             Name = "All Users";
         }
 
-        public double Balance => storage.Accounts.Sum(a => a.Balance);
+        
+
+        public override double Balance { get => storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, this.CurrencyIndex.Value, a.Balance)); set { } }
     }
 }

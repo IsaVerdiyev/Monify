@@ -9,7 +9,8 @@ namespace Monify.Models
     interface IAccount
     {
         string Name { get; set; }
-        double Balance { get; }
+        double Balance { get; set; }
+        int? CurrencyIndex { get; set; }
         
     }
 }
