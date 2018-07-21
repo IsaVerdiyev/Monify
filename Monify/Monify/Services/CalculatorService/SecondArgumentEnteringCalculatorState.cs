@@ -23,7 +23,7 @@ namespace Monify.Services.CalculatorService
             {
                 operation.FirstArgument = CalculationOperation.Result;
                 CalculationOperation = operation;
-                Reset = true;
+                reset = true;
             }
             else
             {
@@ -34,7 +34,7 @@ namespace Monify.Services.CalculatorService
 
         public override void ResetVisibleInput<T>(ref T field, T value)
         {
-            if (Reset)
+            if (reset)
             {
                 field = value;
             }

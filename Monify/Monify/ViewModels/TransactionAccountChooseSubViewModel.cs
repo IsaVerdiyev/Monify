@@ -1,5 +1,5 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.Tools;
+﻿using Monify.Tools;
+using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
@@ -24,7 +24,7 @@ namespace Monify.ViewModels
                 return switchToTransactionCalculatorViewCommand ??
                     (switchToTransactionCalculatorViewCommand = new RelayCommand(obj =>
                     {
-                        ((TransactionViewModel)ViewModelsStorage.GetViewModel(typeof(TransactionViewModel).Name)).CurrentControl = new TransactionCalculatorView();
+                        ((TransactionViewModel)ViewModelsStorage.GetViewModel(typeof(TransactionViewModel).Name)).CurrentControl = new CalculatorSubView();
                     }));
             }
         }

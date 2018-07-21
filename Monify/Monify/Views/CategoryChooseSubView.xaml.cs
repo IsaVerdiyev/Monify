@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Monify.Tools;
+using Monify.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +18,11 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for TransactionCalculatorView.xaml
+    /// Interaction logic for CostAddCategoriesView.xaml
     /// </summary>
-    public partial class TransactionCalculatorView : UserControl
+    public partial class CategoryChooseSubView : UserControl
     {
-        public TransactionCalculatorView()
+        internal CategoryChooseSubView()
         {
             InitializeComponent();
         }

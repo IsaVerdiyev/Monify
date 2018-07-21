@@ -1,7 +1,7 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.Models;
+﻿using Monify.Models;
 using Monify.Services;
 using Monify.Tools;
+using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
@@ -62,8 +62,9 @@ namespace Monify.ViewModels
                 return addExpenseCommand ??
                     (addExpenseCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new ExpenseAddView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new AddExpenseView();
                     }
+                    , obj => Storage.Accounts.Count != 0
                     ));
             }
         }
@@ -77,8 +78,10 @@ namespace Monify.ViewModels
                 return addProfitCommand ??
                     (addProfitCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new ProfitAddView();
-                    }));
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new AddProfitView();
+                    },
+                    obj => Storage.Accounts.Count != 0
+                    ));
             }
         }
 

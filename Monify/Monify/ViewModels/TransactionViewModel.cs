@@ -1,6 +1,6 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.Services;
+﻿using Monify.Services;
 using Monify.Tools;
+using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
 using System;
 using System.Collections.Generic;

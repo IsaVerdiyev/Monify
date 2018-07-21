@@ -18,13 +18,15 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for CostAddCategoriesView.xaml
+    /// Interaction logic for ProfitAddView.xaml
     /// </summary>
-    public partial class ExpenseAddCategoriesView : UserControl
+    public partial class AddProfitView : UserControl
     {
-        internal ExpenseAddCategoriesView()
+        public AddProfitView()
         {
             InitializeComponent();
+            DataContext = (AddProfitViewModel)ViewModelsStorage.Add(typeof(AddProfitViewModel).Name, $"{typeof(AddProfitViewModel).Namespace}.{typeof(AddProfitViewModel).Name}");
+
         }
     }
 }

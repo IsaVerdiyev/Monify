@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels
+namespace Monify.ViewModels.AbstractClassesAndInterfaces
 {
     interface IViewModel
     {

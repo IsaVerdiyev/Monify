@@ -1,5 +1,5 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.ViewModels;
+﻿using Monify.ViewModels;
+using Monify.ViewModels.AbstractClassesAndInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

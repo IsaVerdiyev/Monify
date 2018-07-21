@@ -92,41 +92,35 @@
     <Compile Include="Tools\ViewModelsStorage.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractCalculatorViewModel.cs" />
     <Compile Include="ViewModels\AddAccountViewModel.cs" />
-    <Compile Include="ViewModels\ExpenseAddViewModel.cs" />
+    <Compile Include="ViewModels\AddExpenseViewModel.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\AbstractOperationAddViewModel.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\IGetSpecifiedGategories.cs" />
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ProfitAddViewModel.cs" />
+    <Compile Include="ViewModels\AddProfitViewModel.cs" />
     <Compile Include="ViewModels\TransactionAccountChooseSubViewModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\AddAccountView.xaml.cs">
       <DependentUpon>AddAccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CalculatorView.xaml.cs">
-      <DependentUpon>CalculatorView.xaml</DependentUpon>
+    <Compile Include="Views\CategoryChooseSubView.xaml.cs">
+      <DependentUpon>CategoryChooseSubView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExpenseAddCategoriesView.xaml.cs">
-      <DependentUpon>ExpenseAddCategoriesView.xaml</DependentUpon>
+    <Compile Include="Views\CalculatorSubView.xaml.cs">
+      <DependentUpon>CalculatorSubView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExpenseProfitCalculatorView.xaml.cs">
-      <DependentUpon>ExpenseProfitCalculatorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ExpenseAddView.xaml.cs">
-      <DependentUpon>ExpenseAddView.xaml</DependentUpon>
+    <Compile Include="Views\AddExpenseView.xaml.cs">
+      <DependentUpon>AddExpenseView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProfitAddView.xaml.cs">
-      <DependentUpon>ProfitAddView.xaml</DependentUpon>
+    <Compile Include="Views\AddProfitView.xaml.cs">
+      <DependentUpon>AddProfitView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionAccountChooseSubView.xaml.cs">
       <DependentUpon>TransactionAccountChooseSubView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TransactionCalculatorView.xaml.cs">
-      <DependentUpon>TransactionCalculatorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TransactionView.xaml.cs">
       <DependentUpon>TransactionView.xaml</DependentUpon>
@@ -155,19 +149,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CalculatorView.xaml">
+    <Page Include="Views\CategoryChooseSubView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ExpenseAddCategoriesView.xaml">
+    <Page Include="Views\CalculatorSubView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ExpenseProfitCalculatorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ExpenseAddView.xaml">
+    <Page Include="Views\AddExpenseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,15 +165,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProfitAddView.xaml">
+    <Page Include="Views\AddProfitView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TransactionAccountChooseSubView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TransactionCalculatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

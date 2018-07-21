@@ -18,13 +18,13 @@ namespace Monify.Services.CalculatorService
             operation.FirstArgument = operation.SecondArgument;
             operation.SecondArgument = null;
             this.CalculationOperation = operation;
-            Reset = true;
+            reset = true;
             return null;
         }
 
         public override void ResetVisibleInput<T>(ref T field, T value)
         {
-            if(Reset)
+            if(reset)
             {
                 calculatorUser.CalculatorState = new SecondArgumentEnteringCalculatorState(calculatorUser);
                 calculatorUser.CalculatorState.CalculationOperation = this.CalculationOperation;

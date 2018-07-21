@@ -1,5 +1,4 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.Services;
+﻿using Monify.Services;
 using Monify.Services.CalculatorService;
 using Monify.Tools;
 using Monify.ViewModels;
@@ -11,15 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Monify.AbstractClassesAndInterfaces.ViewModels
+namespace Monify.ViewModels.AbstractClassesAndInterfaces
 {
-    abstract class AbstractOperationAddViewModel: AbstractCalculatorViewModel
+    abstract class AbstractOperationAddViewModel : AbstractCalculatorViewModel
     {
         public IStorage Storage { get; }
 
         public AbstractOperationAddViewModel()
         {
             Storage = StorageGetter.Storage;
+            PerformOperationButtonName = "Choose category";
+
             ResetToInitialState();
         }
 
@@ -43,10 +44,28 @@ namespace Monify.AbstractClassesAndInterfaces.ViewModels
             }
         }
 
+        RelayCommand performOperationButtonCommand;
+
+        public override RelayCommand PerformOperationButtonCommand
+        {
+            get
+            {
+                return performOperationButtonCommand ??
+                    (performOperationButtonCommand = new RelayCommand(obj =>
+                    {
+                        CurrentControl = new CategoryChooseSubView();
+                    },
+                    obj => (CalculatorState is InitialCalculatorState || (CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset == false)) && TextBoxNumber != ""
+                    ));
+            }
+        }
+
+        public override string  PerformOperationButtonName { get; }
+
         public override IViewModel ResetToInitialState()
         {
-          
-            CurrentControl = new CostProfitCalculatorView();
+
+            CurrentControl = new CalculatorSubView();
             CurrentControl.DataContext = this;
             CalculatorState = new InitialCalculatorState(this);
             CalculatorHistory = null;
@@ -54,6 +73,6 @@ namespace Monify.AbstractClassesAndInterfaces.ViewModels
             return this;
         }
 
-        
+
     }
 }

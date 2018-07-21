@@ -1,5 +1,4 @@
-﻿using Monify.AbstractClassesAndInterfaces.AbstractClassesAndInterfaces.ViewModels;
-using Monify.Services;
+﻿using Monify.Services;
 using Monify.Services.CalculatorService;
 using Monify.Tools;
 using System;
@@ -11,15 +10,11 @@ using System.Windows;
 using System.Windows.Controls;
 
 
-namespace Monify.AbstractClassesAndInterfaces.ViewModels
+namespace Monify.ViewModels.AbstractClassesAndInterfaces
 {
 
     abstract class AbstractCalculatorViewModel: ObservableObject,  IViewModel, ICalculatorUser
     {
-
-        double? result;
-
-        public Double? Result { get => result; set => SetProperty(ref result, value); }
 
         string textBoxNumber;
 
@@ -36,6 +31,11 @@ namespace Monify.AbstractClassesAndInterfaces.ViewModels
      
         public ICalculatorHistory CalculatorHistory { get => calculatorHistory; set => calculatorHistory = value; }
 
+
+        public abstract string PerformOperationButtonName { get; }
+
+
+        public abstract RelayCommand PerformOperationButtonCommand { get; }
 
 
         private RelayCommand calculatorNumberButtonClickCommand;
@@ -75,23 +75,23 @@ namespace Monify.AbstractClassesAndInterfaces.ViewModels
                         Double.TryParse(TextBoxNumber, out double second);
                         if (opText == "+")
                         {
-                            operation = new SumOperation { FirstArgument = result, SecondArgument = second };
+                            operation = new SumOperation { SecondArgument = second };
                         }
                         else if (opText == "-")
                         {
-                            operation = new SubstractOperation { FirstArgument = result, SecondArgument = second };
+                            operation = new SubstractOperation { SecondArgument = second };
                         }
                         else if (opText == "*")
                         {
-                            operation = new MultiplyOperation { FirstArgument = result, SecondArgument = second };
+                            operation = new MultiplyOperation { SecondArgument = second };
                         }
                         else if (opText == "÷")
                         {
-                            operation = new DevideOperation { FirstArgument = result, SecondArgument = second };
+                            operation = new DevideOperation { SecondArgument = second };
                         }
                         else if (opText == "=")
                         {
-                            operation = new EqualsOperation { FirstArgument = result, SecondArgument = second };
+                            operation = new EqualsOperation { SecondArgument = second };
                         }
                         else
                         {
@@ -101,6 +101,8 @@ namespace Monify.AbstractClassesAndInterfaces.ViewModels
                     }));
             }
         }
+
+
 
         public abstract IViewModel ResetToInitialState();
     }

@@ -15,7 +15,7 @@ namespace Monify.Services.CalculatorService
         public AbstractCalculatorState(ICalculatorUser calculatorUser)
         {
             this.calculatorUser = calculatorUser;
-            Reset = false;
+            reset = false;
         }
 
         public abstract double? performOperation(ICalculationOperation operation);
@@ -26,7 +26,10 @@ namespace Monify.Services.CalculatorService
 
         public ICalculationOperation CalculationOperation { get=> calculationOperation; set => calculationOperation = value; }
 
-        protected bool Reset { get; set; }
+        protected bool reset;
+
+        public bool Reset { get => reset; }
+
 
     }
 }

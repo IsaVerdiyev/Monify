@@ -8,7 +8,6 @@ namespace Monify.Services.CalculatorService
 {
     interface ICalculatorUser
     {
-        Double? Result { get; set; }
 
         AbstractCalculatorState CalculatorState { get; set; }
 
