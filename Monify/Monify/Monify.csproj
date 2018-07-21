@@ -104,6 +104,9 @@
     <Compile Include="Views\AddAccountView.xaml.cs">
       <DependentUpon>AddAccountView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddOperationUpperPartUserControl.xaml.cs">
+      <DependentUpon>AddOperationUpperPartUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryChooseSubView.xaml.cs">
       <DependentUpon>CategoryChooseSubView.xaml</DependentUpon>
     </Compile>
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddOperationUpperPartUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,5 +12,7 @@ namespace Monify.ViewModels
     class AddProfitViewModel : AbstractOperationAddViewModel, IGetSpecifiedGategories
     {
         public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Profit").Index));
+
+        public override string HeaderText => "Add Profit";
     }
 }

@@ -102,6 +102,23 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
             }
         }
 
+        private RelayCommand eraseCommand;
+
+        public RelayCommand EraseCommand
+        {
+            get
+            {
+                return eraseCommand ??
+                    (eraseCommand = new RelayCommand(obj =>
+                    {
+                        TextBoxNumber = TextBoxNumber.Remove(TextBoxNumber.Length - 1);
+                    },
+                    obj => TextBoxNumber != "" && !(CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset) && !(CalculatorState is InitialCalculatorState)
+                    ));
+            }
+        }
+
+
 
 
         public abstract IViewModel ResetToInitialState();

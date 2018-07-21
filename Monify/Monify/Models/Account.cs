@@ -11,5 +11,10 @@ namespace Monify.Models
     class Account : AbstractAccount
     {
         public override double Balance { get => balance; set => SetProperty(ref balance, value); }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

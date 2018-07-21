@@ -9,51 +9,14 @@
              Margin="5">
     <Grid x:Name="mainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1.5*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2.5*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+
         </Grid.RowDefinitions>
-        <DockPanel Background="Green"
-               TextElement.Foreground="White">
-            <Button
-                DockPanel.Dock="Left"
-                Background="Transparent"
-                Command="{Binding ReturnToMainViewCommand}">
-                ⬅
-            </Button>
-            <TextBlock
-                Background="Transparent"
-                TextAlignment="Center">
-                New cost
-            </TextBlock>
-        </DockPanel>
-        
-        <TextBlock
-            Grid.Row="1"
-            Text="15.34.43"
-                   TextAlignment="Center"/>
-
-        <DockPanel Grid.Row="2"
-                    Background="Green">
-            <Button DockPanel.Dock="Left"
-                Style="{StaticResource HorizontalSameSizeControl}"
-                ></Button>
-            <Button DockPanel.Dock="Right"
-                Style="{StaticResource HorizontalSameSizeControl}"
-                ></Button>
-            <TextBlock 
-                TextAlignment="Center" 
-                Text="{Binding TextBoxNumber, Mode=OneWay}"
-                VerticalAlignment="Center"/>
-        </DockPanel>
-
-        <DockPanel Grid.Row="3" >
-            <Label>🖊</Label>
-            <TextBox></TextBox>
-        </DockPanel>
-        <ContentControl Grid.Row="4"
+        <ContentControl>
+            <local:AddOperationUpperPartUserControl/>
+        </ContentControl>
+        <ContentControl Grid.Row="1"
             Content="{Binding CurrentControl}"/>
     </Grid>
 </UserControl>

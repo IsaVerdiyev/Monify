@@ -11,9 +11,11 @@ namespace Monify.Models
         static int iterator = 0;
 
         int index;
-        int expenseCategoryIndex;
         int operationCategoryIndex;
         double amount;
+        DateTime date;
+        int accountIndex;
+
 
         public Operation()
         {
@@ -22,10 +24,7 @@ namespace Monify.Models
 
         public int Index { get => index; }
 
-        public int ExpenseCategoryIndex {
-            get => expenseCategoryIndex;
-            set => expenseCategoryIndex = value;
-        }
+        
         public int OperationCategoryIndex {
             get => operationCategoryIndex;
             set => operationCategoryIndex = value;
@@ -34,6 +33,14 @@ namespace Monify.Models
             get => amount;
             set => amount = value;
         }
+
+        public int AccountIndex
+        {
+            get => accountIndex;
+            set => accountIndex = value;
+        }
+
+        public DateTime Date { get => date; set => date = value; }
 
 
     }

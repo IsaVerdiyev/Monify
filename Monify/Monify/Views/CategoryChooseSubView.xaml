@@ -7,6 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListBox x:Name="categoriesListBox" ItemsSource="{Binding GetSpecifiedCategories}"/>
+        <ListBox 
+            ItemsSource="{Binding GetSpecifiedCategories}"
+            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
     </Grid>
 </UserControl>

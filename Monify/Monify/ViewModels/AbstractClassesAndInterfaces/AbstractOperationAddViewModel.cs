@@ -1,4 +1,5 @@
-﻿using Monify.Services;
+﻿using Monify.Models;
+using Monify.Services;
 using Monify.Services.CalculatorService;
 using Monify.Tools;
 using Monify.ViewModels;
@@ -24,11 +25,22 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
             ResetToInitialState();
         }
 
+        OperationCategory selectedCategory;
+
+        public OperationCategory SelectedCategory { get => selectedCategory; set => SetProperty(ref selectedCategory, value); }
+
         UserControl currentControl;
 
         public UserControl CurrentControl { get => currentControl; set => SetProperty(ref currentControl, value); }
 
-        public DateTime CurrentDate { get => DateTime.Now; }
+        DateTime selectedDate;
+
+        public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
+
+        Account selectedAccount;
+
+        public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
+
 
         RelayCommand returnToMainViewCommand;
 
@@ -60,16 +72,44 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
             }
         }
 
-        public override string  PerformOperationButtonName { get; }
+        private RelayCommand addOperationCommand;
+
+        public RelayCommand AddOperationCommand
+        {
+            get
+            {
+                return addOperationCommand ??
+                    (addOperationCommand = new RelayCommand(obj =>
+                    {
+                        Operation operation = new Operation
+                        {
+                            Amount = Double.Parse(TextBoxNumber),
+                            OperationCategoryIndex = selectedCategory.Index,
+                            Date = SelectedDate,
+                            AccountIndex = SelectedAccount.Index
+                        };
+                        ReturnToMainViewCommand.Execute(obj);
+                    },
+                    obj => SelectedCategory != null && SelectedAccount != null
+                    ));
+            }
+        }
+
+
+        public override string PerformOperationButtonName { get; }
+
+        public abstract string HeaderText { get; }
+
 
         public override IViewModel ResetToInitialState()
         {
 
             CurrentControl = new CalculatorSubView();
-            CurrentControl.DataContext = this;
             CalculatorState = new InitialCalculatorState(this);
-            CalculatorHistory = null;
+            SelectedCategory = null;
             TextBoxNumber = "";
+            SelectedDate = DateTime.Now;
+            SelectedAccount = null;
             return this;
         }
 

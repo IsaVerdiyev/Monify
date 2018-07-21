@@ -14,6 +14,6 @@ namespace Monify.ViewModels
     {
         public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Expense").Index));
 
-
+        public override string HeaderText => "Add Extense";
     }
 }
