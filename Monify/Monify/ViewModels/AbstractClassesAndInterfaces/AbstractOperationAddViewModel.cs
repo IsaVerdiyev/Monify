@@ -88,6 +88,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                             Date = SelectedDate,
                             AccountIndex = SelectedAccount.Index
                         };
+                        Storage.Operations.Add(operation);
                         ReturnToMainViewCommand.Execute(obj);
                     },
                     obj => SelectedCategory != null && SelectedAccount != null
