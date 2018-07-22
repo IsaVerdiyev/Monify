@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Monify.Models;
+using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
 
 namespace Monify.ViewModels
@@ -14,6 +15,11 @@ namespace Monify.ViewModels
     {
         public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Expense").Index));
 
+        
+
+
         public override string HeaderText => "Add Extense";
+
+        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Balance -= double.Parse(TextBoxNumber);}
     }
 }

@@ -18,6 +18,7 @@ namespace Monify.Tools
         {
             storage = StorageGetter.Storage;
             Name = "All Users";
+            CurrencyIndex = storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index;
         }
 
 

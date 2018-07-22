@@ -43,13 +43,23 @@ namespace Monify.ViewModels
             set
             {
                 SetProperty(ref selectedAccount, value);
+                Balance = selectedAccount?.Balance ?? null;
                 OperationStatistics = selectedAccount?.GetOperationsByThisAccout ?? null;
+                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.CurrencyIndex)?.Code ?? " ";
             }
         }
 
         private ObservableCollection<string> operationStatistics;
 
         public ObservableCollection<string> OperationStatistics { get => operationStatistics; set => SetProperty(ref operationStatistics, value); }
+
+        private double? balance;
+
+        public double? Balance { get => balance; set => SetProperty(ref balance, value); }
+
+        private string selectedCurrencyCode;
+        
+        public string SelectedCurrencyCode { get => selectedCurrencyCode; set => SetProperty(ref selectedCurrencyCode, value); }
 
         Visibility accountsControlVisibility;
 
@@ -334,6 +344,7 @@ namespace Monify.ViewModels
         {
             AccountsControlVisibility = Visibility.Collapsed;
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
+            SelectedAccount = SelectedAccount;
             return this;
         }
     }

@@ -41,6 +41,8 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
 
         public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
 
+        protected abstract Func<double> BalanceRefresher { get;}
+
 
         RelayCommand returnToMainViewCommand;
 
@@ -89,6 +91,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                             AccountIndex = SelectedAccount.Index
                         };
                         Storage.Operations.Add(operation);
+                        BalanceRefresher();
                         ReturnToMainViewCommand.Execute(obj);
                     },
                     obj => SelectedCategory != null && SelectedAccount != null

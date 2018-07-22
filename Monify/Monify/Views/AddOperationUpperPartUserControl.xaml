@@ -26,7 +26,8 @@
             <Button
                 DockPanel.Dock="Right"
                 Background="Transparent"
-                Command="{Binding AddOperationCommand}">
+                Command="{Binding AddOperationCommand}"
+                x:Name="AddOperationButton">
                 Add
             </Button>
             <TextBlock

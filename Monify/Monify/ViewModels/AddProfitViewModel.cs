@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Monify.Models;
+using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
 
 namespace Monify.ViewModels
@@ -12,6 +13,11 @@ namespace Monify.ViewModels
     class AddProfitViewModel : AbstractOperationAddViewModel, IGetSpecifiedGategories
     {
         public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Profit").Index));
+
+
+        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Balance += double.Parse(TextBoxNumber); }
+
+
 
         public override string HeaderText => "Add Profit";
     }
