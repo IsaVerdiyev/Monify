@@ -55,6 +55,10 @@ namespace Monify.ViewModels
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
 
+        Visibility hideAllSideMenusButtonVisibility;
+
+        public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
+
         ObservableCollection<AbstractAccount> accounts;
 
         public ObservableCollection<AbstractAccount> Accounts
@@ -151,7 +155,6 @@ namespace Monify.ViewModels
                             animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
                             storyboard.Children.Add(animation);
                             storyboard.Begin(userControl);
-                        
                         }
                     }));
             }
@@ -226,6 +229,7 @@ namespace Monify.ViewModels
                     {
                         ShowVisibilitySettingsCommand.Execute(obj);
                         HideOtherSettingsCommand.Execute(obj);
+                        HideAllSideMenusButtonVisibility = Visibility.Visible;
                     }));
             }
         }
@@ -241,6 +245,7 @@ namespace Monify.ViewModels
                     {
                         ShowOtherSettingsCommand.Execute(obj);
                         HideVisibilitySettingsCommand.Execute(obj);
+                        HideAllSideMenusButtonVisibility = Visibility.Visible;
                     }));
             }
         }
@@ -306,25 +311,29 @@ namespace Monify.ViewModels
             
         }
 
-        //private RelayCommand updateSelectedAccountBindingCommand;
+        private RelayCommand hideAllSideMenuButtonCommand;
 
-        //public RelayCommand MupdateSelectedAccountBindingCommandyProperty
-        //{
-        //    get {
-        //        return updateSelectedAccountBindingCommand ??
-        //            (updateSelectedAccountBindingCommand = new RelayCommand(obj =>
-        //            {
-        //                Binding binding = 
-        //            }))
-        //    }
-           
-        //}
+        public RelayCommand HideAllSideMenuButtonCommand
+        {
+            get
+            {
+                return hideAllSideMenuButtonCommand ??
+                    (hideAllSideMenuButtonCommand = new RelayCommand(obj =>
+                    {
+                        HideOtherSettingsCommand.Execute(obj);
+                        HideVisibilitySettingsCommand.Execute(obj);
+                        HideAllSideMenusButtonVisibility = Visibility.Collapsed;
+                    }));
+            }
+        }
+
 
 
 
         public IViewModel ResetToInitialState()
         {
             AccountsControlVisibility = Visibility.Collapsed;
+            HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             return this;
         }
     }

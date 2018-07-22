@@ -67,7 +67,20 @@
             </Button>
         </DockPanel>
 
+        
         <!--Second Row-->
+
+        <Button Grid.Row="1" 
+            x:Name="HideAllMenus" 
+            Grid.RowSpan="3"
+            VerticalAlignment="Stretch"
+            Opacity="0.5"
+            Panel.ZIndex="1"
+            Visibility="{Binding HideAllSideMenusButtonVisibility, Mode=OneWay}"
+            Command="{Binding HideAllSideMenuButtonCommand}"/>
+
+
+
         <StackPanel 
                         x:Name="VisibilitySettingsStackPanel"
                         Grid.Row="1"
@@ -109,18 +122,19 @@
 
 
 
-
+        
         <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
-                    <TextBlock Text="{Binding Path=Yesterday, StringFormat={}{0:m}, Mode=OneWay}"/>
-                    <TextBlock HorizontalAlignment="Center"
+            
+            <TextBlock Text="{Binding Path=Yesterday, StringFormat={}{0:m}, Mode=OneWay}"/>
+            <TextBlock HorizontalAlignment="Center"
                                 Margin="130, 0">
                             <Run Text="{Binding Path=DayOfWeek, Mode=OneWay}"/>
                             <Run>,</Run>
                             <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
-                    </TextBlock>
-                </StackPanel>
-   
+            </TextBlock>
+        </StackPanel>
+
 
         <!-- Third Row-->
 
@@ -131,6 +145,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="50" x:Name="OperationsListRow" MinHeight="50"/>
             </Grid.RowDefinitions>
+            
             <ListBox ScrollViewer.VerticalScrollBarVisibility="Auto"
                              ItemsSource="{Binding Path=Storage.OperationCategories}" 
                      MaxHeight="200"/>
