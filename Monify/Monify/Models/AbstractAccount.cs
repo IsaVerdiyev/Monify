@@ -3,13 +3,14 @@ using Monify.Services;
 using Monify.Tools;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Monify.Models
 {
-    abstract class AbstractAccount : ObservableObject, IAccount
+    abstract class AbstractAccount : ObservableObject
     {
         static int iterator = 0;
         int index;
@@ -17,6 +18,11 @@ namespace Monify.Models
         protected double balance;
         string name;
         string imagePath;
+
+        
+       
+       
+        
 
         string icon;
 
@@ -31,7 +37,7 @@ namespace Monify.Models
 
         public abstract double Balance { get; set; }
 
-
+        public abstract ObservableCollection<string> GetOperationsByThisAccout { get; }
 
         public string Name
         {

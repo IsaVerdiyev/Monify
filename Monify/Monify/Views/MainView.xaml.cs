@@ -30,12 +30,6 @@ namespace Monify.Views
 
             DataContext = (MainViewModel)ViewModelsStorage.Add(typeof(MainViewModel).Name, $"{typeof(MainViewModel).Namespace}.{typeof(MainViewModel).Name}");
 
-
-
-
-
-
         }
-
     }
 }

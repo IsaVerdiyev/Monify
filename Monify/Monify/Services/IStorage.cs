@@ -10,11 +10,13 @@ namespace Monify.Services
 {
     interface IStorage
     {
-        ObservableCollection<IAccount> Accounts { get; set; }
+        ObservableCollection<AbstractAccount> Accounts { get; set; }
         ObservableCollection<OperationType> OperationTypes { get; set; }
         ObservableCollection<OperationCategory> OperationCategories { get; set; }
         ObservableCollection<Operation> Operations { get; set; }
         ObservableCollection<Currency> Currencies { get; set; }
+
+
 
         void Initialize();
     }

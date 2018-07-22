@@ -77,7 +77,7 @@
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
                         Width="100"
                         Height="300">
-            <ComboBox SelectedItem="{Binding Path=SelectedAccount}" ItemsSource="{Binding Path=Accounts}" >
+            <ComboBox SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" ItemsSource="{Binding Path=Accounts}">
             </ComboBox>
             <Button>Day</Button>
             <Button>Week</Button>
@@ -163,7 +163,7 @@
                          Background="Aqua"
                          Height="{Binding Path=Height, ElementName=StatisticsRow}"
                          MaxHeight="200"
-                         ItemsSource="{Binding Storage.Operations}"></ListBox>
+                         ItemsSource="{Binding OperationStatistics, Mode=OneWay}"></ListBox>
             </DockPanel>
 
         </Grid>

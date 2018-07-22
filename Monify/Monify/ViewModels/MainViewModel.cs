@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Media.Animation;
 
@@ -35,19 +36,32 @@ namespace Monify.ViewModels
 
         public DayOfWeek DayOfWeek { get => CurrentDate.DayOfWeek; }
 
-        public IAccount SelectedAccount { get; set; }
+        private AbstractAccount selectedAccount;
+
+        public AbstractAccount SelectedAccount {
+            get => selectedAccount;
+            set
+            {
+                SetProperty(ref selectedAccount, value);
+                OperationStatistics = selectedAccount?.GetOperationsByThisAccout ?? null;
+            }
+        }
+
+        private ObservableCollection<string> operationStatistics;
+
+        public ObservableCollection<string> OperationStatistics { get => operationStatistics; set => SetProperty(ref operationStatistics, value); }
 
         Visibility accountsControlVisibility;
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
 
-        ObservableCollection<IAccount> accounts;
+        ObservableCollection<AbstractAccount> accounts;
 
-        public ObservableCollection<IAccount> Accounts
+        public ObservableCollection<AbstractAccount> Accounts
         {
             get
             {
-                accounts = new ObservableCollection<IAccount>(Storage.Accounts);
+                accounts = new ObservableCollection<AbstractAccount>(Storage.Accounts);
                 accounts.Insert(0, new AllUsers());
                 return accounts;
                 
@@ -291,6 +305,21 @@ namespace Monify.ViewModels
             }
             
         }
+
+        //private RelayCommand updateSelectedAccountBindingCommand;
+
+        //public RelayCommand MupdateSelectedAccountBindingCommandyProperty
+        //{
+        //    get {
+        //        return updateSelectedAccountBindingCommand ??
+        //            (updateSelectedAccountBindingCommand = new RelayCommand(obj =>
+        //            {
+        //                Binding binding = 
+        //            }))
+        //    }
+           
+        //}
+
 
 
         public IViewModel ResetToInitialState()
