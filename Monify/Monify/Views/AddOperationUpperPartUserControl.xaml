@@ -45,7 +45,7 @@
         <DockPanel Grid.Row="2"
                     Background="Green">
             <ComboBox DockPanel.Dock="Left"
-                ItemsSource="{Binding Storage.Accounts}"
+                ItemsSource="{Binding Accounts}"
                 Width="50"
                 Background="Transparent"
                 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"/>

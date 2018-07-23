@@ -27,6 +27,7 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
+          
             ResetToInitialState();
         }
 
@@ -36,17 +37,31 @@ namespace Monify.ViewModels
 
         public DayOfWeek DayOfWeek { get => CurrentDate.DayOfWeek; }
 
-        private AbstractAccount selectedAccount;
+        private AccountFullInfoClass selectedAccount;
 
-        public AbstractAccount SelectedAccount {
+        public AccountFullInfoClass SelectedAccount {
             get => selectedAccount;
             set
             {
                 SetProperty(ref selectedAccount, value);
-                Balance = selectedAccount?.Balance ?? null;
-                OperationStatistics = selectedAccount?.GetOperationsByThisAccout ?? null;
-                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.CurrencyIndex)?.Code ?? " ";
+                SelectedCurrencyForAllUsers = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
+                Balance = selectedAccount?.Account?.Balance ?? null;
+                OperationStatistics = selectedAccount?.Account?.GetOperationsByThisAccout ?? null;
+                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.Account?.CurrencyIndex)?.Code ?? " ";
             }
+        }
+
+        Currency selectedCurrencyForAllUsers;
+
+        public Currency SelectedCurrencyForAllUsers { get => selectedCurrencyForAllUsers; set => SetProperty(ref selectedCurrencyForAllUsers, value); }
+
+        private AccountFullInfoClass allUsers;
+
+        AccountFullInfoClass AllUsers {
+            get => allUsers ?? 
+                (allUsers = new AccountFullInfoClass
+                { Account = new AllUsers {Name = "All Users", CurrencyIndex = SelectedCurrencyForAllUsers.Index }, Code = SelectedCurrencyForAllUsers.Code
+                });
         }
 
         private ObservableCollection<string> operationStatistics;
@@ -69,14 +84,18 @@ namespace Monify.ViewModels
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
 
-        ObservableCollection<AbstractAccount> accounts;
+        ObservableCollection<AccountFullInfoClass> accounts;
 
-        public ObservableCollection<AbstractAccount> Accounts
+        public ObservableCollection<AccountFullInfoClass> Accounts
         {
             get
             {
-                accounts = new ObservableCollection<AbstractAccount>(Storage.Accounts);
-                accounts.Insert(0, new AllUsers());
+                accounts = new ObservableCollection<AccountFullInfoClass>(Storage.Accounts.
+                    Select(a => 
+                    new AccountFullInfoClass {
+                        Account = a, Code = Storage.Currencies.FirstOrDefault(c => c.Index == a.CurrencyIndex).Code
+                    }));
+                accounts.Insert(0, AllUsers);
                 return accounts;
                 
             }

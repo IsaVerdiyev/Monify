@@ -71,7 +71,7 @@
         
         <!--Second Row-->
 
-        <!--<Button Grid.Row="1" 
+        <Button Grid.Row="1" 
             x:Name="HideAllMenus" 
             Grid.RowSpan="3"
             VerticalAlignment="Stretch"
@@ -79,7 +79,7 @@
             Panel.ZIndex="1"
             Visibility="{Binding HideAllSideMenusButtonVisibility, Mode=OneWay}"
             Command="{Binding HideAllSideMenuButtonCommand}"
-            CommandParameter="{Binding ElementName=MainViewUserControl}"/>-->
+            CommandParameter="{Binding ElementName=MainViewUserControl}"/>
 
 
 
@@ -92,7 +92,9 @@
                         Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
                         Width="100"
                         Height="300">
-            <ComboBox SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" ItemsSource="{Binding Path=Accounts}">
+            <ComboBox 
+                SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" 
+                ItemsSource="{Binding Path=Accounts}">
             </ComboBox>
             <Button>Day</Button>
             <Button>Week</Button>

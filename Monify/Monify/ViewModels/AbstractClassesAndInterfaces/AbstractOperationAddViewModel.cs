@@ -6,6 +6,7 @@ using Monify.ViewModels;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,9 +38,19 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
 
         public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
 
-        Account selectedAccount;
+        AccountFullInfoClass selectedAccount;
 
-        public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
+        public AccountFullInfoClass SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
+
+        public ObservableCollection<AccountFullInfoClass> Accounts {
+            get => new ObservableCollection<AccountFullInfoClass>(
+                Storage.Accounts.
+                Select(a => new AccountFullInfoClass {
+                    Account = a, Code = Storage.Currencies.FirstOrDefault(c => c.Index == a.CurrencyIndex).Code
+                })
+            );
+        }
+
 
         protected abstract Func<double> BalanceRefresher { get;}
 
@@ -88,7 +99,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                             Amount = Double.Parse(TextBoxNumber),
                             OperationCategoryIndex = selectedCategory.Index,
                             Date = SelectedDate,
-                            AccountIndex = SelectedAccount.Index
+                            AccountIndex = SelectedAccount.Account.Index
                         };
                         Storage.Operations.Add(operation);
                         BalanceRefresher();

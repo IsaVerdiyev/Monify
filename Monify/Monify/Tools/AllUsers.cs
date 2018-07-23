@@ -17,8 +17,6 @@ namespace Monify.Tools
         public AllUsers() : base()
         {
             storage = StorageGetter.Storage;
-            Name = "All Users";
-            CurrencyIndex = storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index;
         }
 
 
@@ -36,7 +34,7 @@ namespace Monify.Tools
 
         public override string ToString()
         {
-            return base.ToString();
+            return Name;
         }
     }
 }
