@@ -20,6 +20,6 @@ namespace Monify.ViewModels
 
         public override string HeaderText => "Add Extense";
 
-        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Account.Balance -= double.Parse(TextBoxNumber);}
+        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Balance -= double.Parse(TextBoxNumber);}
     }
 }

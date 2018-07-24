@@ -93,6 +93,20 @@
             <ComboBox DockPanel.Dock="Top"
                 SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" 
                 ItemsSource="{Binding Path=Accounts}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Name}"/>
+                            <LineBreak/>
+                            <Run>
+                               <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
+                                   <Binding  Mode="OneWay"/>
+                                   <Binding Path="DataContext.Storage" RelativeSource="{RelativeSource  Mode=FindAncestor, AncestorType=UserControl}" Mode="OneWay"/>
+                               </MultiBinding>
+                            </Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
             </ComboBox>
             <Button DockPanel.Dock="Top">Day</Button>
             <Button DockPanel.Dock="Top">Week</Button>

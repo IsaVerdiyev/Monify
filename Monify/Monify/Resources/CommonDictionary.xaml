@@ -5,6 +5,7 @@
                    xmlns:core="clr-namespace:System;assembly=mscorlib">
 
     <converters:DoubleTypeVariableConverter x:Key="DoubleTypeVariableConverter"/>
+    <converters:CurrencyIndexToCodeMultiConverter x:Key="CurrencyIndexToCodeMultiConverter"/>
 
     <Style  x:Key="RoundButton" TargetType="Button">
         <Setter Property="Template">

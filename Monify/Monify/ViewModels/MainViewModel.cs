@@ -36,6 +36,7 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
+            SelectedCurrencyForAllUsers = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
           
             ResetToInitialState();
         }
@@ -46,32 +47,52 @@ namespace Monify.ViewModels
 
         public DayOfWeek DayOfWeek { get => CurrentDate.DayOfWeek; }
 
-        private AccountFullInfoClass selectedAccount;
+        
 
-        public AccountFullInfoClass SelectedAccount {
+
+        Account selectedAccount;
+
+        public Account SelectedAccount
+        {
             get => selectedAccount;
             set
             {
                 SetProperty(ref selectedAccount, value);
-                SelectedCurrencyForAllUsers = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
-                Balance = selectedAccount?.Account?.Balance ?? null;
-                OperationStatistics = selectedAccount?.Account?.GetOperationsByThisAccout ?? null;
-                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.Account?.CurrencyIndex)?.Code ?? " ";
+                Balance = selectedAccount?.Balance ?? null;
+                OperationStatistics = selectedAccount?.GetOperationsByThisAccout ?? null;
+                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.CurrencyIndex)?.Code ?? " ";
             }
         }
+
+     
+
+        public ObservableCollection<AbstractAccount> Accounts
+        {
+            get
+            {
+                var collection = new ObservableCollection<AbstractAccount>(Storage.Accounts);
+                collection.Add(AllUsers);
+                return collection;
+            }
+        }
+
+
+        AllUsers allUsers;
+
+        public AllUsers AllUsers
+        {
+            get => allUsers ??
+                (allUsers = new AllUsers { Name = "All Users", CurrencyIndex = SelectedCurrencyForAllUsers.Index });
+        }
+
+        public string AccountCurrencyCode { get => Storage.Currencies.FirstOrDefault(c => c.Index == selectedAccount.CurrencyIndex).Code; } 
+
+
 
         Currency selectedCurrencyForAllUsers;
 
         public Currency SelectedCurrencyForAllUsers { get => selectedCurrencyForAllUsers; set => SetProperty(ref selectedCurrencyForAllUsers, value); }
 
-        private AccountFullInfoClass allUsers;
-
-        AccountFullInfoClass AllUsers {
-            get => allUsers ?? 
-                (allUsers = new AccountFullInfoClass
-                { Account = new AllUsers {Name = "All Users", CurrencyIndex = SelectedCurrencyForAllUsers.Index }, Code = SelectedCurrencyForAllUsers.Code
-                });
-        }
 
         private ObservableCollection<string> operationStatistics;
 
@@ -97,22 +118,6 @@ namespace Monify.ViewModels
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
 
-        ObservableCollection<AccountFullInfoClass> accounts;
-
-        public ObservableCollection<AccountFullInfoClass> Accounts
-        {
-            get
-            {
-                accounts = new ObservableCollection<AccountFullInfoClass>(Storage.Accounts.
-                    Select(a => 
-                    new AccountFullInfoClass {
-                        Account = a, Code = Storage.Currencies.FirstOrDefault(c => c.Index == a.CurrencyIndex).Code
-                    }));
-                accounts.Insert(0, AllUsers);
-                return accounts;
-                
-            }
-        }
 
         RelayCommand addExpenseCommand;
 

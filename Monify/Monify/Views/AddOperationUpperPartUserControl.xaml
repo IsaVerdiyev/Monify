@@ -47,10 +47,25 @@
         <DockPanel Grid.Row="2"
                     Background="Green">
             <ComboBox DockPanel.Dock="Left"
-                ItemsSource="{Binding Accounts}"
+                ItemsSource="{Binding Storage.Accounts}"
                 Width="50"
                 Background="Transparent"
-                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"/>
+                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="{Binding Name}"/>
+                            <LineBreak/>
+                            <Run>
+                               <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
+                                   <Binding  Mode="OneWay"/>
+                                   <Binding Path="DataContext.Storage" RelativeSource="{RelativeSource  Mode=FindAncestor, AncestorType=UserControl}" Mode="OneWay"/>
+                               </MultiBinding>
+                            </Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button DockPanel.Dock="Right"
                 Style="{StaticResource HorizontalSameSizeControl}"
                 Command="{Binding EraseCommand}"

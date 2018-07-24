@@ -15,7 +15,7 @@ namespace Monify.ViewModels
         public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Profit").Index));
 
 
-        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Account.Balance += double.Parse(TextBoxNumber); }
+        protected override Func<double> BalanceRefresher { get => () => SelectedAccount.Balance += double.Parse(TextBoxNumber); }
 
 
 

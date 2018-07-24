@@ -3,8 +3,10 @@ using Monify.ViewModels;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,6 +28,9 @@ namespace Monify
         public MainWindow()
         {
             InitializeComponent();
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
             DataContext = (WindowViewModel)ViewModelsStorage.Add(typeof(WindowViewModel).Name, $"{typeof(WindowViewModel).Namespace}.{typeof(WindowViewModel).Name}");
             ((WindowViewModel)(DataContext)).CurrentControl = new MainView();
 

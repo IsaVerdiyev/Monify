@@ -152,7 +152,7 @@ namespace Monify.Services
             var doc = new XmlDocument();
             doc.LoadXml(xmlData);
 
-            CultureInfo culture = new CultureInfo("us");
+            
 
             var nodes = doc.SelectNodes("/ValCurs/ValType[@Type='Xarici valyutalar']/Valute");
             foreach (XmlNode item in nodes)
@@ -160,7 +160,7 @@ namespace Monify.Services
                 Currency currency = new Currency
                 {
                     Code = item.Attributes["Code"].InnerText.ToUpper(),
-                    Value = Double.Parse(item["Value"].InnerText, culture)
+                    Value = Double.Parse(item["Value"].InnerText)
                 };
 
 
