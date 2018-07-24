@@ -103,33 +103,48 @@
             <Button>All</Button>
         </StackPanel>
 
-        <DockPanel Grid.Row="1" Grid.RowSpan="2"
+        <Grid Grid.Row="1" Grid.RowSpan="2"
                     x:Name="OtherSettingsStackPanel"
                     HorizontalAlignment="Right"
                     Panel.ZIndex="1"
                     Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
-                    Height="300"
                     Width="200"
-                    ScrollViewer.HorizontalScrollBarVisibility="Auto">
-            <Button DockPanel.Dock="Top">Categories</Button>
-            <Button DockPanel.Dock="Top" Content="Accounts"
-                        Command="{Binding ShowHideAccountsCommand}"/>
-            <StackPanel VerticalAlignment="Stretch"
-                        Margin="0, 0, 0, 0"
-                DockPanel.Dock="Top" x:Name="AccountsStackPanel" 
-                                Visibility="{Binding AccountsControlVisibility}" >
-                <Button Margin="2"
-                                Command="{Binding AddAccountCommand}">
+                    Background="DarkGreen">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button>Categories</Button>
+            <Button Grid.Row="{Binding AccountsRow, Mode=OneWay}"
+                    Content="Accounts"
+                    Command="{Binding ShowHideAccountsCommand}"/>
+            <Button
+                Grid.Row="{Binding CurrenciesRow, Mode=OneWay}"
+                Command="{Binding ShowHideCurrenciesCommand}">
+                Currencies
+            </Button>
+            <Button Grid.Row="3">Settings</Button>
+
+            <DockPanel Grid.Row="1"
+                Grid.RowSpan="4"
+                Visibility="{Binding AccountsControlVisibility}" 
+                Panel.ZIndex="2">
+                <Button DockPanel.Dock="Top" 
+                    Margin="2"
+                        Command="{Binding AddAccountCommand}">
                     Add Account
                 </Button>
                 <ListBox ItemsSource="{Binding Storage.Accounts}"/>
-            </StackPanel>
-            <Button
-                DockPanel.Dock="Top"
-                Command="{Binding ShowHideCurrenciesCommand}">Currencies</Button>
-            <StackPanel DockPanel.Dock="Top"
-                                Visibility="{Binding CurrenciesControlVisibility}" >
-                <Button Margin="2"
+            </DockPanel>
+            <DockPanel Grid.Row="1"
+                       Background="LightGreen"
+                  Grid.RowSpan="4"
+                        Visibility="{Binding CurrenciesControlVisibility}"
+                        Panel.ZIndex="2">
+                <Button DockPanel.Dock="Top"
+                    Margin="2"
                     Command="{Binding RefreshCurrenciesCommand}">↺</Button>
                
                     <ListBox 
@@ -145,10 +160,8 @@
                         </ListBox.ItemTemplate>
                     </ListBox>
                 
-            </StackPanel>
-            <Button DockPanel.Dock="Top">Settings</Button>
-            <Button DockPanel.Dock="Bottom"></Button>
-        </DockPanel>
+            </DockPanel>
+        </Grid>
 
 
 

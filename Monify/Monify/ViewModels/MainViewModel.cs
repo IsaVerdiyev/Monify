@@ -22,7 +22,16 @@ namespace Monify.ViewModels
     {
         public IStorage Storage { get; }
 
-      
+
+        int categoriesRow;
+        int accountsRow;
+        int currenciesRow;
+        int settingsRow;
+
+        public int CategoriesRow { get => categoriesRow; set => SetProperty(ref categoriesRow, value); }
+        public int AccountsRow { get => accountsRow; set => SetProperty(ref accountsRow, value); }
+        public int CurrenciesRow { get => currenciesRow; set => SetProperty(ref currenciesRow, value); }
+        public int SettingsRow { get => settingsRow; set => SetProperty(ref settingsRow, value); }
 
         public MainViewModel()
         {
@@ -318,12 +327,17 @@ namespace Monify.ViewModels
                 return showHideAccountsCommand ??
                     (showHideAccountsCommand = new RelayCommand(obj =>
                     {
+                      
                         if(AccountsControlVisibility == Visibility.Collapsed)
                         {
+                            CategoriesRow = AccountsRow;
+                            AccountsRow = 0;
                             AccountsControlVisibility = Visibility.Visible;
                         }
                         else if (AccountsControlVisibility == Visibility.Visible)
                         {
+                            AccountsRow = CategoriesRow;
+                            CategoriesRow = 0;
                             AccountsControlVisibility = Visibility.Collapsed;
                         }
                     }));
@@ -338,12 +352,17 @@ namespace Monify.ViewModels
                 return showHideCurrenciesCommand ??
                     (showHideCurrenciesCommand = new RelayCommand(obj =>
                     {
-                        if(CurrenciesControlVisibility == Visibility.Collapsed)
+
+                        if (CurrenciesControlVisibility == Visibility.Collapsed)
                         {
+                            CategoriesRow = CurrenciesRow;
+                            CurrenciesRow = 0;
                             CurrenciesControlVisibility = Visibility.Visible;
                         }
                         else if (CurrenciesControlVisibility == Visibility.Visible)
                         {
+                            CurrenciesRow = CategoriesRow;
+                            CategoriesRow = 0;
                             CurrenciesControlVisibility = Visibility.Collapsed;
                         }
                     }));
@@ -404,6 +423,10 @@ namespace Monify.ViewModels
             AccountsControlVisibility = Visibility.Collapsed;
             CurrenciesControlVisibility = Visibility.Collapsed;
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
+            CategoriesRow = 0;
+            AccountsRow = 1;
+            CurrenciesRow = 2;
+            SettingsRow = 3;
             SelectedAccount = SelectedAccount;
             return this;
         }
