@@ -83,12 +83,13 @@
 
 
 
-        <DockPanel  Grid.Row="1"  Grid.RowSpan="2"
+        <DockPanel  Grid.Row="1"  Grid.RowSpan="3"
              x:Name="VisibilitySettingsStackPanel"
              HorizontalAlignment="Left"
              Panel.ZIndex="1"
              Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
-             Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource DoubleTypeVariableConverter}, ConverterParameter={StaticResource SideMenusWidthConverterParameter}}">
+             Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource DoubleTypeVariableConverter}, ConverterParameter={StaticResource SideMenusWidthConverterParameter}}"
+             Background="White">
             <ComboBox DockPanel.Dock="Top"
                 SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" 
                 ItemsSource="{Binding Path=Accounts}">
@@ -98,14 +99,15 @@
             <Button DockPanel.Dock="Top">Month</Button>
             <Button DockPanel.Dock="Top">Year</Button>
             <Button DockPanel.Dock="Top">All</Button>
+            <DatePicker Margin="20"/>
         </DockPanel>
 
-        <Grid Grid.Row="1" Grid.RowSpan="2"
+        <Grid Grid.Row="1" Grid.RowSpan="3"
                     x:Name="OtherSettingsStackPanel"
                     HorizontalAlignment="Right"
                     Panel.ZIndex="1"
                     Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
-                    Background="DarkGreen"
+                    Background="White"
                     Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource DoubleTypeVariableConverter}, ConverterParameter={StaticResource SideMenusWidthConverterParameter}}">
             <Grid.RowDefinitions>
                 <RowDefinition/>

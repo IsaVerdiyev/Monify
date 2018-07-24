@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -151,13 +152,15 @@ namespace Monify.Services
             var doc = new XmlDocument();
             doc.LoadXml(xmlData);
 
+            CultureInfo culture = new CultureInfo("us");
+
             var nodes = doc.SelectNodes("/ValCurs/ValType[@Type='Xarici valyutalar']/Valute");
             foreach (XmlNode item in nodes)
             {
                 Currency currency = new Currency
                 {
                     Code = item.Attributes["Code"].InnerText.ToUpper(),
-                    Value = Double.Parse(item["Value"].InnerText)
+                    Value = Double.Parse(item["Value"].InnerText, culture)
                 };
 
 
