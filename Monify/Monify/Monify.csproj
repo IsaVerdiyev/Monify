@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Converters\HeightToFontSizeConverter.cs" />
+    <Compile Include="Converters\DoubleTypeVariableConverter.cs" />
     <Compile Include="Converters\MainViewConverters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\AbstractAccount.cs" />
     <Compile Include="Models\Account.cs" />

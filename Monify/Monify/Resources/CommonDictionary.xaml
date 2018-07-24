@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Monify"
-                    xmlns:converters="clr-namespace:Monify.Converters">
+                    xmlns:converters="clr-namespace:Monify.Converters"
+                   xmlns:core="clr-namespace:System;assembly=mscorlib">
 
-    <converters:HeightToFontSizeConverter x:Key="heightToSizeConverter"/>
+    <converters:DoubleTypeVariableConverter x:Key="DoubleTypeVariableConverter"/>
 
     <Style  x:Key="RoundButton" TargetType="Button">
         <Setter Property="Template">
@@ -36,7 +37,15 @@
     <Style x:Key="HorizontalAutoSizedRoundButtons" TargetType="Button" BasedOn="{StaticResource RoundButton}">
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="FontSize" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource heightToSizeConverter}}"/>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <Binding Path="ActualHeight" RelativeSource="{RelativeSource self}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <core:Double>0.65</core:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="VerticalAutoSizedRoundButtons" TargetType="Button" BasedOn="{StaticResource RoundButton}">

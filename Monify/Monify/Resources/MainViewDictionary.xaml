@@ -1,9 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Monify"
-                    xmlns:mainViewConverters="clr-namespace:Monify.Converters.MainViewConverters">
+                    xmlns:mainViewConverters="clr-namespace:Monify.Converters.MainViewConverters"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <mainViewConverters:PropertyMarginConverterForHidingControl x:Key="PropertyMarginConverterForHidingControl"/>
+    <sys:Double x:Key="SideMenusWidthConverterParameter">0.5</sys:Double>
     <Style x:Key="BottomExpenseProfitButtons" 
            TargetType="Button" 
            BasedOn="{StaticResource HorizontalAutoSizedRoundButtons}">

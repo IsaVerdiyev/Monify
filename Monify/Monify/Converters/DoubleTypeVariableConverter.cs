@@ -8,11 +8,11 @@ using System.Windows.Data;
 
 namespace Monify.Converters
 {
-    class HeightToFontSizeConverter : IValueConverter
+    class DoubleTypeVariableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value * 0.65;
+            return (double)value * (double)parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
