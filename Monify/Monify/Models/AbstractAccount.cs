@@ -50,6 +50,8 @@ namespace Monify.Models
             get => imagePath;
             set => SetProperty(ref imagePath, value);
         }
+
+
         public int? CurrencyIndex {
             get => currencyIndex;
             set

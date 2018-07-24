@@ -80,6 +80,10 @@ namespace Monify.ViewModels
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
 
+        Visibility currenciesControlVisibility;
+
+        public Visibility CurrenciesControlVisibility { get => currenciesControlVisibility; set => SetProperty(ref currenciesControlVisibility, value); }
+
         Visibility hideAllSideMenusButtonVisibility;
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
@@ -326,6 +330,27 @@ namespace Monify.ViewModels
             }
         }
 
+        private RelayCommand showHideCurrenciesCommand;
+
+        public RelayCommand ShowHideCurrenciesCommand
+        {
+            get {
+                return showHideCurrenciesCommand ??
+                    (showHideCurrenciesCommand = new RelayCommand(obj =>
+                    {
+                        if(CurrenciesControlVisibility == Visibility.Collapsed)
+                        {
+                            CurrenciesControlVisibility = Visibility.Visible;
+                        }
+                        else if (CurrenciesControlVisibility == Visibility.Visible)
+                        {
+                            CurrenciesControlVisibility = Visibility.Collapsed;
+                        }
+                    }));
+            }
+        }
+
+
         private RelayCommand addAccountCommand;
 
         public RelayCommand AddAccountCommand
@@ -339,6 +364,21 @@ namespace Monify.ViewModels
             }
             
         }
+
+        private RelayCommand refreshCurrenciesCommand;
+
+        public RelayCommand RefreshCurrenciesCommand
+        {
+            get
+            {
+                return refreshCurrenciesCommand ??
+                    (refreshCurrenciesCommand = new RelayCommand(obj =>
+                    {
+                        Storage.SetCurrencies();
+                    }));
+            }
+        }
+
 
         private RelayCommand hideAllSideMenuButtonCommand;
 
@@ -362,6 +402,7 @@ namespace Monify.ViewModels
         public IViewModel ResetToInitialState()
         {
             AccountsControlVisibility = Visibility.Collapsed;
+            CurrenciesControlVisibility = Visibility.Collapsed;
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             SelectedAccount = SelectedAccount;
             return this;

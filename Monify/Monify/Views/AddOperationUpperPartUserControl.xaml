@@ -19,7 +19,8 @@
             <Button
                 DockPanel.Dock="Left"
                 Background="Transparent"
-                Command="{Binding ReturnToMainViewCommand}">
+                Command="{Binding ReturnToMainViewCommand}"
+                Style="{StaticResource HorizontalSameSizeControl}">
                 ⬅
             </Button>
 
@@ -27,7 +28,8 @@
                 DockPanel.Dock="Right"
                 Background="Transparent"
                 Command="{Binding AddOperationCommand}"
-                x:Name="AddOperationButton">
+                x:Name="AddOperationButton"
+                Style="{StaticResource HorizontalSameSizeControl}">
                 Add
             </Button>
             <TextBlock

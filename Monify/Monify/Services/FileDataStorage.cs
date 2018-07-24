@@ -137,7 +137,6 @@ namespace Monify.Services
                 string month = String.Format("{0,2}", DateTime.Now.Month.ToString()).Replace(' ', '0');
                 string date = day + "." + month + "." + DateTime.Now.Year;
                 string unformattedUrl = "http://www.cbar.az/currencies/" + date + ".xml";
-                Console.WriteLine(unformattedUrl);
                 string url = string.Format(unformattedUrl);
                 string data = web.DownloadString(url);
                 return data;
@@ -145,7 +144,7 @@ namespace Monify.Services
             }
         }
 
-        void SetCurrencies()
+        public void SetCurrencies()
         {
             string xmlData = GetXmlOfCurrencies();
 

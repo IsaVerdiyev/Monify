@@ -103,25 +103,52 @@
             <Button>All</Button>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.RowSpan="2"
+        <DockPanel Grid.Row="1" Grid.RowSpan="2"
                     x:Name="OtherSettingsStackPanel"
                     HorizontalAlignment="Right"
                     Panel.ZIndex="1"
                     Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
                     Height="300"
-                    Width="100">
-            <Button>Categories</Button>
-            <Button Content="Accounts"
+                    Width="200"
+                    ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <Button DockPanel.Dock="Top">Categories</Button>
+            <Button DockPanel.Dock="Top" Content="Accounts"
                         Command="{Binding ShowHideAccountsCommand}"/>
-            <StackPanel x:Name="AccountsStackPanel" 
+            <StackPanel VerticalAlignment="Stretch"
+                        Margin="0, 0, 0, 0"
+                DockPanel.Dock="Top" x:Name="AccountsStackPanel" 
                                 Visibility="{Binding AccountsControlVisibility}" >
                 <Button Margin="2"
-                                Command="{Binding AddAccountCommand}">Add Account</Button>
+                                Command="{Binding AddAccountCommand}">
+                    Add Account
+                </Button>
                 <ListBox ItemsSource="{Binding Storage.Accounts}"/>
             </StackPanel>
-            <Button>Currencies</Button>
-            <Button>Settings</Button>
-        </StackPanel>
+            <Button
+                DockPanel.Dock="Top"
+                Command="{Binding ShowHideCurrenciesCommand}">Currencies</Button>
+            <StackPanel DockPanel.Dock="Top"
+                                Visibility="{Binding CurrenciesControlVisibility}" >
+                <Button Margin="2"
+                    Command="{Binding RefreshCurrenciesCommand}">↺</Button>
+               
+                    <ListBox 
+                    ItemsSource="{Binding Storage.Currencies}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                <Run Text="{Binding Code}"/>
+                                -
+                                <Run Text="{Binding Value}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                
+            </StackPanel>
+            <Button DockPanel.Dock="Top">Settings</Button>
+            <Button DockPanel.Dock="Bottom"></Button>
+        </DockPanel>
 
 
 
