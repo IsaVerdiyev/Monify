@@ -253,6 +253,7 @@ namespace Monify.ViewModels
                             animation.Duration = new Duration(TimeSpan.FromSeconds(0.2));
                             storyboard.Children.Add(animation);
                             storyboard.Begin(userControl);
+                            ResetOtherSettingsRowsDisplay();
                         }
                     }));
             }
@@ -335,9 +336,7 @@ namespace Monify.ViewModels
                         }
                         else if (AccountsControlVisibility == Visibility.Visible)
                         {
-                            AccountsRow = CategoriesRow;
-                            CategoriesRow = 0;
-                            AccountsControlVisibility = Visibility.Collapsed;
+                            ResetOtherSettingsRowsDisplay();
                         }
                     }));
             }
@@ -360,9 +359,7 @@ namespace Monify.ViewModels
                         }
                         else if (CurrenciesControlVisibility == Visibility.Visible)
                         {
-                            CurrenciesRow = CategoriesRow;
-                            CategoriesRow = 0;
-                            CurrenciesControlVisibility = Visibility.Collapsed;
+                            ResetOtherSettingsRowsDisplay();
                         }
                     }));
             }
@@ -383,19 +380,19 @@ namespace Monify.ViewModels
             
         }
 
-        private RelayCommand refreshCurrenciesCommand;
+        //private RelayCommand refreshCurrenciesCommand;
 
-        public RelayCommand RefreshCurrenciesCommand
-        {
-            get
-            {
-                return refreshCurrenciesCommand ??
-                    (refreshCurrenciesCommand = new RelayCommand(obj =>
-                    {
-                        Storage.SetCurrencies();
-                    }));
-            }
-        }
+        //public RelayCommand RefreshCurrenciesCommand
+        //{
+        //    get
+        //    {
+        //        return refreshCurrenciesCommand ??
+        //            (refreshCurrenciesCommand = new RelayCommand(obj =>
+        //            {
+        //                Storage.SetCurrencies();
+        //            }));
+        //    }
+        //}
 
 
         private RelayCommand hideAllSideMenuButtonCommand;
@@ -415,18 +412,24 @@ namespace Monify.ViewModels
         }
 
 
+        void ResetOtherSettingsRowsDisplay()
+        {
+            CategoriesRow = 0;
+            AccountsRow = 1;
+            CurrenciesRow = 2;
+            SettingsRow = 3;
+
+            AccountsControlVisibility = Visibility.Collapsed;
+            CurrenciesControlVisibility = Visibility.Collapsed;
+        }
 
 
         public IViewModel ResetToInitialState()
         {
             totalBalance.Value = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
-            AccountsControlVisibility = Visibility.Collapsed;
-            CurrenciesControlVisibility = Visibility.Collapsed;
+            
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
-            CategoriesRow = 0;
-            AccountsRow = 1;
-            CurrenciesRow = 2;
-            SettingsRow = 3;
+            ResetOtherSettingsRowsDisplay();
             SelectedAccount = SelectedAccount;
             return this;
         }
