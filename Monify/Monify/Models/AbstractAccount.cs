@@ -13,11 +13,12 @@ namespace Monify.Models
     abstract class AbstractAccount : ObservableObject
     {
         static int iterator = 0;
-        int index;
+        protected int index;
         int? currencyIndex;
-        protected double balance;
         string name;
         string imagePath;
+
+        protected double? balance;
 
         
        
@@ -35,9 +36,8 @@ namespace Monify.Models
 
         public int Index { get => index; }
 
-        public abstract double Balance { get; set; }
+        public abstract double? Balance { get; set; }
 
-        public abstract ObservableCollection<string> GetOperationsByThisAccout { get; }
 
         public string Name
         {
@@ -57,7 +57,7 @@ namespace Monify.Models
             set
             {
                 if(currencyIndex != null)
-                    Balance = CurrencyConverter.Convert(currencyIndex.Value, value.Value, Balance);
+                    Balance = CurrencyConverter.Convert(currencyIndex.Value, value.Value, Balance.Value);
                 
                 SetProperty(ref currencyIndex, value);
 

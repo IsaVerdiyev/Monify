@@ -229,7 +229,12 @@
                             Balance:  
                             <Run Text="{Binding Balance}" />
                             <Run Text=" "/>
-                            <Run Text="{Binding SelectedCurrencyCode, Mode=OneWay}"/>
+                            <Run>
+                                <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
+                                    <Binding Path="SelectedAccount"/>
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Run>
                         </TextBlock>
                     </DockPanel>
                 </Button>

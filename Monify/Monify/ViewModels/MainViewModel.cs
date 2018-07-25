@@ -1,4 +1,5 @@
 ﻿using Monify.Models;
+using Monify.Models.HelperObjects;
 using Monify.Services;
 using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
@@ -28,6 +29,10 @@ namespace Monify.ViewModels
         int currenciesRow;
         int settingsRow;
 
+        DoubleWrapper totalBalance;
+
+       
+
         public int CategoriesRow { get => categoriesRow; set => SetProperty(ref categoriesRow, value); }
         public int AccountsRow { get => accountsRow; set => SetProperty(ref accountsRow, value); }
         public int CurrenciesRow { get => currenciesRow; set => SetProperty(ref currenciesRow, value); }
@@ -36,7 +41,7 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
-            SelectedCurrencyForAllUsers = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
+            totalBalance = new DoubleWrapper();
           
             ResetToInitialState();
         }
@@ -50,17 +55,18 @@ namespace Monify.ViewModels
         
 
 
-        Account selectedAccount;
+        AbstractAccount selectedAccount;
 
-        public Account SelectedAccount
+        public AbstractAccount SelectedAccount
         {
             get => selectedAccount;
             set
             {
                 SetProperty(ref selectedAccount, value);
                 Balance = selectedAccount?.Balance ?? null;
-                OperationStatistics = selectedAccount?.GetOperationsByThisAccout ?? null;
-                SelectedCurrencyCode = Storage.Currencies.FirstOrDefault(c => c.Index == SelectedAccount?.CurrencyIndex)?.Code ?? " ";
+                OperationStatistics = new ObservableCollection<string>(
+                Storage.Operations.Join(Storage.OperationCategories, o => o.OperationCategoryIndex, cat => cat.Index,
+                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount.Index).Select(OpAndCat => OpAndCat.Cat.Name));
             }
         }
 
@@ -82,16 +88,8 @@ namespace Monify.ViewModels
         public AllUsers AllUsers
         {
             get => allUsers ??
-                (allUsers = new AllUsers { Name = "All Users", CurrencyIndex = SelectedCurrencyForAllUsers.Index });
+                (allUsers = new AllUsers { Name = "All Users", CurrencyIndex = Storage.Currencies.FirstOrDefault(c=> c.Code == "USD").Index, balance = totalBalance });
         }
-
-        public string AccountCurrencyCode { get => Storage.Currencies.FirstOrDefault(c => c.Index == selectedAccount.CurrencyIndex).Code; } 
-
-
-
-        Currency selectedCurrencyForAllUsers;
-
-        public Currency SelectedCurrencyForAllUsers { get => selectedCurrencyForAllUsers; set => SetProperty(ref selectedCurrencyForAllUsers, value); }
 
 
         private ObservableCollection<string> operationStatistics;
@@ -101,10 +99,6 @@ namespace Monify.ViewModels
         private double? balance;
 
         public double? Balance { get => balance; set => SetProperty(ref balance, value); }
-
-        private string selectedCurrencyCode;
-        
-        public string SelectedCurrencyCode { get => selectedCurrencyCode; set => SetProperty(ref selectedCurrencyCode, value); }
 
         Visibility accountsControlVisibility;
 
@@ -425,6 +419,7 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
+            totalBalance.Value = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
             AccountsControlVisibility = Visibility.Collapsed;
             CurrenciesControlVisibility = Visibility.Collapsed;
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
