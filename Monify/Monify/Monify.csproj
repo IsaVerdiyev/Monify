@@ -60,8 +60,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\CurrencyIndexToCodeMultiConverter.cs" />
+    <Compile Include="Converters\DateToStringMultiConverter.cs" />
     <Compile Include="Converters\DoubleTypeVariableConverter.cs" />
-    <Compile Include="Converters\MainViewConverters\PropertyMarginConverterForHidingControl.cs" />
+    <Compile Include="Converters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Operation.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
     <Compile Include="Services\JsonSaveLoader.cs" />
+    <Compile Include="Tools\DateTimeExtensions.cs" />
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="Tools\StorageGetter.cs" />

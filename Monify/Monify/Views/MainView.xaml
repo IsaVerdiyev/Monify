@@ -88,8 +88,14 @@
              HorizontalAlignment="Left"
              Panel.ZIndex="1"
              Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
-             Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource DoubleTypeVariableConverter}, ConverterParameter={StaticResource SideMenusWidthConverterParameter}}"
              Background="White">
+            <DockPanel.Width>
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.5</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </DockPanel.Width>
             <ComboBox DockPanel.Dock="Top"
                 SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" 
                 ItemsSource="{Binding Path=Accounts}">
@@ -121,8 +127,14 @@
                     HorizontalAlignment="Right"
                     Panel.ZIndex="1"
                     Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
-                    Background="White"
-                    Width="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Converter={StaticResource DoubleTypeVariableConverter}, ConverterParameter={StaticResource SideMenusWidthConverterParameter}}">
+                    Background="White">
+            <Grid.Width>
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.5</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </Grid.Width>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -182,13 +194,34 @@
         
         <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
-            
-            <TextBlock Text="{Binding Path=Yesterday, StringFormat={}{0:m}, Mode=OneWay}"/>
+
+            <TextBlock>
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
+                        <Binding Path="Past"/>
+                        <Binding Path="Duration"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Boolean>False</sys:Boolean>
+                            </Binding.Source>
+                        </Binding>
+
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <TextBlock HorizontalAlignment="Center"
                                 Margin="130, 0">
-                            <Run Text="{Binding Path=DayOfWeek, Mode=OneWay}"/>
-                            <Run>,</Run>
-                            <Run Text="{Binding Path=CurrentDate, StringFormat={}{0:m}, Mode=OneWay}"/>
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
+                        <Binding Path="SelectedDate"/>
+                        <Binding Path="Duration"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Boolean>True</sys:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
             </TextBlock>
         </StackPanel>
 

@@ -39,16 +39,33 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
+
+            SelectedDate = DateTime.Now;
+            Duration = TimeSpan.FromDays(1);
             ResetToInitialState();
         }
 
-        public DateTime CurrentDate { get => DateTime.Now; }
+        //public DateTime CurrentDate { get => DateTime.Now; }
 
-        public DateTime Yesterday { get => CurrentDate.AddDays(-1); }
+        //public DateTime Yesterday { get => CurrentDate.AddDays(-1); }
 
-        public DayOfWeek DayOfWeek { get => CurrentDate.DayOfWeek; }
+        public DayOfWeek DayOfWeek { get => SelectedDate.DayOfWeek; }
 
-        
+
+        DateTime selectedDate;
+
+        public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
+
+
+
+        private TimeSpan duration;
+
+        public TimeSpan Duration { get => duration; set => SetProperty(ref duration, value); }
+
+
+        public DateTime Past { get => SelectedDate - Duration; }
+       
+            
 
 
         Account selectedAccount;

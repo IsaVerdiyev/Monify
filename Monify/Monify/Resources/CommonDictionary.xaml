@@ -2,10 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Monify"
                     xmlns:converters="clr-namespace:Monify.Converters"
-                   xmlns:core="clr-namespace:System;assembly=mscorlib">
+                   xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <converters:DoubleTypeVariableConverter x:Key="DoubleTypeVariableConverter"/>
     <converters:CurrencyIndexToCodeMultiConverter x:Key="CurrencyIndexToCodeMultiConverter"/>
+    <converters:DateToStringMultiConverter x:Key="DateToStringMultiConverter"/>
+
+    
 
     <Style  x:Key="RoundButton" TargetType="Button">
         <Setter Property="Template">
@@ -42,7 +45,7 @@
             <Setter.Value>
                 <Binding Path="ActualHeight" RelativeSource="{RelativeSource self}" Converter="{StaticResource DoubleTypeVariableConverter}">
                     <Binding.ConverterParameter>
-                        <core:Double>0.65</core:Double>
+                        <sys:Double>0.65</sys:Double>
                     </Binding.ConverterParameter>
                 </Binding>
             </Setter.Value>

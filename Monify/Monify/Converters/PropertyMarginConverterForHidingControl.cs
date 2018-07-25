@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
-namespace Monify.Converters.MainViewConverters
+namespace Monify.Converters
 {
 
     class PropertyMarginConverterForHidingControl : IValueConverter
