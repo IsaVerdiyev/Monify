@@ -15,6 +15,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Media.Animation;
+using static Monify.Tools.DateTimeExtensions;
 
 namespace Monify.ViewModels
 {
@@ -41,7 +42,7 @@ namespace Monify.ViewModels
             Storage = StorageGetter.Storage;
 
             SelectedDate = DateTime.Now;
-            Duration = TimeSpan.FromDays(1);
+            StatisticsDateInterval = DateInterval.Day;
             ResetToInitialState();
         }
 
@@ -58,12 +59,14 @@ namespace Monify.ViewModels
 
 
 
-        private TimeSpan duration;
+        private DateInterval statisticsDateInterval;
 
-        public TimeSpan Duration { get => duration; set => SetProperty(ref duration, value); }
+        public DateInterval StatisticsDateInterval { get => statisticsDateInterval; set => SetProperty(ref statisticsDateInterval, value); }
 
 
-        public DateTime Past { get => SelectedDate - Duration; }
+
+
+        public DateTime Past { get => SelectedDate.GetPastDate(StatisticsDateInterval).Value; }
        
             
 
@@ -79,7 +82,7 @@ namespace Monify.ViewModels
                 Balance = selectedAccount?.Balance ?? null;
                 OperationStatistics = new ObservableCollection<string>(
                 Storage.Operations.Join(Storage.OperationCategories, o => o.OperationCategoryIndex, cat => cat.Index,
-                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount.Index).Select(OpAndCat => OpAndCat.Cat.Name));
+                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount.Index).Where(OpAndCat => OpAndCat.O.Date.IsInCurrentDateInterval(SelectedDate,StatisticsDateInterval)).Select(OpAndCat => OpAndCat.Cat.Name));
             }
         }
 

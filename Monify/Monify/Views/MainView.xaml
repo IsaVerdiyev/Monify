@@ -199,7 +199,7 @@
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
                         <Binding Path="Past"/>
-                        <Binding Path="Duration"/>
+                        <Binding Path="StatisticsDateInterval"/>
                         <Binding>
                             <Binding.Source>
                                 <sys:Boolean>False</sys:Boolean>
@@ -214,7 +214,7 @@
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
                         <Binding Path="SelectedDate"/>
-                        <Binding Path="Duration"/>
+                        <Binding Path="StatisticsDateInterval"/>
                         <Binding>
                             <Binding.Source>
                                 <sys:Boolean>True</sys:Boolean>
@@ -273,8 +273,6 @@
                 </Button>
                 <ListBox Grid.ColumnSpan="2"
                          Background="Aqua"
-                         
-                         
                          ItemsSource="{Binding OperationStatistics, Mode=OneWay}"></ListBox>
             </DockPanel>
 
