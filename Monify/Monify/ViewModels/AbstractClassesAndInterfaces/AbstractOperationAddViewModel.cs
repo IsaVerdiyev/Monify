@@ -38,9 +38,9 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
 
         public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
 
-        AbstractAccount selectedAccount;
+        Account selectedAccount;
 
-        public AbstractAccount SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
+        public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
 
 
 

@@ -14,7 +14,7 @@ namespace Monify.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            AbstractAccount account = values[0] as AbstractAccount;
+            Account account = values[0] as Account;
 
             IStorage storage = values[1] as IStorage;
 

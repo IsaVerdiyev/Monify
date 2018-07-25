@@ -1,5 +1,4 @@
 ﻿using Monify.Models;
-using Monify.Models.HelperObjects;
 using Monify.Services;
 using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
@@ -29,8 +28,7 @@ namespace Monify.ViewModels
         int currenciesRow;
         int settingsRow;
 
-        DoubleWrapper totalBalance;
-
+        
        
 
         public int CategoriesRow { get => categoriesRow; set => SetProperty(ref categoriesRow, value); }
@@ -41,8 +39,6 @@ namespace Monify.ViewModels
         public MainViewModel()
         {
             Storage = StorageGetter.Storage;
-            totalBalance = new DoubleWrapper();
-          
             ResetToInitialState();
         }
 
@@ -55,9 +51,9 @@ namespace Monify.ViewModels
         
 
 
-        AbstractAccount selectedAccount;
+        Account selectedAccount;
 
-        public AbstractAccount SelectedAccount
+        public Account SelectedAccount
         {
             get => selectedAccount;
             set
@@ -72,23 +68,23 @@ namespace Monify.ViewModels
 
      
 
-        public ObservableCollection<AbstractAccount> Accounts
+        public ObservableCollection<Account> Accounts
         {
             get
             {
-                var collection = new ObservableCollection<AbstractAccount>(Storage.Accounts);
+                var collection = new ObservableCollection<Account>(Storage.Accounts);
                 collection.Add(AllUsers);
                 return collection;
             }
         }
 
 
-        AllUsers allUsers;
+        Account allUsers;
 
-        public AllUsers AllUsers
+        public Account AllUsers
         {
             get => allUsers ??
-                (allUsers = new AllUsers { Name = "All Users", CurrencyIndex = Storage.Currencies.FirstOrDefault(c=> c.Code == "USD").Index, balance = totalBalance });
+                (allUsers = new Account(-1) { Name = "All Users", CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index});
         }
 
 
@@ -426,7 +422,7 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
-            totalBalance.Value = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
+            AllUsers.Balance = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
             
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             ResetOtherSettingsRowsDisplay();
