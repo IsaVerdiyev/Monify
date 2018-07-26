@@ -498,7 +498,40 @@ namespace Monify.ViewModels
                     ));
             }
         }
-       
+
+
+        private RelayCommand navigateToPastCommand;
+
+        public RelayCommand NavigateToPastCommand
+        {
+            get {
+                return navigateToPastCommand ??
+                    (navigateToPastCommand = new RelayCommand(obj =>
+                    {
+                        SelectedDate = PastDate.Value;
+
+                    },
+                    obj => PastDate != null
+                    )); 
+            }
+        }
+
+        private RelayCommand navigateToNextCommand;
+
+        public RelayCommand NavigateToNextCommand
+        {
+            get {
+                return navigateToNextCommand ??
+                    (navigateToNextCommand = new RelayCommand(obj =>
+                    {
+                        SelectedDate = NextDate.Value;
+                    },
+                    obj => NextDate != null
+                    ));
+            }
+        }
+
+
 
 
         void ResetOtherSettingsRowsDisplay()

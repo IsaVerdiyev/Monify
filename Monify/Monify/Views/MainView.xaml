@@ -223,7 +223,8 @@
             <Button 
                 Grid.Column="0"
                 BorderThickness="0"
-                Background="Transparent">
+                Background="Transparent"
+                Command="{Binding NavigatoToPastCommand}">
                 <Button.Content>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
                         <Binding Path="PastDate"/>
@@ -233,13 +234,11 @@
                                 <sys:Boolean>False</sys:Boolean>
                             </Binding.Source>
                         </Binding>
-
                     </MultiBinding>
                 </Button.Content>
             </Button>
             <TextBlock
                 Grid.Column="1"
-                
                 Background="Transparent">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
@@ -256,7 +255,8 @@
             <Button 
                 Grid.Column="2"
                 BorderThickness="0"
-                Background="Transparent">
+                Background="Transparent"
+                Command="{Binding NavigateToNextCommand}">
                 <Button.Content>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
                         <Binding Path="NextDate"/>
