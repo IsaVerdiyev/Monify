@@ -61,6 +61,7 @@ namespace Monify.ViewModels
             {
                 SetProperty(ref selectedDate, value);
                 PastDate = PastDate;
+                NextDate = NextDate;
                 OperationStatistics = OperationStatistics;
             }
         }
@@ -133,9 +134,7 @@ namespace Monify.ViewModels
                 Balance = selectedAccount?.Balance ?? null;
                 PastDate = PastDate;
                 NextDate = NextDate;
-                OperationStatistics = new ObservableCollection<string>(
-                Storage.Operations.Join(Storage.OperationCategories, o => o.OperationCategoryIndex, cat => cat.Index,
-                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount?.Index).Where(OpAndCat => OpAndCat.O.Date.IsInCurrentDateInterval(SelectedDate,StatisticsDateInterval)).Select(OpAndCat => OpAndCat.Cat.Name));
+                OperationStatistics = OperationStatistics;
             }
         }
 
@@ -164,9 +163,15 @@ namespace Monify.ViewModels
         }
 
 
-        private ObservableCollection<string> operationStatistics;
+        private ObservableCollection<Operation> operationStatistics;
 
-        public ObservableCollection<string> OperationStatistics { get => operationStatistics; set => SetProperty(ref operationStatistics, value); }
+        public ObservableCollection<Operation> OperationStatistics {
+            get => operationStatistics;
+            set
+            {
+                SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations?.Where(op => op.AccountIndex == SelectedAccount?.Index && op.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval))));
+            }
+        }
 
         private double? balance;
 
