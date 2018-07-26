@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace Monify.Tools
 {
+    public enum DateInterval { Day, Week, Month, Year, All };
+
     public static class DateTimeExtensions
     {
-        public enum DateInterval { Day, Week, Month, Year, All };
+        
 
         public static DateTime SearchedDayOfWeek(this DateTime datetime, DayOfWeek startOfWeek)
         {
-            int diff = (7 + (datetime.DayOfWeek - startOfWeek)) % 7;
-            return datetime.AddDays(-1 * diff).Date;
+            //int diff = (7 + (((int)datetime.DayOfWeek + 6) % 7 - ((int)startOfWeek + 6) % 7)) % 7;
+            //return datetime.AddDays(-1 * diff).Date;
+
+            int diff = ((int)startOfWeek + 6) % 7 - ((int)datetime.DayOfWeek + 6) % 7;
+            return datetime.AddDays(diff);
         }
 
         public static DateTime SearchFirstDayOfMonth(this DateTime dateTime)

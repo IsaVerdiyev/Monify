@@ -55,19 +55,47 @@ namespace Monify.ViewModels
 
         DateTime selectedDate;
 
-        public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
+        public DateTime SelectedDate {
+            get => selectedDate;
+            set
+            {
+                SetProperty(ref selectedDate, value);
+                PastDate = PastDate;
+                OperationStatistics = OperationStatistics;
+            }
+        }
 
 
 
         private DateInterval statisticsDateInterval;
 
-        public DateInterval StatisticsDateInterval { get => statisticsDateInterval; set => SetProperty(ref statisticsDateInterval, value); }
+        public DateInterval StatisticsDateInterval {
+            get => statisticsDateInterval;
+            set
+            {
+                SetProperty(ref statisticsDateInterval, value);
+                PastDate = PastDate;
+                NextDate = NextDate;
+                OperationStatistics = OperationStatistics;
+            }
+        }
 
 
+        DateTime? pastDate;
+
+        public DateTime? PastDate {
+            get => pastDate;
+            set => SetProperty(ref pastDate, (DateTime?)SelectedDate.GetPastDate(StatisticsDateInterval));
+        }
 
 
-        public DateTime Past { get => SelectedDate.GetPastDate(StatisticsDateInterval).Value; }
-       
+        DateTime? nextDate;
+
+        public DateTime? NextDate
+        {
+            get => nextDate;
+            set => SetProperty(ref nextDate, (DateTime)SelectedDate.GetNextDate(StatisticsDateInterval));
+        }
             
 
 
@@ -82,7 +110,7 @@ namespace Monify.ViewModels
                 Balance = selectedAccount?.Balance ?? null;
                 OperationStatistics = new ObservableCollection<string>(
                 Storage.Operations.Join(Storage.OperationCategories, o => o.OperationCategoryIndex, cat => cat.Index,
-                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount.Index).Where(OpAndCat => OpAndCat.O.Date.IsInCurrentDateInterval(SelectedDate,StatisticsDateInterval)).Select(OpAndCat => OpAndCat.Cat.Name));
+                (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount?.Index).Where(OpAndCat => OpAndCat.O.Date.IsInCurrentDateInterval(SelectedDate,StatisticsDateInterval)).Select(OpAndCat => OpAndCat.Cat.Name));
             }
         }
 
@@ -426,6 +454,23 @@ namespace Monify.ViewModels
                     }));
             }
         }
+
+        private RelayCommand changeDateIntervalCommand;
+
+        public RelayCommand ChangeDateIntervalCommand {
+            get
+            {
+                return changeDateIntervalCommand ??
+                    (changeDateIntervalCommand = new RelayCommand(obj =>
+                    {
+                        DateInterval dateIntervalParam = (DateInterval)obj;
+
+                        StatisticsDateInterval = dateIntervalParam;
+                    }
+                    ));
+            }
+        }
+       
 
 
         void ResetOtherSettingsRowsDisplay()

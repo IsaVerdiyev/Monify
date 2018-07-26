@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using Monify.Tools;
 using static Monify.Tools.DateTimeExtensions;
@@ -14,7 +15,14 @@ namespace Monify.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            DateTime selectedDate = (DateTime)values[0];
+            DateTime selectedDate;
+
+            if((DateTime?)values[0] != null)
+            {
+                selectedDate = (DateTime)values[0];
+            }
+            else { return null; }
+            
 
             DateInterval dateInterval = (DateInterval)values[1];
 
@@ -33,11 +41,12 @@ namespace Monify.Converters
             }
             else if (dateInterval == DateInterval.Week)
             {
-                return $"{selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Day} - {selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Day} {selectedDate.Month}";
+              
+                return $"{selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Day} - {selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Day} {selectedDate.ToMonthName()}";
             }
             else if (dateInterval == DateInterval.Month)
             {
-                return $"{selectedDate.Month}";
+                return $"{selectedDate.ToMonthName()}";
             }
             else if (dateInterval == DateInterval.Year)
             {

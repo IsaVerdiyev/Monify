@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Monify.Views"
+             xmlns:dt="clr-namespace:Monify.Tools"
              xmlns:sys ="clr-namespace:System;assembly=mscorlib" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" x:Name="MainViewUserControl">
@@ -114,11 +115,32 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button DockPanel.Dock="Top">Day</Button>
-            <Button DockPanel.Dock="Top">Week</Button>
-            <Button DockPanel.Dock="Top">Month</Button>
-            <Button DockPanel.Dock="Top">Year</Button>
-            <Button DockPanel.Dock="Top">All</Button>
+            <Button DockPanel.Dock="Top" 
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Day}">
+               
+                Day
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Week}">
+                Week
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Month}">
+                Month
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Year}">
+                Year
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.All}">
+                All
+            </Button>
             <DatePicker Margin="20"/>
         </DockPanel>
 
@@ -195,10 +217,10 @@
         <StackPanel Grid.Row="1"
                             Orientation="Horizontal">
 
-            <TextBlock>
-                <TextBlock.Text>
+            <Button>
+                <Button.Content>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
-                        <Binding Path="Past"/>
+                        <Binding Path="PastDate"/>
                         <Binding Path="StatisticsDateInterval"/>
                         <Binding>
                             <Binding.Source>
@@ -207,11 +229,11 @@
                         </Binding>
 
                     </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-            <TextBlock HorizontalAlignment="Center"
+                </Button.Content>
+            </Button>
+            <Button HorizontalAlignment="Center"
                                 Margin="130, 0">
-                <TextBlock.Text>
+                <Button.Content>
                     <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
                         <Binding Path="SelectedDate"/>
                         <Binding Path="StatisticsDateInterval"/>
@@ -221,8 +243,8 @@
                             </Binding.Source>
                         </Binding>
                     </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+                </Button.Content>
+            </Button>
         </StackPanel>
 
 

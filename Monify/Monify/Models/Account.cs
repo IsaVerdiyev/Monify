@@ -17,6 +17,7 @@ namespace Monify.Models
         int? currencyIndex;
         string name;
         string imagePath;
+        DateTime startDate;
 
         protected double? balance;
 
@@ -64,6 +65,7 @@ namespace Monify.Models
             }
         }
 
+        public DateTime StartDate { get => startDate; set => SetProperty(ref startDate, value); }
         
         public override string ToString()
         {

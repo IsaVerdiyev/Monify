@@ -24,6 +24,8 @@ namespace Monify.ViewModels
 
         string balance;
 
+        DateTime? selectedDate;
+
         Currency selectedCurrency;
 
         public AddAccountViewModel()
@@ -43,6 +45,8 @@ namespace Monify.ViewModels
 
         public Currency SelectedCurrency { get => selectedCurrency; set => SetProperty(ref selectedCurrency, value); }
 
+        public DateTime? SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
+
         private RelayCommand addAccountCommand;
 
         public RelayCommand AddAccountCommand
@@ -57,11 +61,12 @@ namespace Monify.ViewModels
                             Name = NewAccountName,
                             Icon = SelectedIcon,
                             Balance = Double.Parse(Balance),
-                            CurrencyIndex = selectedCurrency.Index
+                            CurrencyIndex = selectedCurrency.Index,
+                            StartDate = SelectedDate.Value
                         });
                         ReturnToMainViewCommand.Execute(obj);
                     },
-                    obj => SelectedIcon != null && Balance != "" && NewAccountName != "" && SelectedCurrency != null
+                    obj => SelectedIcon != null && Balance != "" && NewAccountName != "" && SelectedCurrency != null && SelectedDate != null
                     ));
             }
         }
@@ -89,6 +94,7 @@ namespace Monify.ViewModels
             NewAccountName = "";
             SelectedIcon = null;
             SelectedCurrency = null;
+            SelectedDate = null;
             Icons = new ObservableCollection<string> { "💳", "💰" };
             return this;
         }

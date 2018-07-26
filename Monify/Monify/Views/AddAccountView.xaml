@@ -46,6 +46,7 @@
         <DockPanel
             Grid.Row="2">
             <TextBlock DockPanel.Dock="Top">Valute of account</TextBlock>
+            <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding SelectedDate}"></DatePicker>
             <ComboBox Width="90"
                       HorizontalAlignment="Left"
                       ItemsSource="{Binding Storage.Currencies}"
