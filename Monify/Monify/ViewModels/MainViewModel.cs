@@ -85,7 +85,19 @@ namespace Monify.ViewModels
 
         public DateTime? PastDate {
             get => pastDate;
-            set => SetProperty(ref pastDate, (DateTime?)SelectedDate.GetPastDate(StatisticsDateInterval));
+            set
+            {
+
+                DateTime? resultedPastDate = (DateTime?)SelectedDate.GetPastDate(StatisticsDateInterval);
+                if(resultedPastDate > SelectedAccount?.StartDate)
+                {
+                    SetProperty(ref pastDate, resultedPastDate);
+                }
+                else
+                {
+                    SetProperty(ref pastDate, null);
+                }
+            }
         }
 
 
@@ -94,7 +106,18 @@ namespace Monify.ViewModels
         public DateTime? NextDate
         {
             get => nextDate;
-            set => SetProperty(ref nextDate, (DateTime)SelectedDate.GetNextDate(StatisticsDateInterval));
+            set
+            {
+                DateTime? resultedNextDate = (DateTime?)SelectedDate.GetNextDate(StatisticsDateInterval);
+                if (resultedNextDate < DateTime.Now)
+                {
+                    SetProperty(ref nextDate, resultedNextDate);
+                }
+                else
+                {
+                    SetProperty(ref nextDate, null);
+                }
+            }
         }
             
 
@@ -108,6 +131,8 @@ namespace Monify.ViewModels
             {
                 SetProperty(ref selectedAccount, value);
                 Balance = selectedAccount?.Balance ?? null;
+                PastDate = PastDate;
+                NextDate = NextDate;
                 OperationStatistics = new ObservableCollection<string>(
                 Storage.Operations.Join(Storage.OperationCategories, o => o.OperationCategoryIndex, cat => cat.Index,
                 (o, cat) => new { O = o, Cat = cat }).Where(OpAndCat => OpAndCat.O.AccountIndex == selectedAccount?.Index).Where(OpAndCat => OpAndCat.O.Date.IsInCurrentDateInterval(SelectedDate,StatisticsDateInterval)).Select(OpAndCat => OpAndCat.Cat.Name));
@@ -132,7 +157,10 @@ namespace Monify.ViewModels
         public Account AllUsers
         {
             get => allUsers ??
-                (allUsers = new Account(-1) { Name = "All Users", CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index});
+                (allUsers = new Account(-1) {
+                    Name = "All Users",
+                    CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index,
+                });
         }
 
 
@@ -488,7 +516,10 @@ namespace Monify.ViewModels
         public IViewModel ResetToInitialState()
         {
             AllUsers.Balance = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
-            
+
+            AllUsers.StartDate = Storage.Accounts?.Min(a => a.StartDate);
+
+
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             ResetOtherSettingsRowsDisplay();
             SelectedAccount = SelectedAccount;
