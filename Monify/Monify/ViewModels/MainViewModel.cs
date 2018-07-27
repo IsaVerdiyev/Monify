@@ -29,31 +29,105 @@ namespace Monify.ViewModels
         int currenciesRow;
         int settingsRow;
 
+        private double? balance;
+
+        Account selectedAccount;
+        Account allUsers;
+
+        DateTime selectedDate;
+        DateTime? startDate;
+        DateTime? pastDate;
+        DateTime? nextDate;
+        DateInterval statisticsDateInterval;
+
+        private ObservableCollection<Operation> operationStatistics;
+
         
+        Visibility accountsControlVisibility;
+        Visibility currenciesControlVisibility;
+
+        Visibility hideAllSideMenusButtonVisibility;
        
+
+
+
+
+
+
+        public MainViewModel()
+        {
+            Storage = StorageGetter.Storage;
+            SelectedDate = DateTime.Now;
+            SelectedAccount = AllUsers;
+            StatisticsDateInterval = DateInterval.Day;
+            ResetToInitialState();
+        }
+
+
+
+
+
+
+
+
 
         public int CategoriesRow { get => categoriesRow; set => SetProperty(ref categoriesRow, value); }
         public int AccountsRow { get => accountsRow; set => SetProperty(ref accountsRow, value); }
         public int CurrenciesRow { get => currenciesRow; set => SetProperty(ref currenciesRow, value); }
         public int SettingsRow { get => settingsRow; set => SetProperty(ref settingsRow, value); }
 
-        public MainViewModel()
-        {
-            Storage = StorageGetter.Storage;
 
-            SelectedDate = DateTime.Now;
-            StatisticsDateInterval = DateInterval.Day;
-            ResetToInitialState();
+        public double? Balance {
+            get => balance;
+            set
+            {
+                if (SelectedAccount == AllUsers)
+                {
+                    SetProperty(ref balance, Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value)));
+                }
+                else
+                {
+                    SetProperty(ref balance, SelectedAccount?.Balance);
+                }
+            }
         }
 
-        //public DateTime CurrentDate { get => DateTime.Now; }
 
-        //public DateTime Yesterday { get => CurrentDate.AddDays(-1); }
+        public Account SelectedAccount
+        {
+            get => selectedAccount;
+            set
+            {
+                SetProperty(ref selectedAccount, value);
+                Balance = Balance;
+                StartDate = StartDate;
+                if(SelectedDate < StartDate)
+                {
+                    SelectedDate = StartDate ?? DateTime.Now;
+                }
+                PastDate = PastDate;
+                NextDate = NextDate;
+                OperationStatistics = OperationStatistics;
+            }
+        }
+        public Account AllUsers
+        {
+            get => allUsers ??
+                (allUsers = new Account(-1) {
+                    Name = "All Users",
+                    CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index,
+                });
+        }
+        public ObservableCollection<Account> Accounts
+        {
+            get
+            {
+                var collection = new ObservableCollection<Account>(Storage.Accounts);
+                collection.Add(AllUsers);
+                return collection;
+            }
+        }
 
-        public DayOfWeek DayOfWeek { get => SelectedDate.DayOfWeek; }
-
-
-        DateTime selectedDate;
 
         public DateTime SelectedDate {
             get => selectedDate;
@@ -65,32 +139,27 @@ namespace Monify.ViewModels
                 OperationStatistics = OperationStatistics;
             }
         }
-
-
-
-        private DateInterval statisticsDateInterval;
-
-        public DateInterval StatisticsDateInterval {
-            get => statisticsDateInterval;
+        public DateTime? StartDate {
+            get => startDate;
             set
             {
-                SetProperty(ref statisticsDateInterval, value);
-                PastDate = PastDate;
-                NextDate = NextDate;
-                OperationStatistics = OperationStatistics;
+                if(SelectedAccount == AllUsers)
+                {
+                    SetProperty(ref startDate, Storage.Accounts?.Min(a => a.StartDate));
+                }
+                else
+                {
+                    SetProperty(ref startDate, SelectedAccount?.StartDate);
+                }
             }
         }
-
-
-        DateTime? pastDate;
-
         public DateTime? PastDate {
             get => pastDate;
             set
             {
 
                 DateTime? resultedPastDate = (DateTime?)SelectedDate.GetPastDate(StatisticsDateInterval);
-                if(resultedPastDate > SelectedAccount?.StartDate)
+                if(resultedPastDate > StartDate)
                 {
                     SetProperty(ref pastDate, resultedPastDate);
                 }
@@ -100,10 +169,6 @@ namespace Monify.ViewModels
                 }
             }
         }
-
-
-        DateTime? nextDate;
-
         public DateTime? NextDate
         {
             get => nextDate;
@@ -120,50 +185,17 @@ namespace Monify.ViewModels
                 }
             }
         }
-            
-
-
-        Account selectedAccount;
-
-        public Account SelectedAccount
-        {
-            get => selectedAccount;
+        public DateInterval StatisticsDateInterval {
+            get => statisticsDateInterval;
             set
             {
-                SetProperty(ref selectedAccount, value);
-                Balance = selectedAccount?.Balance ?? null;
+                SetProperty(ref statisticsDateInterval, value);
                 PastDate = PastDate;
                 NextDate = NextDate;
                 OperationStatistics = OperationStatistics;
             }
         }
 
-     
-
-        public ObservableCollection<Account> Accounts
-        {
-            get
-            {
-                var collection = new ObservableCollection<Account>(Storage.Accounts);
-                collection.Add(AllUsers);
-                return collection;
-            }
-        }
-
-
-        Account allUsers;
-
-        public Account AllUsers
-        {
-            get => allUsers ??
-                (allUsers = new Account(-1) {
-                    Name = "All Users",
-                    CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index,
-                });
-        }
-
-
-        private ObservableCollection<Operation> operationStatistics;
 
         public ObservableCollection<Operation> OperationStatistics {
             get => operationStatistics;
@@ -180,24 +212,13 @@ namespace Monify.ViewModels
             }
         }
 
-        private double? balance;
-
-        public double? Balance {
-            get => balance;
-            set => SetProperty(ref balance, value);
-        }
-
-        Visibility accountsControlVisibility;
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
-
-        Visibility currenciesControlVisibility;
-
         public Visibility CurrenciesControlVisibility { get => currenciesControlVisibility; set => SetProperty(ref currenciesControlVisibility, value); }
 
-        Visibility hideAllSideMenusButtonVisibility;
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
+
 
 
         RelayCommand addExpenseCommand;
@@ -563,11 +584,6 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
-            AllUsers.Balance = Storage.Accounts.Sum(a => CurrencyConverter.Convert(a.CurrencyIndex.Value, AllUsers.CurrencyIndex.Value, a.Balance.Value));
-
-            AllUsers.StartDate = Storage.Accounts?.Min(a => a.StartDate);
-
-
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             ResetOtherSettingsRowsDisplay();
             SelectedAccount = SelectedAccount;
