@@ -169,13 +169,23 @@ namespace Monify.ViewModels
             get => operationStatistics;
             set
             {
-                SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations?.Where(op => op.AccountIndex == SelectedAccount?.Index && op.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval))));
+                if (SelectedAccount == AllUsers)
+                {
+                    SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations.Where(o => o.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval)).OrderBy(o => o.Date)));
+                }
+                else
+                {
+                    SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations?.Where(op => op.AccountIndex == SelectedAccount?.Index && op.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval)).OrderBy(o => o.Date)));
+                }
             }
         }
 
         private double? balance;
 
-        public double? Balance { get => balance; set => SetProperty(ref balance, value); }
+        public double? Balance {
+            get => balance;
+            set => SetProperty(ref balance, value);
+        }
 
         Visibility accountsControlVisibility;
 
