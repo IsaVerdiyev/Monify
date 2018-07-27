@@ -17,8 +17,12 @@ namespace Monify.Converters
             Operation operation = values[0] as Operation;
 
             IStorage storage = values[1] as IStorage;
+            if (operation != null)
+            {
 
-            return $"{storage.OperationCategories.FirstOrDefault(cat => cat.Index == operation?.OperationCategoryIndex)} - {operation?.Amount}";
+                return $"{storage.OperationCategories.FirstOrDefault(cat => cat.Index == operation?.OperationCategoryIndex)} - {operation?.Amount}";
+            }
+            else return null;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

@@ -319,13 +319,20 @@
                     </DockPanel>
                 </Button>
                 <ListBox Grid.ColumnSpan="2"
-                         Background="Aqua">
-                    <ListBox.ItemsSource>
-                        <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
-                            <Binding />
-                            <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
-                        </MultiBinding>
-                    </ListBox.ItemsSource>
+                         Background="Aqua"
+                         ItemsSource="{Binding OperationStatistics, Mode=OneWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <TextBlock.Text>
+                                    <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
+                                        <Binding Mode="OneWay"/>
+                                        <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
+                                    </MultiBinding>
+                                </TextBlock.Text>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
 
 
                 </ListBox>
