@@ -99,7 +99,7 @@
             </DockPanel.Width>
             <ComboBox DockPanel.Dock="Top"
                 SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                ItemsSource="{Binding Path=Accounts}">
+                ItemsSource="{Binding Path=Accounts, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -353,14 +353,28 @@
                          ItemsSource="{Binding OperationStatistics, Mode=OneWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock>
-                                <TextBlock.Text>
-                                    <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
-                                        <Binding Mode="OneWay"/>
-                                        <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
-                                    </MultiBinding>
-                                </TextBlock.Text>
-                            </TextBlock>
+                            <DockPanel>
+                                <Label 
+                                    DockPanel.Dock="Left"
+                                    Style="{StaticResource HorizontalAutoSizedRoundLabel}"
+                                    Margin="20, 5">
+                                    <Label.Background>
+                                        <MultiBinding Converter="{StaticResource OperationCategoryTypeIndexToColorConverter}">
+                                            <Binding/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Label.Background>
+                                </Label>
+                                <TextBlock></TextBlock>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
+                                            <Binding Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
 

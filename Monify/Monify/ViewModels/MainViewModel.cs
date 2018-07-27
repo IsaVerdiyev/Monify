@@ -132,19 +132,6 @@ namespace Monify.ViewModels
             }
         }
         public ObservableCollection<Account> Accounts { get => accounts; set => SetProperty(ref accounts, value); }
-        //{
-        //    get
-        //    {
-        //        //var collection = new ObservableCollection<Account>(Storage.Accounts);
-        //        //collection.Add(AllUsers);
-        //        //return collection;
-        //        return accounts;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref accounts, value);
-        //    }
-        //}
 
 
         public DateTime SelectedDate {

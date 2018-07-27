@@ -41,81 +41,81 @@ namespace Monify.Services
         {
             OperationTypes = new ObservableCollection<OperationType>
             {
-                new OperationType{Name = "Expense"} ,
-                new OperationType{Name = "Profit"}
+                new OperationType{Name = OperationTypesEnum.Profit.ToString()} ,
+                new OperationType{Name = OperationTypesEnum.Expense.ToString()}
             };
 
             OperationCategories = new ObservableCollection<OperationCategory>
             {
                 new OperationCategory{
                     Name = "Hygiene",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory
                 {
                     Name = "Food",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Accommodation",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
 
                 new OperationCategory{
                     Name = "Health",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Cafe",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Car",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Clothes",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Pets",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Presents",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Entertainments",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Communication",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Sports",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Taxi",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Transport",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Expense").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Deposits",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Salary",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
                 },
                 new OperationCategory{
                     Name = "Saving",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == "Profit").Index
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
                 }
             };
 

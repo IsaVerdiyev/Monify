@@ -13,12 +13,12 @@ namespace Monify.ViewModels
 {
     class AddExpenseViewModel : AbstractOperationAddViewModel, IGetSpecifiedGategories
     {
-        public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == "Expense").Index));
+        public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index));
 
         
 
 
-        public override string HeaderText => "Add Extense";
+        public override string HeaderText => "Add Expense";
 
         protected override Func<double> BalanceRefresher { get => () =>(double) (SelectedAccount.Balance -= double.Parse(TextBoxNumber));}
     }

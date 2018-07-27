@@ -8,6 +8,7 @@
     <converters:CurrencyIndexToCodeMultiConverter x:Key="CurrencyIndexToCodeMultiConverter"/>
     <converters:DateToStringMultiConverter x:Key="DateToStringMultiConverter"/>
     <converters:OperationToCategoryAmountMultiConverter x:Key="OperationToCategoryAmountMultiConverter"/>
+    <converters:OperationCategoryTypeIndexToColorMultiConverter x:Key="OperationCategoryTypeIndexToColorConverter"/>
 
 
 
@@ -25,8 +26,7 @@
                                 TextBlock.TextAlignment="Center"
                                 TextElement.Foreground="{TemplateBinding Foreground}"
                                 Content="{TemplateBinding Content}"
-                                TextBlock.FontSize="{TemplateBinding FontSize}"
-                            />
+                                TextBlock.FontSize="{TemplateBinding FontSize}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -38,8 +38,43 @@
         </Style.Triggers>
     </Style>
 
+    <Style  x:Key="RoundLabel" TargetType="Label">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate x:Name="EllipseLabelTemplate"  TargetType="Label">
+                    <Grid>
+                        <Ellipse
+                            Fill="{TemplateBinding Background}"
+                            Width="{TemplateBinding Width}"
+                            Height="{TemplateBinding Height}"
+                            Stroke="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter 
+                                TextBlock.TextAlignment="Center"
+                                TextElement.Foreground="{TemplateBinding Foreground}"
+                                Content="{TemplateBinding Content}"
+                                TextBlock.FontSize="{TemplateBinding FontSize}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 
     <Style x:Key="HorizontalAutoSizedRoundButtons" TargetType="Button" BasedOn="{StaticResource RoundButton}">
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <Binding Path="ActualHeight" RelativeSource="{RelativeSource self}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.65</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HorizontalAutoSizedRoundLabel" TargetType="Label" BasedOn="{StaticResource RoundLabel}">
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="FontSize">

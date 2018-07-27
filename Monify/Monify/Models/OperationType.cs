@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
+    public enum OperationTypesEnum { Profit, Expense }
+
     class OperationType
     {
         static int iterator = 0;
