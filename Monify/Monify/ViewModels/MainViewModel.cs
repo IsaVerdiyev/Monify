@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,6 +34,7 @@ namespace Monify.ViewModels
 
         Account selectedAccount;
         Account allUsers;
+        ObservableCollection<Account> accounts;
 
         DateTime selectedDate;
         DateTime? startDate;
@@ -40,11 +42,12 @@ namespace Monify.ViewModels
         DateTime? nextDate;
         DateInterval statisticsDateInterval;
 
-        private ObservableCollection<Operation> operationStatistics;
+        ObservableCollection<Operation> operationStatistics;
 
         
         Visibility accountsControlVisibility;
         Visibility currenciesControlVisibility;
+        Visibility settingsControlVisibility;
 
         Visibility hideAllSideMenusButtonVisibility;
        
@@ -59,6 +62,7 @@ namespace Monify.ViewModels
             Storage = StorageGetter.Storage;
             SelectedDate = DateTime.Now;
             SelectedAccount = AllUsers;
+            AllUsersCurrency = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
             StatisticsDateInterval = DateInterval.Day;
             ResetToInitialState();
         }
@@ -114,19 +118,33 @@ namespace Monify.ViewModels
         {
             get => allUsers ??
                 (allUsers = new Account(-1) {
-                    Name = "All Users",
-                    CurrencyIndex = Storage.Currencies.FirstOrDefault(c => c.Code == "USD").Index,
+                    Name = "All Users"
                 });
         }
-        public ObservableCollection<Account> Accounts
-        {
-            get
+        public Currency AllUsersCurrency {
+            get => Storage.Currencies.FirstOrDefault(c => c.Index == AllUsers.CurrencyIndex);
+            set
             {
-                var collection = new ObservableCollection<Account>(Storage.Accounts);
-                collection.Add(AllUsers);
-                return collection;
+                AllUsers.CurrencyIndex = (value as Currency).Index;
+                OnPropertyChanged();
+                Accounts = Accounts;
+                SelectedAccount = SelectedAccount;
             }
         }
+        public ObservableCollection<Account> Accounts { get => accounts; set => SetProperty(ref accounts, value); }
+        //{
+        //    get
+        //    {
+        //        //var collection = new ObservableCollection<Account>(Storage.Accounts);
+        //        //collection.Add(AllUsers);
+        //        //return collection;
+        //        return accounts;
+        //    }
+        //    set
+        //    {
+        //        SetProperty(ref accounts, value);
+        //    }
+        //}
 
 
         public DateTime SelectedDate {
@@ -215,7 +233,7 @@ namespace Monify.ViewModels
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
         public Visibility CurrenciesControlVisibility { get => currenciesControlVisibility; set => SetProperty(ref currenciesControlVisibility, value); }
-
+        public Visibility SettingsControlVisibility { get => settingsControlVisibility; set => SetProperty(ref settingsControlVisibility, value); }
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
 
@@ -473,6 +491,29 @@ namespace Monify.ViewModels
             }
         }
 
+        private RelayCommand showHideSettingsCommand;
+
+        public RelayCommand ShowHideSettingsCommand
+        {
+            get {
+                return showHideSettingsCommand ??
+                    (showHideSettingsCommand = new RelayCommand(obj =>
+                    {
+                        if (SettingsControlVisibility == Visibility.Collapsed)
+                        {
+                            CategoriesRow = SettingsRow;
+                            SettingsRow = 0;
+                            SettingsControlVisibility = Visibility.Visible;
+                        }
+                        else if (SettingsControlVisibility == Visibility.Visible)
+                        {
+                            ResetOtherSettingsRowsDisplay();
+                        }
+                    }));
+            }
+        }
+
+
 
         private RelayCommand addAccountCommand;
 
@@ -579,6 +620,7 @@ namespace Monify.ViewModels
 
             AccountsControlVisibility = Visibility.Collapsed;
             CurrenciesControlVisibility = Visibility.Collapsed;
+            SettingsControlVisibility = Visibility.Collapsed;
         }
 
 
@@ -586,6 +628,9 @@ namespace Monify.ViewModels
         {
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             ResetOtherSettingsRowsDisplay();
+            var tempAccounts = new ObservableCollection<Account>(Storage.Accounts);
+            tempAccounts.Add(AllUsers);
+            Accounts = tempAccounts;
             SelectedAccount = SelectedAccount;
             return this;
         }

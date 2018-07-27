@@ -8,7 +8,7 @@ namespace Monify.Tools
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void OnPropertyChanged(string prop)
+        protected void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }

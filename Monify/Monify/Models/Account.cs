@@ -57,8 +57,11 @@ namespace Monify.Models
             get => currencyIndex;
             set
             {
-                if(currencyIndex != null)
-                    Balance = CurrencyConverter.Convert(currencyIndex.Value, value.Value, Balance.Value);
+                if (currencyIndex != null)
+                    if (Balance != null)
+                    {
+                        Balance = CurrencyConverter.Convert(currencyIndex.Value, value.Value, Balance.Value);
+                    }
                 
                 SetProperty(ref currencyIndex, value);
 

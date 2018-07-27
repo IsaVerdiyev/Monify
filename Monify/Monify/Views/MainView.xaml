@@ -98,7 +98,7 @@
                 </Binding>
             </DockPanel.Width>
             <ComboBox DockPanel.Dock="Top"
-                SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay}" 
+                SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 ItemsSource="{Binding Path=Accounts}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -164,15 +164,18 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button>Categories</Button>
-            <Button Grid.Row="{Binding AccountsRow, Mode=OneWay}"
-                    Content="Accounts"
-                    Command="{Binding ShowHideAccountsCommand}"/>
+            <Button 
+                Grid.Row="{Binding AccountsRow, Mode=OneWay}"
+                Content="Accounts"
+                Command="{Binding ShowHideAccountsCommand}"/>
             <Button
                 Grid.Row="{Binding CurrenciesRow, Mode=OneWay}"
-                Command="{Binding ShowHideCurrenciesCommand}">
-                Currencies
-            </Button>
-            <Button Grid.Row="3">Settings</Button>
+                Command="{Binding ShowHideCurrenciesCommand}"
+                Content="Currencies"/>
+            <Button 
+                Grid.Row="{Binding SettingsRow, Mode=OneWay}"
+                Command="{Binding ShowHideSettingsCommand}"
+                Content="Settings"/> 
 
             <DockPanel Grid.Row="1"
                 Grid.RowSpan="4"
@@ -192,21 +195,47 @@
                         Panel.ZIndex="2">
                 <Button DockPanel.Dock="Top"
                     Margin="2"
-                    Command="{Binding RefreshCurrenciesCommand}">↺</Button>
+                    Command="{Binding RefreshCurrenciesCommand}">
+                    ↺
+                </Button>
                
-                    <ListBox 
-                    ItemsSource="{Binding Storage.Currencies}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock>
-                                <Run Text="{Binding Code}"/>
-                                -
-                                <Run Text="{Binding Value}"/>
-                                </TextBlock>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
+                <ListBox 
+                ItemsSource="{Binding Storage.Currencies}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                            <Run Text="{Binding Code}"/>
+                            -
+                            <Run Text="{Binding Value}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 
+            </DockPanel>
+
+            <DockPanel Grid.Row="1"
+                       Grid.RowSpan="4"
+                       Visibility="{Binding SettingsControlVisibility}" 
+                       Panel.ZIndex="2"
+                       Background="White">
+                <Grid
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"> 
+                        <Run> All Users </Run>
+                        <LineBreak/>
+                        <Run> Currency</Run>
+                    </TextBlock>
+                    <ComboBox
+                        Grid.Column="1"
+                        SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
+                        ItemsSource="{Binding Storage.Currencies, Mode=OneWay}"
+                        />
+                </Grid>
             </DockPanel>
         </Grid>
 
