@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace Monify.Converters
 {
-    class OperationToCategoryAmountMultiConverter : IMultiValueConverter
+    class OperationToCategoryAmountCurrencyMultiConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
@@ -20,7 +20,9 @@ namespace Monify.Converters
             if (operation != null)
             {
 
-                return $"{storage.OperationCategories.FirstOrDefault(cat => cat.Index == operation?.OperationCategoryIndex)} - {operation?.Amount}";
+                return $"{storage.OperationCategories.FirstOrDefault(cat => cat.Index == operation?.OperationCategoryIndex)} - " +
+                    $"{operation?.Amount} " +
+                    $"{storage.Operations.Join(storage.Accounts, o => o.AccountIndex, a => a.Index, (o, a) => new { Op = o, Ac = a }).Join(storage.Currencies, OpAc => OpAc.Ac.CurrencyIndex, c => c.Index, (OpAc, c) => new {Op = OpAc.Op, Code = c.Code }).FirstOrDefault(item => item.Op == operation).Code } ";
             }
             else return null;
         }

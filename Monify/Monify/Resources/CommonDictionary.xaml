@@ -7,7 +7,7 @@
     <converters:DoubleTypeVariableConverter x:Key="DoubleTypeVariableConverter"/>
     <converters:CurrencyIndexToCodeMultiConverter x:Key="CurrencyIndexToCodeMultiConverter"/>
     <converters:DateToStringMultiConverter x:Key="DateToStringMultiConverter"/>
-    <converters:OperationToCategoryAmountMultiConverter x:Key="OperationToCategoryAmountMultiConverter"/>
+    <converters:OperationToCategoryAmountCurrencyMultiConverter x:Key="OperationToCategoryAmountMultiConverter"/>
     <converters:OperationCategoryTypeIndexToColorMultiConverter x:Key="OperationCategoryTypeIndexToColorConverter"/>
 
 
