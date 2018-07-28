@@ -97,7 +97,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                         BalanceRefresher();
                         ReturnToMainViewCommand.Execute(obj);
                     },
-                    obj => SelectedCategory != null && SelectedAccount != null && SelectedDate >= SelectedAccount.StartDate
+                    obj => SelectedCategory != null && SelectedAccount != null && SelectedDate >= SelectedAccount.StartDate && SelectedAccount.StartDate <= DateTime.Now
                     ));
             }
         }

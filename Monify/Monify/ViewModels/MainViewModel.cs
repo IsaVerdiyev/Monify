@@ -235,8 +235,8 @@ namespace Monify.ViewModels
                     (addExpenseCommand = new RelayCommand(obj =>
                     {
                         ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new AddExpenseView();
-                    }
-                    , obj => Storage.Accounts.Count != 0
+                    },
+                    obj => Storage.Accounts.Count != 0
                     ));
             }
         }
