@@ -365,7 +365,9 @@
                                         </MultiBinding>
                                     </Label.Background>
                                 </Label>
-                                <TextBlock></TextBlock>
+                                <TextBlock DockPanel.Dock="Right"
+                                           TextAlignment="Right"
+                                           Text="{Binding Date, StringFormat='{}{00:d/M/yyyy}'}"/>
                                 <TextBlock>
                                     <TextBlock.Text>
                                         <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
