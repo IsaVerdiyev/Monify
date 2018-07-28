@@ -350,32 +350,34 @@
                 </Button>
                 <ListBox Grid.ColumnSpan="2"
                          Background="Aqua"
-                         ItemsSource="{Binding OperationStatistics, Mode=OneWay}">
+                         ItemsSource="{Binding OperationStatistics, Mode=OneWay}"
+                         HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <Label 
-                                    DockPanel.Dock="Left"
+                                <Label DockPanel.Dock="Left"
                                     Style="{StaticResource HorizontalAutoSizedRoundLabel}"
-                                    Margin="20, 5">
+                                    Margin="10, 5">
                                     <Label.Background>
                                         <MultiBinding Converter="{StaticResource OperationCategoryTypeIndexToColorConverter}">
                                             <Binding/>
-                                            <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
                                         </MultiBinding>
                                     </Label.Background>
                                 </Label>
-                                <TextBlock DockPanel.Dock="Right"
-                                           TextAlignment="Right"
-                                           Text="{Binding Date, StringFormat='{}{00:d/M/yyyy}'}"/>
-                                <TextBlock>
+                                <TextBlock DockPanel.Dock="Left">
                                     <TextBlock.Text>
                                         <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
                                             <Binding Mode="OneWay"/>
-                                            <Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="DataContext.Storage" Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
                                         </MultiBinding>
                                     </TextBlock.Text>
                                 </TextBlock>
+                                <TextBlock Grid.Column="2"
+                                           TextAlignment="Right"
+                                           Text="{Binding Date, StringFormat='{}{00:d/M/yyyy}'}"
+                                           
+                                           />
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
