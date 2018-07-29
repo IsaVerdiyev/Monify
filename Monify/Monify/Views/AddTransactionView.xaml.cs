@@ -20,9 +20,9 @@ namespace Monify.Views
     /// <summary>
     /// Interaction logic for TransactionView.xaml
     /// </summary>
-    public partial class TransactionView : UserControl
+    public partial class AddTransactionView : UserControl
     {
-        public TransactionView()
+        public AddTransactionView()
         {
             InitializeComponent();
 

@@ -106,8 +106,11 @@
     <Compile Include="Views\AddAccountView.xaml.cs">
       <DependentUpon>AddAccountView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddOperationUpperPartUserControl.xaml.cs">
-      <DependentUpon>AddOperationUpperPartUserControl.xaml</DependentUpon>
+    <Compile Include="Views\AddOperationUpperPartSubView.xaml.cs">
+      <DependentUpon>AddOperationUpperPartSubView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddTransactionUpperPartSubView.xaml.cs">
+      <DependentUpon>AddTransactionUpperPartSubView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CategoryChooseSubView.xaml.cs">
       <DependentUpon>CategoryChooseSubView.xaml</DependentUpon>
@@ -124,11 +127,11 @@
     <Compile Include="Views\AddProfitView.xaml.cs">
       <DependentUpon>AddProfitView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TransactionAccountChooseSubView.xaml.cs">
-      <DependentUpon>TransactionAccountChooseSubView.xaml</DependentUpon>
+    <Compile Include="Views\AddTransactionDownerPartAccountChooseSubView.xaml.cs">
+      <DependentUpon>AddTransactionDownerPartAccountChooseSubView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TransactionView.xaml.cs">
-      <DependentUpon>TransactionView.xaml</DependentUpon>
+    <Compile Include="Views\AddTransactionView.xaml.cs">
+      <DependentUpon>AddTransactionView.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\CommonDictionary.xaml">
       <SubType>Designer</SubType>
@@ -146,15 +149,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\MainViewDictionary.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\AddAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddOperationUpperPartUserControl.xaml">
+    <Page Include="Views\AddOperationUpperPartSubView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddTransactionUpperPartSubView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,11 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TransactionAccountChooseSubView.xaml">
+    <Page Include="Views\AddTransactionDownerPartAccountChooseSubView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TransactionView.xaml">
+    <Page Include="Views\AddTransactionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

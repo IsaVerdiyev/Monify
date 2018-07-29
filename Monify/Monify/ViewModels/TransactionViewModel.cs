@@ -47,7 +47,7 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
-            CurrentControl = new TransactionAccountChooseSubView();
+            CurrentControl = new AddTransactionDownerPartAccountChooseSubView();
 
             return this;
         }

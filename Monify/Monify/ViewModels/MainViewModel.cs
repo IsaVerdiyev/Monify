@@ -427,7 +427,7 @@ namespace Monify.ViewModels
             get { return openTransactionMenuCommand ??
                     (openTransactionMenuCommand = new RelayCommand(obj =>
                     {
-                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new TransactionView();
+                        ((WindowViewModel)(ViewModelsStorage.GetViewModel(typeof(WindowViewModel).Name))).CurrentControl = new AddTransactionView();
                     })); }
         }
 

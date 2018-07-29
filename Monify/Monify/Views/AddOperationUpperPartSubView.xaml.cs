@@ -18,9 +18,9 @@ namespace Monify.Views
     /// <summary>
     /// Interaction logic for AddOperationUpperPartUserControl.xaml
     /// </summary>
-    public partial class AddOperationUpperPartUserControl : UserControl
+    public partial class AddOperationUpperPartSubView : UserControl
     {
-        public AddOperationUpperPartUserControl()
+        public AddOperationUpperPartSubView()
         {
             InitializeComponent();
         }

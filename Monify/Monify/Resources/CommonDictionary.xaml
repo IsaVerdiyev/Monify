@@ -9,6 +9,10 @@
     <converters:DateToStringMultiConverter x:Key="DateToStringMultiConverter"/>
     <converters:OperationToCategoryAmountCurrencyMultiConverter x:Key="OperationToCategoryAmountMultiConverter"/>
     <converters:OperationCategoryTypeIndexToColorMultiConverter x:Key="OperationCategoryTypeIndexToColorConverter"/>
+    <converters:PropertyMarginConverterForHidingControl x:Key="PropertyMarginConverterForHidingControl"/>
+
+    <SolidColorBrush x:Key="CommonForeground">White</SolidColorBrush>
+    <sys:Double x:Key="CurrencyComboBoxWidth">90</sys:Double>
 
 
 
@@ -88,6 +92,24 @@
         </Setter>
     </Style>
 
+
+
+
+    <Style x:Key="BottomExpenseProfitButtons" 
+           TargetType="Button" 
+           BasedOn="{StaticResource HorizontalAutoSizedRoundButtons}">
+        <Setter Property="Margin" Value="0, 0"/>
+    </Style>
+
+    <Style x:Key="UpperPartRowHeight" TargetType="RowDefinition">
+        <Setter Property="Height" Value="4*"/>
+    </Style>
+
+    <Style x:Key="DownerPartRowHeight" TargetType="RowDefinition">
+        <Setter Property="Height" Value="6*"/>
+    </Style>
+    
+
     <Style x:Key="VerticalAutoSizedRoundButtons" TargetType="Button" BasedOn="{StaticResource RoundButton}">
         <Setter Property="Height" Value="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Width" Value="Auto"/>
@@ -97,6 +119,39 @@
         <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}"/>
     </Style>
 
+    <Style x:Key="FirstGridRowOfUpperPart" TargetType="RowDefinition">
+        <Setter Property="Height" Value="2*"/>
+    </Style>
+
+    <Style x:Key="SecondGridRowOfUpperPart" TargetType="RowDefinition">
+        <Setter Property="Height" Value="3*"/>
+    </Style>
+
+    <Style x:Key="ThirdGridRowOfUpperPart" TargetType="RowDefinition">
+        <Setter Property="Height" Value="3*"/>
+    </Style>
+
+    <Style x:Key="FourthGridRowOfUpperPart" TargetType="RowDefinition">
+        <Setter Property="Height" Value="2*"/>
+    </Style>
+
+    <Style x:Key="HeaderPanelColors" TargetType="Panel">
+        <Setter Property="Background" Value="LightGreen"/>
+    </Style>
+
+    <Style x:Key="PanelsForeground" TargetType="Control">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
+    <Style x:Key="ValuePanelColors" TargetType="Panel">
+        <Setter Property="Background" Value="Green"/>
+    </Style>
+
+
+    <Style x:Key="CurrencyComboBox" TargetType="ComboBox">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Width" Value="{StaticResource CurrencyComboBoxWidth}"/>
+    </Style>
     
 
 

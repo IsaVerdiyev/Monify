@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Monify.Views.AddOperationUpperPartUserControl"
+﻿<UserControl x:Class="Monify.Views.AddOperationUpperPartSubView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,34 +6,35 @@
              xmlns:local="clr-namespace:Monify.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid
-        TextElement.FontSize="20">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Style="{StaticResource FirstGridRowOfUpperPart}"/>
+            <RowDefinition Style="{StaticResource SecondGridRowOfUpperPart}"/>
+            <RowDefinition Style="{StaticResource ThirdGridRowOfUpperPart}"/>
+            <RowDefinition Style="{StaticResource FourthGridRowOfUpperPart}"/>
         </Grid.RowDefinitions>
-        <DockPanel Background="Green"
-               TextElement.Foreground="White">
+        <DockPanel 
+            Style="{StaticResource HeaderPanelColors}">
             <Button
-                DockPanel.Dock="Left"
-                Background="Transparent"
                 Command="{Binding ReturnToMainViewCommand}"
-                Style="{StaticResource HorizontalSameSizeControl}">
-                ⬅
+                Style="{StaticResource HorizontalSameSizeControl}"
+                Background="Transparent"
+                Foreground ="{StaticResource CommonForeground}">
+                    ⬅
             </Button>
+               
 
             <Button
                 DockPanel.Dock="Right"
                 Background="Transparent"
                 Command="{Binding AddOperationCommand}"
                 x:Name="AddOperationButton"
-                Style="{StaticResource HorizontalSameSizeControl}">
+                Style="{StaticResource HorizontalSameSizeControl}"
+                Foreground="{StaticResource CommonForeground}">
                 Add
             </Button>
             <TextBlock
-                Background="Transparent"
+                Foreground="{StaticResource CommonForeground}"
                 TextAlignment="Center"
                 Text="{Binding HeaderText}"/>
 
@@ -45,11 +46,10 @@
 
 
         <DockPanel Grid.Row="2"
-                    Background="Green">
+                    Style="{StaticResource ValuePanelColors}">
             <ComboBox DockPanel.Dock="Left"
                 ItemsSource="{Binding Storage.Accounts}"
-                Width="50"
-                Background="Transparent"
+                Width="{StaticResource CurrencyComboBoxWidth}"
                 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -69,11 +69,15 @@
             <Button DockPanel.Dock="Right"
                 Style="{StaticResource HorizontalSameSizeControl}"
                 Command="{Binding EraseCommand}"
-                >X</Button>
+                Background="Transparent"
+                Foreground="{StaticResource CommonForeground}">
+                X
+            </Button>
             <TextBlock 
                 TextAlignment="Center" 
                 Text="{Binding TextBoxNumber, Mode=OneWay}"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center"
+                Foreground="White"/>
         </DockPanel>
 
         <DockPanel Grid.Row="3" >

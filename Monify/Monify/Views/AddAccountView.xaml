@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Monify.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid
-        TextElement.FontSize="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>

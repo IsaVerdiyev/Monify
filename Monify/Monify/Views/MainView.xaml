@@ -21,8 +21,7 @@
             </Style.Setters>
         </Style>
     </UserControl.Resources>
-    <Grid 
-        TextElement.FontSize="20">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
@@ -334,8 +333,7 @@
                         <TextBlock 
                             DockPanel.Dock="Right"> ☰</TextBlock>
                         <TextBlock
-                            HorizontalAlignment="Center"
-                            FontSize="20">
+                            HorizontalAlignment="Center">
                             Balance:  
                             <Run Text="{Binding Balance}" />
                             <Run Text=" "/>

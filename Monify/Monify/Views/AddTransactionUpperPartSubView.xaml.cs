@@ -1,6 +1,4 @@
-﻿using Monify.Tools;
-using Monify.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +16,11 @@ using System.Windows.Shapes;
 namespace Monify.Views
 {
     /// <summary>
-    /// Interaction logic for TransactionAccountChooseSubView.xaml
+    /// Interaction logic for AddTransactionUpperPartUserControl.xaml
     /// </summary>
-    public partial class TransactionAccountChooseSubView : UserControl
+    public partial class AddTransactionUpperPartSubView : UserControl
     {
-        public TransactionAccountChooseSubView()
+        public AddTransactionUpperPartSubView()
         {
             InitializeComponent();
         }
