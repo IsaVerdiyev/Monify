@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
+    public enum CategoryEnum {
+        Transaction
+    }
+
     class OperationCategory
     {
         static int iterator = 0;

@@ -12,7 +12,15 @@ namespace Monify.ViewModels
 {
     class AddProfitViewModel : AbstractOperationAddViewModel, IGetSpecifiedGategories
     {
-        public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index));
+        public ObservableCollection<OperationCategory> GetSpecifiedCategories {
+            get
+            {
+                ObservableCollection<OperationCategory> profitCategories;
+                profitCategories = new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index));
+                profitCategories.Remove(profitCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString()));
+                return profitCategories;
+            }
+        }
 
 
         protected override Func<double> BalanceRefresher { get => () =>(double) (SelectedAccount.Balance += double.Parse(TextBoxNumber)); }

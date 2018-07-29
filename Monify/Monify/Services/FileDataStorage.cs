@@ -105,6 +105,11 @@ namespace Monify.Services
                     Name = "Transport",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
                 },
+                new OperationCategory
+                {
+                    Name = CategoryEnum.Transaction.ToString(),
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+                },
                 new OperationCategory{
                     Name = "Deposits",
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
@@ -115,6 +120,11 @@ namespace Monify.Services
                 },
                 new OperationCategory{
                     Name = "Saving",
+                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
+                },
+                new OperationCategory
+                {
+                    Name = CategoryEnum.Transaction.ToString(),
                     OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
                 }
             };

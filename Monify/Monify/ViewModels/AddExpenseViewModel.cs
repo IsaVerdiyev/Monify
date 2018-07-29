@@ -13,7 +13,17 @@ namespace Monify.ViewModels
 {
     class AddExpenseViewModel : AbstractOperationAddViewModel, IGetSpecifiedGategories
     {
-        public ObservableCollection<OperationCategory> GetSpecifiedCategories => new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index));
+
+        public ObservableCollection<OperationCategory> GetSpecifiedCategories
+        {
+            get
+            {
+                ObservableCollection<OperationCategory> expenseCategories;
+                expenseCategories = new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index));
+                expenseCategories.Remove(expenseCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString()));
+                return expenseCategories;
+            }
+        }
 
         
 
