@@ -18,7 +18,7 @@
 
         <ComboBox 
                 ItemsSource="{Binding Storage.Accounts}"
-                SelectedItem="{Binding SourceAccountAccount, Mode=TwoWay}"
+                SelectedItem="{Binding SourceAccount, Mode=TwoWay}"
                 Margin="0, 10"
                 Style="{StaticResource CurrencyComboboxItemTemplateStyle}">
         </ComboBox>

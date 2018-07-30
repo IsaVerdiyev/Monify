@@ -37,7 +37,13 @@
 
         <DockPanel Grid.Row="2"
                     Background="{StaticResource BackgroundColor}">
-            <TextBlock DockPanel.Dock="Left"/>
+            <Border BorderThickness="0, 0, 3, 0" Margin="3, 10" BorderBrush="White">
+                <TextBlock DockPanel.Dock="Left"
+                       Width="{StaticResource CurrencyComboBoxWidth}"
+                       Foreground="{StaticResource CommonForeground}"
+                       Text="{Binding CurrencyCode, Mode=OneWay}">
+                </TextBlock>
+            </Border>
 
             <Button DockPanel.Dock="Right"
                 Style="{StaticResource HorizontalSameSizeControl}"

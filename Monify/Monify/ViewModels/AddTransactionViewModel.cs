@@ -39,9 +39,18 @@ namespace Monify.ViewModels
             }
         }
 
+        public string CurrencyCode { get => Storage.Currencies.FirstOrDefault(c => c.Index == SourceAccount.CurrencyIndex).Code; set => OnPropertyChanged(); }
+
         public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
 
-        public Account SourceAccount { get => sourceAccount; set => SetProperty(ref sourceAccount, value); }
+        public Account SourceAccount {
+            get => sourceAccount;
+            set
+            {
+                SetProperty(ref sourceAccount, value);
+                CurrencyCode = CurrencyCode;
+            }
+        }
         public Account DestinationAccount { get => destinationAccount; set => SetProperty(ref destinationAccount, value); }
 
         RelayCommand returnToMainViewCommand;
