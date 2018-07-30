@@ -94,26 +94,27 @@ namespace Monify.ViewModels
                 return performOperationButtonCommand ??
                     (performOperationButtonCommand = new RelayCommand(obj =>
                     {
-                        double TransactionAmount = Double.Parse(TextBoxNumber);
+                        double transactionAmountInSourceCurrency = Double.Parse(TextBoxNumber);
+                        double transactionAmountInDestinationCurrency = CurrencyConverter.Convert(Storage.Currencies.FirstOrDefault(c => c.Index == SourceAccount.CurrencyIndex), Storage.Currencies.FirstOrDefault(c => c.Index == DestinationAccount.CurrencyIndex), transactionAmountInSourceCurrency);
                         Operation sourceOperation = new Operation
                         {
                             AccountIndex = SourceAccount.Index,
-                            Amount = TransactionAmount,
+                            Amount = transactionAmountInSourceCurrency,
                             Date = SelectedDate,
                             OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index).Index
                         };
-                        SourceAccount.Balance -= TransactionAmount;
+                        SourceAccount.Balance -= transactionAmountInSourceCurrency;
 
                         Storage.Operations.Add(sourceOperation);
 
                         Operation destinationOperation = new Operation
                         {
                             AccountIndex = DestinationAccount.Index,
-                            Amount = TransactionAmount,
+                            Amount = transactionAmountInDestinationCurrency,
                             Date = SelectedDate,
                             OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index).Index
                         };
-                        DestinationAccount.Balance += TransactionAmount;
+                        DestinationAccount.Balance += transactionAmountInDestinationCurrency;
 
                         Storage.Operations.Add(destinationOperation);
 
