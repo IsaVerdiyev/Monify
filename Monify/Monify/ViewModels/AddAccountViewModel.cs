@@ -89,12 +89,11 @@ namespace Monify.ViewModels
 
         public IViewModel ResetToInitialState()
         {
-
+            SelectedDate = DateTime.Now;
             SelectedIcon = "";
             NewAccountName = "";
             SelectedIcon = null;
             SelectedCurrency = null;
-            SelectedDate = null;
             Icons = new ObservableCollection<string> { "💳", "💰" };
             return this;
         }

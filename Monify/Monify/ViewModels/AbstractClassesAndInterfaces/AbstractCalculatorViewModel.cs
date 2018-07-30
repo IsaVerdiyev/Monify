@@ -113,7 +113,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                     {
                         TextBoxNumber = TextBoxNumber.Remove(TextBoxNumber.Length - 1);
                     },
-                    obj => TextBoxNumber != "" && !(CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset) && !(CalculatorState is InitialCalculatorState)
+                    obj => !String.IsNullOrEmpty(TextBoxNumber) && !(CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset) && !(CalculatorState is InitialCalculatorState)
                     ));
             }
         }

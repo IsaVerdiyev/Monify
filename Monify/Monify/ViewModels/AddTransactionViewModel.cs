@@ -119,7 +119,8 @@ namespace Monify.ViewModels
                         Storage.Operations.Add(destinationOperation);
 
                         ReturnToMainViewCommand.Execute(obj);
-                    }));
+                    },
+                    obj => (CalculatorState is InitialCalculatorState || (CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset == false)) && !string.IsNullOrEmpty(TextBoxNumber)));
             }
         }
 

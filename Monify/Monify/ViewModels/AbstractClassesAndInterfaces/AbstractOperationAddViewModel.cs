@@ -71,8 +71,9 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                     (performOperationButtonCommand = new RelayCommand(obj =>
                     {
                         CurrentControl = new CategoryChooseSubView();
+                        CalculatorState = new InitialCalculatorState(this);
                     },
-                    obj => (CalculatorState is InitialCalculatorState || (CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset == false)) && TextBoxNumber != ""
+                    obj => (CalculatorState is InitialCalculatorState || (CalculatorState is FirstArgumentEnteringCalculatorState && CalculatorState.Reset == false)) && !string.IsNullOrEmpty(TextBoxNumber)
                     ));
             }
         }

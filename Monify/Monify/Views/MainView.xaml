@@ -31,7 +31,7 @@
 
         <!-- First Row-->
         <DockPanel
-            LastChildFill="False"
+            
             Background="Green">
             <Button DockPanel.Dock="Left"
                     Background="Transparent"
@@ -42,13 +42,6 @@
                 ☰
             </Button>
 
-            <TextBlock>
-                <Run
-                    FontFamily="Tahoma"
-                    FontStyle="Italic">Monify</Run>
-                <LineBreak/>
-                <Run />
-            </TextBlock>
             <Button 
                 DockPanel.Dock="Right"
                 Style="{StaticResource HorizontalSameSizeControl}"
@@ -66,6 +59,14 @@
                 Command="{Binding OpenTransactionMenuCommand}">
                 ⇄
             </Button>
+            <TextBlock 
+                Margin="4, 0">
+                <Run
+                    FontFamily="Tahoma"
+                    FontStyle="Italic">Monify</Run>
+                <LineBreak/>
+                <Run Text="{Binding SelectedAccount.Name}"/>
+            </TextBlock>
         </DockPanel>
 
         
@@ -312,9 +313,9 @@
             
             <DockPanel Grid.Row="2">
                 <Button DockPanel.Dock="top"
-                    Height="{Binding Path=MinHeight, ElementName=OperationsListRow}">
-                    <DockPanel 
-                            Width="{Binding Path=Parent.ActualWidth, RelativeSource={RelativeSource Self}}">
+                    Height="{Binding Path=MinHeight, ElementName=OperationsListRow}" 
+                    HorizontalContentAlignment="Stretch">
+                    <DockPanel>
                         <TextBlock 
                             DockPanel.Dock="Left"> ☰</TextBlock>
                         <TextBlock 
