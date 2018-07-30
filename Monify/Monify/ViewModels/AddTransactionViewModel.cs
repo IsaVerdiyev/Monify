@@ -67,6 +67,21 @@ namespace Monify.ViewModels
             }
         }
 
+        private RelayCommand switchToCalculatorCommand;
+
+        public RelayCommand SwitchToCalculatorCommand
+        {
+            get {
+                return switchToCalculatorCommand ??
+                    (switchToCalculatorCommand = new RelayCommand(obj =>
+                    {
+                        CurrentControl = new CalculatorSubView();
+                    },
+                    obj => SelectedDate != null && SourceAccount != null && DestinationAccount != null && SourceAccount != DestinationAccount));
+            }
+        }
+
+
         public IViewModel ResetToInitialState()
         {
             CurrentControl = new AddTransactionDownerPartAccountChooseSubView();
