@@ -14,7 +14,7 @@
             <RowDefinition Style="{StaticResource FourthGridRowOfUpperPart}"/>
         </Grid.RowDefinitions>
         <DockPanel 
-            Style="{StaticResource HeaderPanelColors}">
+            Background="{StaticResource BackgroundColor}">
             <Button
                 Command="{Binding ReturnToMainViewCommand}"
                 Style="{StaticResource HorizontalSameSizeControl}"
@@ -46,7 +46,7 @@
 
 
         <DockPanel Grid.Row="2"
-                    Style="{StaticResource ValuePanelColors}">
+                    Background="{StaticResource BackgroundColor}">
             <ComboBox DockPanel.Dock="Left"
                 ItemsSource="{Binding Storage.Accounts}"
                 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"

@@ -19,6 +19,7 @@
         <ComboBox 
                 ItemsSource="{Binding Storage.Accounts}"
                 SelectedItem="{Binding SourceAccountAccount, Mode=TwoWay}"
+                Margin="0, 10"
                 Style="{StaticResource CurrencyComboboxItemTemplateStyle}">
         </ComboBox>
 
@@ -34,14 +35,15 @@
         <ComboBox Grid.Row="2"
                 ItemsSource="{Binding Storage.Accounts}"
                 SelectedItem="{Binding DestinationAccount, Mode=TwoWay}"
+                Margin="0, 10"
                 Style="{StaticResource CurrencyComboboxItemTemplateStyle}">
         </ComboBox>
 
         <Button Grid.Row="3"
                 Style="{StaticResource HorizontalAutoSizedRoundButtons}"
-                Margin="20"
-                Foreground="White"
-                Background="Green"
+                Margin="10"
+                Foreground="{Binding Source={StaticResource CommonForeground}}"
+                Background="{Binding Source={StaticResource BackgroundColor}}"
                 Command="{Binding SwitchToTransactionCalculatorViewCommand}">
             ☰
         </Button>

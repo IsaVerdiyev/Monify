@@ -12,6 +12,7 @@
     <converters:PropertyMarginConverterForHidingControl x:Key="PropertyMarginConverterForHidingControl"/>
 
     <SolidColorBrush x:Key="CommonForeground">White</SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundColor">Green</SolidColorBrush>
     <sys:Double x:Key="CurrencyComboBoxWidth">90</sys:Double>
 
 
@@ -135,18 +136,10 @@
         <Setter Property="Height" Value="2*"/>
     </Style>
 
-    <Style x:Key="HeaderPanelColors" TargetType="Panel">
-        <Setter Property="Background" Value="LightGreen"/>
-    </Style>
+   
 
-    <Style x:Key="PanelsForeground" TargetType="Control">
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
 
-    <Style x:Key="ValuePanelColors" TargetType="Panel">
-        <Setter Property="Background" Value="Green"/>
-    </Style>
-
+   
 
     <Style x:Key="CurrencyComboBox" TargetType="ComboBox">
         <Setter Property="Background" Value="White"/>

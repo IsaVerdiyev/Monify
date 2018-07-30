@@ -220,8 +220,7 @@
                     <ComboBox
                         Grid.Column="1"
                         SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
-                        ItemsSource="{Binding Storage.Currencies, Mode=OneWay}"
-                        />
+                        ItemsSource="{Binding Storage.Currencies, Mode=OneWay}"/>
                 </Grid>
             </DockPanel>
         </Grid>
