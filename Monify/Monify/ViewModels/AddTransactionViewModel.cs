@@ -32,6 +32,7 @@ namespace Monify.ViewModels
         }
 
 
+        public override string PerformOperationButtonName { get;  }
 
         public UserControl CurrentControl {
             get => currentControl;
@@ -83,11 +84,44 @@ namespace Monify.ViewModels
             }
         }
 
-     
 
-        public override RelayCommand PerformOperationButtonCommand => null;
+        private RelayCommand performOperationButtonCommand;
 
-        public override string PerformOperationButtonName { get;  }
+        public override RelayCommand PerformOperationButtonCommand
+        {
+            get
+            {
+                return performOperationButtonCommand ??
+                    (performOperationButtonCommand = new RelayCommand(obj =>
+                    {
+                        double TransactionAmount = Double.Parse(TextBoxNumber);
+                        Operation sourceOperation = new Operation
+                        {
+                            AccountIndex = SourceAccount.Index,
+                            Amount = TransactionAmount,
+                            Date = SelectedDate,
+                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index).Index
+                        };
+                        SourceAccount.Balance -= TransactionAmount;
+
+                        Storage.Operations.Add(sourceOperation);
+
+                        Operation destinationOperation = new Operation
+                        {
+                            AccountIndex = DestinationAccount.Index,
+                            Amount = TransactionAmount,
+                            Date = SelectedDate,
+                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index).Index
+                        };
+                        DestinationAccount.Balance += TransactionAmount;
+
+                        Storage.Operations.Add(destinationOperation);
+
+                        ReturnToMainViewCommand.Execute(obj);
+                    }));
+            }
+        }
+
 
         public override IViewModel ResetToInitialState()
         {
