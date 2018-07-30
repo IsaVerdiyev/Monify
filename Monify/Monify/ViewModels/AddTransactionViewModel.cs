@@ -1,5 +1,6 @@
 ﻿using Monify.Models;
 using Monify.Services;
+using Monify.Services.CalculatorService;
 using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
@@ -12,7 +13,7 @@ using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class AddTransactionViewModel: ObservableObject, IViewModel
+    class AddTransactionViewModel: AbstractCalculatorViewModel, IViewModel
     {
         public IStorage Storage { get; }
         public string HeaderText { get => "Add Transaction"; }
@@ -26,6 +27,7 @@ namespace Monify.ViewModels
         public AddTransactionViewModel()
         {
             Storage = StorageGetter.Storage;
+            PerformOperationButtonName = "Add transaction";
             ResetToInitialState();
         }
 
@@ -39,7 +41,7 @@ namespace Monify.ViewModels
             }
         }
 
-        public string CurrencyCode { get => Storage.Currencies.FirstOrDefault(c => c.Index == SourceAccount.CurrencyIndex).Code; set => OnPropertyChanged(); }
+        public string CurrencyCode { get => Storage.Currencies.FirstOrDefault(c => c.Index == SourceAccount?.CurrencyIndex)?.Code; set => OnPropertyChanged(); }
 
         public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
 
@@ -81,11 +83,21 @@ namespace Monify.ViewModels
             }
         }
 
+     
 
-        public IViewModel ResetToInitialState()
+        public override RelayCommand PerformOperationButtonCommand => null;
+
+        public override string PerformOperationButtonName { get;  }
+
+        public override IViewModel ResetToInitialState()
         {
             CurrentControl = new AddTransactionDownerPartAccountChooseSubView();
             SelectedDate = DateTime.Now;
+            CalculatorState = new InitialCalculatorState(this);
+            TextBoxNumber = "";
+            SelectedDate = DateTime.Now;
+            SourceAccount = null;
+            DestinationAccount = null;
 
             return this;
         }

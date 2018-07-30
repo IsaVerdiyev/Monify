@@ -52,7 +52,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                     obj => 
                     {
                         string text = obj as string;
-                        if (text == "." && (TextBoxNumber.Contains(".") || TextBoxNumber == ""))
+                        if (text == "." && ( string.IsNullOrEmpty(TextBoxNumber) || TextBoxNumber.Contains(".") ))
                         {
                             return false;
                         }
