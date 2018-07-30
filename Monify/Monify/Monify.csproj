@@ -100,8 +100,7 @@
     <Compile Include="ViewModels\AbstractClassesAndInterfaces\IViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\AddProfitViewModel.cs" />
-    <Compile Include="ViewModels\TransactionAccountChooseSubViewModel.cs" />
-    <Compile Include="ViewModels\TransactionViewModel.cs" />
+    <Compile Include="ViewModels\AddTransactionViewModel.cs" />
     <Compile Include="ViewModels\WindowViewModel.cs" />
     <Compile Include="Views\AddAccountView.xaml.cs">
       <DependentUpon>AddAccountView.xaml</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using Monify.Services;
+﻿using Monify.Models;
+using Monify.Services;
 using Monify.Tools;
 using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
@@ -11,25 +12,37 @@ using System.Windows.Controls;
 
 namespace Monify.ViewModels
 {
-    class TransactionViewModel: ObservableObject, IViewModel
+    class AddTransactionViewModel: ObservableObject, IViewModel
     {
         public IStorage Storage { get; }
+        public string HeaderText { get => "Add Transaction"; }
 
         UserControl currentControl;
+        DateTime selectedDate;
+        private Account sourceAccount;
+        private Account destinationAccount;
+
+
+        public AddTransactionViewModel()
+        {
+            Storage = StorageGetter.Storage;
+            ResetToInitialState();
+        }
+
+
 
         public UserControl CurrentControl {
             get => currentControl;
             set {
                 SetProperty(ref currentControl, value);
-                currentControl.DataContext = this;
+                CurrentControl.DataContext = this;
             }
         }
 
-        public TransactionViewModel()
-        {
-            Storage = StorageGetter.Storage;
-            ResetToInitialState();
-        }
+        public DateTime SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
+
+        public Account SourceAccount { get => sourceAccount; set => SetProperty(ref sourceAccount, value); }
+        public Account DestinationAccount { get => destinationAccount; set => SetProperty(ref destinationAccount, value); }
 
         RelayCommand returnToMainViewCommand;
 
@@ -48,6 +61,7 @@ namespace Monify.ViewModels
         public IViewModel ResetToInitialState()
         {
             CurrentControl = new AddTransactionDownerPartAccountChooseSubView();
+            SelectedDate = DateTime.Now;
 
             return this;
         }

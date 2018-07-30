@@ -152,7 +152,27 @@
         <Setter Property="Background" Value="White"/>
         <Setter Property="Width" Value="{StaticResource CurrencyComboBoxWidth}"/>
     </Style>
-    
+
+
+    <Style x:Key="CurrencyComboboxItemTemplateStyle" TargetType="ComboBox">
+        <Setter Property="Width" Value="{StaticResource CurrencyComboBoxWidth}"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock>
+                            <Run Text="{Binding Name}"/>
+                            <LineBreak/>
+                            <Run>
+                               <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
+                                   <Binding  Mode="OneWay"/>
+                                   <Binding Path="DataContext.Storage" RelativeSource="{RelativeSource  Mode=FindAncestor, AncestorType=UserControl}" Mode="OneWay"/>
+                               </MultiBinding>
+                            </Run>
+                    </TextBlock>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 
 

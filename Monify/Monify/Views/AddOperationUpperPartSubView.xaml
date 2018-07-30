@@ -49,22 +49,8 @@
                     Style="{StaticResource ValuePanelColors}">
             <ComboBox DockPanel.Dock="Left"
                 ItemsSource="{Binding Storage.Accounts}"
-                Width="{StaticResource CurrencyComboBoxWidth}"
-                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <Run Text="{Binding Name}"/>
-                            <LineBreak/>
-                            <Run>
-                               <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
-                                   <Binding  Mode="OneWay"/>
-                                   <Binding Path="DataContext.Storage" RelativeSource="{RelativeSource  Mode=FindAncestor, AncestorType=UserControl}" Mode="OneWay"/>
-                               </MultiBinding>
-                            </Run>
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
+                SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
+                Style="{StaticResource CurrencyComboboxItemTemplateStyle}">
             </ComboBox>
             <Button DockPanel.Dock="Right"
                 Style="{StaticResource HorizontalSameSizeControl}"
