@@ -61,8 +61,8 @@ namespace Monify.ViewModels
         {
             Storage = StorageGetter.Storage;
             SelectedDate = DateTime.Now;
-            SelectedAccount = AllUsers;
             AllUsersCurrency = Storage.Currencies.FirstOrDefault(c => c.Code == "USD");
+            SelectedAccount = AllUsers;
             StatisticsDateInterval = DateInterval.Day;
             ResetToInitialState();
         }

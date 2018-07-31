@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using Monify.Models;
 using Monify.Tools;
@@ -16,7 +18,7 @@ namespace Monify.Services
     {
         static FileDataStorage storage;
 
-        
+        public IFileSaveLoader FileSaveLoader { get; set; }
 
         ObservableCollection<OperationCategory> operationCategories;
         ObservableCollection<OperationType> operationTypes;
@@ -26,7 +28,15 @@ namespace Monify.Services
 
         private FileDataStorage()
         {
-            Initialize();
+            FileSaveLoader = new JsonFileSaveLoader(this);
+            try
+            {
+                Load();
+            }
+            catch(FileNotFoundException ex)
+            {
+                Initialize();
+            }
         }
 
         public static FileDataStorage Storage { get => storage ?? (storage = new FileDataStorage()); }
@@ -197,6 +207,31 @@ namespace Monify.Services
             }
         }
 
+        public void Save()
+        {
+            try
+            {
+                FileSaveLoader.Save();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        public void Load()
+        {
+            try
+            {
+                FileSaveLoader.Load();
+            }catch(FileNotFoundException ex)
+            {
+                throw ex;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

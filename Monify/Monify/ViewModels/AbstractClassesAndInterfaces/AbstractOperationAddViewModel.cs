@@ -42,6 +42,9 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
 
         public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
 
+        public override string PerformOperationButtonName { get; }
+
+        public abstract string HeaderText { get; }
 
 
         protected abstract Func<double> BalanceRefresher { get;}
@@ -96,6 +99,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                         };
                         Storage.Operations.Add(operation);
                         BalanceRefresher();
+                        Storage.Save();
                         ReturnToMainViewCommand.Execute(obj);
                     },
                     obj => SelectedCategory != null && SelectedAccount != null && SelectedDate >= SelectedAccount.StartDate && SelectedAccount.StartDate <= DateTime.Now
@@ -104,10 +108,7 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
         }
 
 
-        public override string PerformOperationButtonName { get; }
-
-        public abstract string HeaderText { get; }
-
+      
 
         public override IViewModel ResetToInitialState()
         {

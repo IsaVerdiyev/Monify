@@ -11,36 +11,36 @@ using System.IO;
 
 namespace Monify.Services
 {
-    class JsonSaveLoader : ISaveLoader
+    class JsonFileSaveLoader : IFileSaveLoader
     {
         IStorage storage;
 
-        public JsonSaveLoader(IStorage storage)
+        public JsonFileSaveLoader(IStorage storage, string saveFileLocation = null)
         {
             this.storage = storage;
+            SaveFileLocation = saveFileLocation ?? "SaveFile.json";
         }
+
+        public string SaveFileLocation { get; set; }
 
         public void Load()
         {
-            var openFileDialogue = new OpenFileDialog();
-            openFileDialogue.Filter = "json files | *.json";
-            if (openFileDialogue.ShowDialog() == true)
-            {
 
-                storage = JsonConvert.DeserializeObject<IStorage>(File.ReadAllText(openFileDialogue.FileName));
-            }
+            var loadedData = JsonConvert.DeserializeObject<Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>>>(File.ReadAllText(SaveFileLocation));
+            storage.Accounts = loadedData.Item1;
+            storage.Currencies = loadedData.Item2;
+            storage.Operations = loadedData.Item3;
+            storage.OperationCategories = loadedData.Item4;
+            storage.OperationTypes = loadedData.Item5;
+
         }
 
         public void Save()
         {
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.FileName = "savefile.json";
-            saveFileDialog.Filter = "json files | *.json";
-            if (saveFileDialog.ShowDialog() == true)
-            {
-                string saveContents = JsonConvert.SerializeObject(storage);
-                File.WriteAllText(saveFileDialog.FileName, saveContents);
-            }
+            var savedData = new Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>>(storage.Accounts, storage.Currencies, storage.Operations, storage.OperationCategories, storage.OperationTypes);
+            
+            File.WriteAllText(SaveFileLocation, JsonConvert.SerializeObject(savedData));
+            
         }
     }
 }

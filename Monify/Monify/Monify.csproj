@@ -84,6 +84,7 @@
     <Compile Include="Services\CalculatorService\SumOperation.cs" />
     <Compile Include="Services\CurrencyConverter.cs" />
     <Compile Include="Services\FileDataStorage.cs" />
+    <Compile Include="Services\IFileSaveLoader.cs" />
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
     <Compile Include="Services\JsonSaveLoader.cs" />

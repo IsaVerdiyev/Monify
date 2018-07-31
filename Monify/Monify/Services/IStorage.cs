@@ -18,6 +18,10 @@ namespace Monify.Services
 
         void SetCurrencies();
 
+        void Save();
+
+        void Load();
+
 
         void Initialize();
     }
