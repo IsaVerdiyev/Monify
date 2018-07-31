@@ -55,96 +55,17 @@ namespace Monify.Services
                 new OperationType{Name = OperationTypesEnum.Expense.ToString()}
             };
 
-            OperationCategories = new ObservableCollection<OperationCategory>
-            {
-                new OperationCategory{
-                    Name = "Hygiene",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory
-                {
-                    Name = "Food",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Accommodation",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
+            OperationCategories = new ObservableCollection<OperationCategory>();
 
-                new OperationCategory{
-                    Name = "Health",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Cafe",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Car",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Clothes",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Pets",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Presents",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Entertainments",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Communication",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Sports",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Taxi",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Transport",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory
-                {
-                    Name = CategoryEnum.Transaction.ToString(),
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Deposits",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Salary",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
-                },
-                new OperationCategory{
-                    Name = "Saving",
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
-                },
-                new OperationCategory
-                {
-                    Name = CategoryEnum.Transaction.ToString(),
-                    OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
-                }
-            };
+            InitializeOperationCategories();
 
             Accounts = new ObservableCollection<Account>();
 
             Operations = new ObservableCollection<Operation>();
 
             Currencies = new ObservableCollection<Currency>();
-            SetCurrencies();
+
+            InitializeCurrencies();
 
 
         }
@@ -165,7 +86,8 @@ namespace Monify.Services
             }
         }
 
-        public void SetCurrencies()
+
+        public void InitializeCurrencies()
         {
             string xmlData = GetXmlOfCurrencies();
 
@@ -207,6 +129,138 @@ namespace Monify.Services
             }
         }
 
+        void RetryInitialize()
+        {
+            Accounts.Clear();
+            Operations.Clear();
+
+            OperationCategories.Clear();
+            InitializeOperationCategories();
+
+        }
+
+        void InitializeOperationCategories()
+        {
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Hygiene.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Food.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Accomodation.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Health.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Cafe.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Car.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Clothes.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Pets.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Presents.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Entertainments.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Communication.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Sports.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Taxi.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Transport.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Transaction.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index
+            });
+
+
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Deposits.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Salary.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Saving.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
+            });
+
+            OperationCategories.Add(new OperationCategory
+            {
+                Name = OperationCategoryEnum.Transaction.ToString(),
+                OperationTypeIndex = operationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index
+            });
+        }
+
+
+      
+
         public void Save()
         {
             try
@@ -232,6 +286,18 @@ namespace Monify.Services
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        public void EraseData()
+        {
+            try
+            {
+                FileSaveLoader.EraseSave();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            storage.RetryInitialize();
         }
     }
 }

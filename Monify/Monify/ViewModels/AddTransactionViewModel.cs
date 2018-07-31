@@ -101,7 +101,7 @@ namespace Monify.ViewModels
                             AccountIndex = SourceAccount.Index,
                             Amount = transactionAmountInSourceCurrency,
                             Date = SelectedDate,
-                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index).Index
+                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == OperationCategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index).Index
                         };
                         SourceAccount.Balance -= transactionAmountInSourceCurrency;
 
@@ -112,7 +112,7 @@ namespace Monify.ViewModels
                             AccountIndex = DestinationAccount.Index,
                             Amount = transactionAmountInDestinationCurrency,
                             Date = SelectedDate,
-                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index).Index
+                            OperationCategoryIndex = Storage.OperationCategories.FirstOrDefault(cat => cat.Name == OperationCategoryEnum.Transaction.ToString() && cat.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index).Index
                         };
                         DestinationAccount.Balance += transactionAmountInDestinationCurrency;
 

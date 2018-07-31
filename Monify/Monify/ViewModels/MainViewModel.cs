@@ -596,6 +596,23 @@ namespace Monify.ViewModels
         }
 
 
+        private RelayCommand cleanDataCommand;
+
+        public RelayCommand CleanDataCommand
+        {
+            get {
+                return cleanDataCommand ??
+                    (cleanDataCommand = new RelayCommand(obj =>
+                    {
+                        Storage.EraseData();
+                        SelectedAccount = AllUsers;
+                        HideAllSideMenuButtonCommand.Execute(obj);
+                        ResetToInitialState();
+                    }));
+            }
+        }
+
+
 
 
         void ResetOtherSettingsRowsDisplay()
@@ -609,6 +626,7 @@ namespace Monify.ViewModels
             CurrenciesControlVisibility = Visibility.Collapsed;
             SettingsControlVisibility = Visibility.Collapsed;
         }
+
 
 
         public IViewModel ResetToInitialState()

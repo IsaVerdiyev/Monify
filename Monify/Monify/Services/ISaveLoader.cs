@@ -10,5 +10,6 @@ namespace Monify.Services
     {
         void Save();
         void Load();
+        void EraseSave();
     }
 }

@@ -207,7 +207,7 @@
                        Visibility="{Binding SettingsControlVisibility}" 
                        Panel.ZIndex="2"
                        Background="White">
-                <Grid
+                <Grid DockPanel.Dock="Top"
                     VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -223,6 +223,11 @@
                         SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
                         ItemsSource="{Binding Storage.Currencies, Mode=OneWay}"/>
                 </Grid>
+                <Button DockPanel.Dock="Bottom"
+                        Command="{Binding CleanDataCommand}"
+                        CommandParameter="{Binding ElementName=MainViewUserControl}">
+                    Clean data
+                </Button>
             </DockPanel>
         </Grid>
 

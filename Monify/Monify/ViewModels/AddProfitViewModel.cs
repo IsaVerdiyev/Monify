@@ -17,7 +17,7 @@ namespace Monify.ViewModels
             {
                 ObservableCollection<OperationCategory> profitCategories;
                 profitCategories = new ObservableCollection<OperationCategory>(Storage.OperationCategories.Where(category => category.OperationTypeIndex == Storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index));
-                profitCategories.Remove(profitCategories.FirstOrDefault(cat => cat.Name == CategoryEnum.Transaction.ToString()));
+                profitCategories.Remove(profitCategories.FirstOrDefault(cat => cat.Name == OperationCategoryEnum.Transaction.ToString()));
                 return profitCategories;
             }
         }

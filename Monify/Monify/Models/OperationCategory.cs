@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
-    public enum CategoryEnum {
+    public enum OperationCategoryEnum {
+        Hygiene,
+        Food,
+        Accomodation,
+        Health,
+        Cafe,
+        Car,
+        Clothes,
+        Pets,
+        Presents,
+        Entertainments,
+        Communication,
+        Sports,
+        Taxi,
+        Transport,
+        Deposits,
+        Salary,
+        Saving,
         Transaction
     }
 

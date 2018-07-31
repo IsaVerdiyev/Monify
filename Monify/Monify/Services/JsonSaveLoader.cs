@@ -23,6 +23,8 @@ namespace Monify.Services
 
         public string SaveFileLocation { get; set; }
 
+       
+
         public void Load()
         {
 
@@ -41,6 +43,11 @@ namespace Monify.Services
             
             File.WriteAllText(SaveFileLocation, JsonConvert.SerializeObject(savedData));
             
+        }
+
+        public void EraseSave()
+        {
+            File.Delete(SaveFileLocation);
         }
     }
 }
