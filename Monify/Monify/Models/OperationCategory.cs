@@ -30,16 +30,16 @@ namespace Monify.Models
     class OperationCategory
     {
         static int iterator = 0;
-        int index;
+        int id;
         string name;
         int operationTypeIndex;
 
         public OperationCategory()
         {
-            index = iterator++;
+            id = iterator++;
         }
 
-        public int Index { get => index; }
+        public int Id { get => id; set => id = value; }
         public string Name {
             get => name;
             set => name = value;

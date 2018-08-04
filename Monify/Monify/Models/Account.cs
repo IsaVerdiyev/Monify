@@ -13,7 +13,7 @@ namespace Monify.Models
     class Account : ObservableObject
     {
         static int iterator = 0;
-        protected int index;
+        protected int id;
         int? currencyIndex;
         string name;
         string imagePath;
@@ -27,15 +27,15 @@ namespace Monify.Models
 
         public Account()
         {
-            index = iterator++;
+            id = iterator++;
         }
 
         public Account(int index)
         {
-            this.index = index;
+            this.id = index;
         }
 
-        public int Index { get => index; }
+        public int Id { get => id; set => id = value; }
 
         public double? Balance { get => balance; set => SetProperty(ref balance, value); }
 

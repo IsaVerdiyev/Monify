@@ -93,9 +93,9 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                         Operation operation = new Operation
                         {
                             Amount = Double.Parse(TextBoxNumber),
-                            OperationCategoryIndex = selectedCategory.Index,
+                            OperationCategoryIndex = selectedCategory.Id,
                             Date = SelectedDate,
-                            AccountIndex = SelectedAccount.Index
+                            AccountIndex = SelectedAccount.Id
                         };
                         BalanceRefresher();
                         Storage.AddOperation(operation);

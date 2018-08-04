@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using Monify.Models;
 
@@ -86,50 +87,58 @@ namespace Monify.Services
         public void Initialize()
         {
             SQLiteConnection.CreateFile("Monify.db");
-            using(SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
-            {
+            SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            try { 
+            connection.Open();
+            
                 string sqlString = "CREATE TABLE CurrencyTable (" +
-                    "Index INTEGER PRIMARY KEY," +
-                    " Code NVARCHAR(10)," +
-                    " Value FLOAT)";
+                    "Id INTEGER PRIMARY KEY, " +
+                    "Code NVARCHAR(10), " +
+                    "Value FLOAT)";
                 SQLiteCommand command = new SQLiteCommand(sqlString, connection);
                 command.ExecuteNonQuery();
 
                 command.CommandText = "CREATE TABLE OperationTypeTable (" +
-                    "Index INTEGER PRIMARY KEY," +
-                    " Name NVARCHAR(30))"; 
+                    "Id INTEGER PRIMARY KEY, " +
+                    "Name NVARCHAR(30))"; 
                 command.ExecuteNonQuery();
 
-                command.CommandText = $"INSERT INTO OperationTypeTable(Name) VALUES({OperationTypesEnum.Expense.ToString()}, )";
-                command.ExecuteNonQuery();
-
-                command.CommandText = $"INSERT INTO OperationTypeTable(Name) VALUES({OperationTypesEnum.Profit.ToString()})";
+                command.CommandText = $"INSERT INTO OperationTypeTable(Name) VALUES" +
+                    $"('{OperationTypesEnum.Expense.ToString()}'), " +
+                    $"('{OperationTypesEnum.Profit.ToString()}')";
                 command.ExecuteNonQuery();
 
                 command.CommandText = "CREATE TABLE OperationCategoryTable (" +
-                    "Index INTEGER  PRIMARY KEY," +
-                    " Name NVARCHAR(30)," +
-                    " OperationTypeIndex INTEGER," +
-                    " FOREIGN KEY(OperationTypeIndex) REFERENCES OperationTypeTable(Index))";
+                    "Id INTEGER  PRIMARY KEY, " +
+                    "Name NVARCHAR(30), " +
+                    "OperationTypeIndex INTEGER, " +
+                    "FOREIGN KEY(OperationTypeIndex) REFERENCES OperationTypeTable(Id))";
                 command.ExecuteNonQuery();
 
-                command.CommandText = "CREATE TABLE AccountTable (" +
-                    "Index INTEGER PRIMARY KEY," +
-                    " Name NVARCHAR(30)," +
-                    " CurrencyIndex INTEGER," +
-                    " StartDate TEXT," +
-                    " FOREIGN KEY(CurrencyIndex) REFERENCES CurrencyTable(INDEX)";
+                command.CommandText = "CREATE TABLE AccountTable(" +
+                    "Id INTEGER PRIMARY KEY, " +
+                    "Name NVARCHAR(30), " +
+                    "CurrencyIndex INTEGER, " +
+                    "StartDate DATETIME, " +
+                    "FOREIGN KEY(CurrencyIndex) REFERENCES CurrencyTable(Id))";
                 command.ExecuteNonQuery();
 
-                command.CommandText = "CREATE TABLE OperationTable (" +
-                    "Index INTEGER PRIMARY KEY, " +
+                command.CommandText = "CREATE TABLE OperationTable(" +
+                    "Id INTEGER PRIMARY KEY, " +
                     "OperationCategoryIndex INTEGER, " +
                     "Amount FLOAT, " +
-                    "Date TEXT, " +
+                    "Date DATETIME, " +
                     "AccountIndex INTEGER, " +
-                    "FOREIGN KEY(OperationCategoryIndex) REFERENCES OperationCategoryTable(Index), " +
-                    "FOREIGN KEY(AccountIndex) REFERENCES AccountTable(Index)";
+                    "FOREIGN KEY(OperationCategoryIndex) REFERENCES OperationCategoryTable(Id), " +
+                    "FOREIGN KEY(AccountIndex) REFERENCES AccountTable(Id))";
                 command.ExecuteNonQuery();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
             }
 
             InitializeOperationCategories();
@@ -139,28 +148,38 @@ namespace Monify.Services
 
         void InitializeOperationCategories()
         {
-            using (SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
-            {
+            SQLiteConnection connection = new SQLiteConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            try {
+                connection.Open();
                 SQLiteCommand command = new SQLiteCommand(connection);
-                command.CommandText = $"INSERT INTO OperationCategoryTable(Name, OperationTypeIndex) VALUES" +
-                    $"({OperationCategoryEnum.Accomodation.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Cafe.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Car.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Clothes.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Communication.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Entertainments.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Food.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Health.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Hygiene.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Pets.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Presents.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Sports.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Taxi.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Transport.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString())}), " +
-                    $"({OperationCategoryEnum.Deposits.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString())}), " +
-                    $"({OperationCategoryEnum.Salary.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString())}), " +
-                    $"({OperationCategoryEnum.Saving.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString())}), " +
-                    $"({OperationCategoryEnum.Transaction.ToString()}, {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString())})";
+                command.CommandText = $"INSERT INTO OperationCategoryTable(Name, OperationTypeIndex) VALUES('{OperationCategoryEnum.Accomodation.ToString()}', {OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id})";
+                //$"('{OperationCategoryEnum.Accomodation.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Cafe.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Car.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Clothes.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Communication.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Entertainments.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Food.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Health.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Hygiene.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Pets.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Presents.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Sports.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Taxi.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Transport.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Deposits.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Salary.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Saving.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
+                //$"('{OperationCategoryEnum.Transaction.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}')";
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 

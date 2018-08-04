@@ -122,10 +122,10 @@ namespace Monify.ViewModels
                 });
         }
         public Currency AllUsersCurrency {
-            get => Storage.Currencies.FirstOrDefault(c => c.Index == AllUsers.CurrencyIndex);
+            get => Storage.Currencies.FirstOrDefault(c => c.Id == AllUsers.CurrencyIndex);
             set
             {
-                AllUsers.CurrencyIndex = (value as Currency).Index;
+                AllUsers.CurrencyIndex = (value as Currency).Id;
                 OnPropertyChanged();
                 Accounts = Accounts;
                 SelectedAccount = SelectedAccount;
@@ -212,7 +212,7 @@ namespace Monify.ViewModels
                 }
                 else
                 {
-                    SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations?.Where(op => op.AccountIndex == SelectedAccount?.Index && op.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval)).OrderBy(o => o.Date)));
+                    SetProperty(ref operationStatistics, new ObservableCollection<Operation>(Storage.Operations?.Where(op => op.AccountIndex == SelectedAccount?.Id && op.Date.IsInCurrentDateInterval(SelectedDate, StatisticsDateInterval)).OrderBy(o => o.Date)));
                 }
             }
         }

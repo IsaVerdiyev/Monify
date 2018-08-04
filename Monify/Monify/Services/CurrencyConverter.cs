@@ -16,9 +16,9 @@ namespace Monify.Services
 
         public static double Convert(int sourceCurrencyIndex, int targetCurrencyIndex, double amount)
         {
-            Currency sourceCurrency = storage.Currencies.FirstOrDefault(c => c.Index == sourceCurrencyIndex);
+            Currency sourceCurrency = storage.Currencies.FirstOrDefault(c => c.Id == sourceCurrencyIndex);
 
-            Currency targetCurrency = storage.Currencies.FirstOrDefault(c => c.Index == targetCurrencyIndex);
+            Currency targetCurrency = storage.Currencies.FirstOrDefault(c => c.Id == targetCurrencyIndex);
 
             return Convert(sourceCurrency, targetCurrency, amount);
         }

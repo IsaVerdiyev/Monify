@@ -18,7 +18,7 @@ namespace Monify.Converters
 
             IStorage storage = values[1] as IStorage;
 
-            return storage.Currencies.FirstOrDefault(c => c.Index == account?.CurrencyIndex)?.Code;
+            return storage.Currencies.FirstOrDefault(c => c.Id == account?.CurrencyIndex)?.Code;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

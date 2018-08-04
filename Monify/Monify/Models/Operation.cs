@@ -10,7 +10,7 @@ namespace Monify.Models
     {
         static int iterator = 0;
 
-        int index;
+        int id;
         int operationCategoryIndex;
         double amount;
         DateTime date;
@@ -19,10 +19,10 @@ namespace Monify.Models
 
         public Operation()
         {
-            index = iterator++;
+            id = iterator++;
         }
 
-        public int Index { get => index; }
+        public int Id { get => id; set => id = value; }
 
         
         public int OperationCategoryIndex {

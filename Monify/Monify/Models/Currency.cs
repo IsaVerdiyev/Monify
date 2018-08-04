@@ -9,16 +9,16 @@ namespace Monify.Models
     class Currency
     {
         static int iterator = 0;
-        int index;
+        int id;
         string code;
         double value;
 
         public Currency()
         {
-            index = iterator++;
+            id = iterator++;
         }
 
-        public int Index { get => index; }
+        public int Id { get => id; set => id = value; }
         public string Code { get => code; set => code = value; }
         public double Value { get => value; set => this.value = value; }
 

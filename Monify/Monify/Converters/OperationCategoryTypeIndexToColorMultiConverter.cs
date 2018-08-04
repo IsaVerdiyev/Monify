@@ -19,11 +19,11 @@ namespace Monify.Converters
 
             IStorage storage = values[1] as IStorage;
 
-            if (storage.OperationCategories.FirstOrDefault(o => o.Index == operation.OperationCategoryIndex).OperationTypeIndex == storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Index)
+            if (storage.OperationCategories.FirstOrDefault(o => o.Id == operation.OperationCategoryIndex).OperationTypeIndex == storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id)
             {
                 return new SolidColorBrush(Colors.Green);
             }
-            else if (storage.OperationCategories.FirstOrDefault(o => o.Index == operation.OperationCategoryIndex).OperationTypeIndex == storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Index)
+            else if (storage.OperationCategories.FirstOrDefault(o => o.Id == operation.OperationCategoryIndex).OperationTypeIndex == storage.OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id)
             {
                 return new SolidColorBrush(Colors.Red);
             }

@@ -61,7 +61,7 @@ namespace Monify.ViewModels
                             Name = NewAccountName,
                             Icon = SelectedIcon,
                             Balance = Double.Parse(Balance),
-                            CurrencyIndex = selectedCurrency.Index,
+                            CurrencyIndex = selectedCurrency.Id,
                             StartDate = SelectedDate.Value
                         });
                         ReturnToMainViewCommand.Execute(obj);

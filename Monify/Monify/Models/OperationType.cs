@@ -11,15 +11,15 @@ namespace Monify.Models
     class OperationType
     {
         static int iterator = 0;
-        int index;
+        int id;
         string name;
 
         public OperationType()
         {
-            index = iterator++;
+            id = iterator++;
         }
 
-        public int Index { get => index; }
+        public int Id { get => id; set => id = value; }
 
         public string Name
         {
