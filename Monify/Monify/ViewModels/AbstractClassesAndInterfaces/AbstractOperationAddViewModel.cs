@@ -97,9 +97,8 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
                             Date = SelectedDate,
                             AccountIndex = SelectedAccount.Index
                         };
-                        Storage.Operations.Add(operation);
                         BalanceRefresher();
-                        Storage.Save();
+                        Storage.AddOperation(operation);
                         ReturnToMainViewCommand.Execute(obj);
                     },
                     obj => SelectedCategory != null && SelectedAccount != null && SelectedDate >= SelectedAccount.StartDate && SelectedAccount.StartDate <= DateTime.Now

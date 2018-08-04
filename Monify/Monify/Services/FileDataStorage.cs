@@ -299,5 +299,23 @@ namespace Monify.Services
             }
             storage.RetryInitialize();
         }
+
+        public void AddAccount(Account account)
+        {
+            Accounts.Add(account);
+            Save();
+        }
+
+        public void AddOperationCategory(OperationCategory category)
+        {
+            OperationCategories.Add(category);
+            Save();
+        }
+
+        public void AddOperation(Operation operation)
+        {
+            Operations.Add(operation);
+            Save();
+        }
     }
 }

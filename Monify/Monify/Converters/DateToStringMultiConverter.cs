@@ -42,7 +42,7 @@ namespace Monify.Converters
             else if (dateInterval == DateInterval.Week)
             {
               
-                return $"{selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Day} - {selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Day} {selectedDate.ToMonthName()}";
+                return $"{selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Day} - {selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Day} {selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).ToMonthName()}";
             }
             else if (dateInterval == DateInterval.Month)
             {

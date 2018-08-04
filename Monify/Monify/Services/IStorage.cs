@@ -18,6 +18,10 @@ namespace Monify.Services
 
         void InitializeCurrencies();
 
+        void AddAccount(Account account);
+        void AddOperationCategory(OperationCategory category);
+        void AddOperation(Operation operation);
+
         void Save();
 
         void Load();

@@ -56,7 +56,7 @@ namespace Monify.ViewModels
                 return addAccountCommand ??
                     (addAccountCommand = new RelayCommand(obj =>
                     {
-                        Storage.Accounts.Add(new Account
+                        Storage.AddAccount(new Account
                         {
                             Name = NewAccountName,
                             Icon = SelectedIcon,
@@ -64,7 +64,6 @@ namespace Monify.ViewModels
                             CurrencyIndex = selectedCurrency.Index,
                             StartDate = SelectedDate.Value
                         });
-                        Storage.Save();
                         ReturnToMainViewCommand.Execute(obj);
                     },
                     obj => SelectedIcon != null && Balance != "" && NewAccountName != "" && SelectedCurrency != null && SelectedDate != null

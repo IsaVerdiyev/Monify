@@ -105,7 +105,7 @@ namespace Monify.ViewModels
                         };
                         SourceAccount.Balance -= transactionAmountInSourceCurrency;
 
-                        Storage.Operations.Add(sourceOperation);
+                        Storage.AddOperation(sourceOperation);
 
                         Operation destinationOperation = new Operation
                         {
@@ -116,9 +116,8 @@ namespace Monify.ViewModels
                         };
                         DestinationAccount.Balance += transactionAmountInDestinationCurrency;
 
-                        Storage.Operations.Add(destinationOperation);
+                        Storage.AddOperation(destinationOperation);
 
-                        Storage.Save();
 
                         ReturnToMainViewCommand.Execute(obj);
                     },
