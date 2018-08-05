@@ -34,7 +34,6 @@ namespace Monify.ViewModels
 
         Account selectedAccount;
         Account allUsers;
-        ObservableCollection<Account> accounts;
 
         DateTime selectedDate;
         DateTime? startDate;
@@ -127,12 +126,21 @@ namespace Monify.ViewModels
             {
                 AllUsers.CurrencyIndex = (value as Currency).Id;
                 OnPropertyChanged();
-                Accounts = Accounts;
+                OnPropertyChanged(nameof(AccountsWithAllUsers));
                 SelectedAccount = SelectedAccount;
             }
         }
-        public ObservableCollection<Account> Accounts { get => accounts; set => SetProperty(ref accounts, value); }
-
+        public ObservableCollection<Account> Accounts { get => Storage.Accounts; }
+        public ObservableCollection<Account> AccountsWithAllUsers
+        {
+            get
+            {
+                var accounts = new ObservableCollection<Account>(Storage.Accounts);
+                accounts.Add(allUsers);
+                return accounts;
+            }
+        }
+        public ObservableCollection<Currency> Currencies { get => Storage.Currencies; }
 
         public DateTime SelectedDate {
             get => selectedDate;
@@ -633,9 +641,7 @@ namespace Monify.ViewModels
         {
             HideAllSideMenusButtonVisibility = Visibility.Collapsed;
             ResetOtherSettingsRowsDisplay();
-            var tempAccounts = new ObservableCollection<Account>(Storage.Accounts);
-            tempAccounts.Add(AllUsers);
-            Accounts = tempAccounts;
+            OnPropertyChanged(nameof(AccountsWithAllUsers));
             SelectedAccount = SelectedAccount;
             return this;
         }

@@ -99,7 +99,7 @@
             </DockPanel.Width>
             <ComboBox DockPanel.Dock="Top"
                 SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                ItemsSource="{Binding Path=Accounts, UpdateSourceTrigger=PropertyChanged}"
+                ItemsSource="{Binding AccountsWithAllUsers, UpdateSourceTrigger=PropertyChanged}"
                 Style="{StaticResource CurrencyComboboxItemTemplateStyle}"
                 Width="Auto">
             </ComboBox>
@@ -174,7 +174,7 @@
                         Command="{Binding AddAccountCommand}">
                     Add Account
                 </Button>
-                <ListBox ItemsSource="{Binding Storage.Accounts}"/>
+                <ListBox ItemsSource="{Binding Accounts}"/>
             </DockPanel>
             <DockPanel Grid.Row="1"
                        Background="LightGreen"
@@ -188,7 +188,7 @@
                 </Button>
                
                 <ListBox 
-                ItemsSource="{Binding Storage.Currencies}">
+                ItemsSource="{Binding Currencies}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock>
@@ -221,7 +221,7 @@
                     <ComboBox
                         Grid.Column="1"
                         SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
-                        ItemsSource="{Binding Storage.Currencies, Mode=OneWay}"/>
+                        ItemsSource="{Binding Currencies, Mode=OneWay}"/>
                 </Grid>
                 <Button DockPanel.Dock="Bottom"
                         Command="{Binding CleanDataCommand}"

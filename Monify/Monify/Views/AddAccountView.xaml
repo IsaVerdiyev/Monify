@@ -48,7 +48,7 @@
             <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding SelectedDate}"></DatePicker>
             <ComboBox Width="90"
                       HorizontalAlignment="Left"
-                      ItemsSource="{Binding Storage.Currencies}"
+                      ItemsSource="{Binding Currencies}"
                       SelectedItem="{Binding SelectedCurrency,Mode=OneWayToSource}"/>
         </DockPanel>
 

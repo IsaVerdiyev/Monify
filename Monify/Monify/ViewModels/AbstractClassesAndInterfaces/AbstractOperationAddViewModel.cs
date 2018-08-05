@@ -42,6 +42,8 @@ namespace Monify.ViewModels.AbstractClassesAndInterfaces
 
         public Account SelectedAccount { get => selectedAccount; set => SetProperty(ref selectedAccount, value); }
 
+        public ObservableCollection<Account> Accounts { get => Storage.Accounts; }
+
         public override string PerformOperationButtonName { get; }
 
         public abstract string HeaderText { get; }

@@ -6,6 +6,7 @@ using Monify.ViewModels.AbstractClassesAndInterfaces;
 using Monify.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,8 @@ namespace Monify.ViewModels
             }
         }
         public Account DestinationAccount { get => destinationAccount; set => SetProperty(ref destinationAccount, value); }
+
+        public ObservableCollection<Account> Accounts { get => Storage.Accounts; }
 
         RelayCommand returnToMainViewCommand;
 

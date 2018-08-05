@@ -55,7 +55,7 @@ namespace Monify.Tools
             }
             else if (dateInterval == DateInterval.Week)
             {
-                return dateTime.Date >= selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Date && dateTime <= selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Date;
+                return dateTime.Date >= selectedDate.SearchedDayOfWeek(DayOfWeek.Monday).Date && dateTime.Date <= selectedDate.SearchedDayOfWeek(DayOfWeek.Sunday).Date;
             }
             else if (dateInterval == DateInterval.Month)
             {

@@ -48,7 +48,7 @@
         <DockPanel Grid.Row="2"
                     Background="{StaticResource BackgroundColor}">
             <ComboBox DockPanel.Dock="Left"
-                ItemsSource="{Binding Storage.Accounts}"
+                ItemsSource="{Binding Accounts}"
                 SelectedItem="{Binding SelectedAccount, Mode=TwoWay}"
                 Style="{StaticResource CurrencyComboboxItemTemplateStyle}">
             </ComboBox>

@@ -45,6 +45,8 @@ namespace Monify.ViewModels
 
         public Currency SelectedCurrency { get => selectedCurrency; set => SetProperty(ref selectedCurrency, value); }
 
+        public ObservableCollection<Currency> Currencies { get => Storage.Currencies; }
+
         public DateTime? SelectedDate { get => selectedDate; set => SetProperty(ref selectedDate, value); }
 
         private RelayCommand addAccountCommand;
