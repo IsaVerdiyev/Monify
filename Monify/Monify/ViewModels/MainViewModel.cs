@@ -110,7 +110,7 @@ namespace Monify.ViewModels
                 }
                 PastDate = PastDate;
                 NextDate = NextDate;
-                OperationStatistics = OperationStatistics;
+                Operations = Operations;
             }
         }
         public Account AllUsers
@@ -141,6 +141,7 @@ namespace Monify.ViewModels
             }
         }
         public ObservableCollection<Currency> Currencies { get => Storage.Currencies; }
+        public ObservableCollection<OperationCategory> Categories { get => Storage.OperationCategories; }
 
         public DateTime SelectedDate {
             get => selectedDate;
@@ -149,7 +150,7 @@ namespace Monify.ViewModels
                 SetProperty(ref selectedDate, value);
                 PastDate = PastDate;
                 NextDate = NextDate;
-                OperationStatistics = OperationStatistics;
+                Operations = Operations;
             }
         }
         public DateTime? StartDate {
@@ -205,12 +206,12 @@ namespace Monify.ViewModels
                 SetProperty(ref statisticsDateInterval, value);
                 PastDate = PastDate;
                 NextDate = NextDate;
-                OperationStatistics = OperationStatistics;
+                Operations = Operations;
             }
         }
 
 
-        public ObservableCollection<Operation> OperationStatistics {
+        public ObservableCollection<Operation> Operations {
             get => operationStatistics;
             set
             {
@@ -613,6 +614,9 @@ namespace Monify.ViewModels
                     (cleanDataCommand = new RelayCommand(obj =>
                     {
                         Storage.EraseData();
+                        OnPropertyChanged(nameof(Accounts));
+                        OnPropertyChanged(nameof(Categories));
+                        OnPropertyChanged(nameof(Operations));
                         SelectedAccount = AllUsers;
                         HideAllSideMenuButtonCommand.Execute(obj);
                         ResetToInitialState();

@@ -307,7 +307,7 @@
 
             <ListBox 
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                ItemsSource="{Binding Path=Storage.OperationCategories}" 
+                ItemsSource="{Binding Categories}" 
                 />
 
             <GridSplitter 
@@ -341,7 +341,7 @@
                 </Button>
                 <ListBox Grid.ColumnSpan="2"
                          Background="Aqua"
-                         ItemsSource="{Binding OperationStatistics, Mode=OneWay}"
+                         ItemsSource="{Binding Operations, Mode=OneWay}"
                          HorizontalContentAlignment="Stretch">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

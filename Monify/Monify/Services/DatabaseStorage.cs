@@ -112,19 +112,10 @@ namespace Monify.Services
 
         public void EraseData()
         {
-            using(SQLiteConnection connection = new SQLiteConnection())
-            {
-                SQLiteCommand command = new SQLiteCommand(connection);
-
-                command.CommandText = $"DELETE FROM {nameof(accounts)}";
-                command.ExecuteNonQuery();
-
-                command.CommandText = $"DELETE FROM {nameof(operations)}";
-                command.ExecuteNonQuery();
-
-                command.CommandText = $"DELETE FROM {nameof(operationCategories)}";
-                command.ExecuteNonQuery();
-            }
+            accounts.RemoveRange(accounts);
+            operationCategories.RemoveRange(operationCategories);
+            operations.RemoveRange(operations);
+            Save();
 
             InitializeOperationCategories();
         }
