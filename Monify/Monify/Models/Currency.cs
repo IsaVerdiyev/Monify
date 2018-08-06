@@ -18,7 +18,7 @@ namespace Monify.Models
             id = iterator++;
         }
 
-        public int Id { get => id; set => id = value; }
+        public int Id { get => id; private set => id = value; }
         public string Code { get => code; set => code = value; }
         public double Value { get => value; set => this.value = value; }
 

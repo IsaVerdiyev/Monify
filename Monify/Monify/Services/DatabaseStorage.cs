@@ -17,6 +17,8 @@ namespace Monify.Services
 {
     class DatabaseStorage : DbContext, IStorage
     {
+        
+
         public static DatabaseStorage storage;
 
         public DbSet<Account> accounts { get; set; }
@@ -24,6 +26,8 @@ namespace Monify.Services
         public DbSet<Operation> operations { get; set; }
         public DbSet<OperationType> operationTypes { get; set; }
         public DbSet<Currency> currencies { get; set; }
+        public DbSet<CurrencyDate> currencyDates { get; set; }
+        
         
 
         private DatabaseStorage(): base("DefaultConnection")
@@ -46,9 +50,8 @@ namespace Monify.Services
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories.Local; set { } }
         public ObservableCollection<Operation> Operations { get => operations.Local; set { } }
         public ObservableCollection<Currency> Currencies { get => currencies.Local; set { } }
-
-        public DateTime CurrenciesDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public DateTime LastUpdateDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<CurrencyDate> CurrencyDates { get => currencyDates.Local; set { } }
+       
 
         public void AddAccount(Account account)
         {
@@ -149,7 +152,21 @@ namespace Monify.Services
                     $"FOREIGN KEY({nameof(Operation.OperationCategoryIndex)}) REFERENCES {nameof(operationCategories)}({nameof(OperationCategory.Id)}), " +
                     $"FOREIGN KEY({nameof(Operation.AccountIndex)}) REFERENCES {nameof(accounts)}({nameof(Account.Id)}))";
                 command.ExecuteNonQuery();
+
+                command.CommandText = $"CREATE TABLE {nameof(currencyDates)}(" +
+                    $"{nameof(CurrencyDate.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(CurrencyDate.Name)} NVARCHAR(30), " +
+                    $"{nameof(CurrencyDate.Date)} DATETIME)";
+                command.ExecuteNonQuery();
+
+                command.CommandText = $"INSERT INTO {nameof(currencyDates)}({nameof(CurrencyDate.Name)}) VALUES " +
+                    $"('{CurrencyDateNames.CurrencyDate.ToString()}'), " +
+                    $"('{CurrencyDateNames.LastUpdate.ToString()}')";
+                command.ExecuteNonQuery();
+                
                 Load();
+                InitializeOperationCategories();
+                InitializeCurrencies();
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -160,9 +177,7 @@ namespace Monify.Services
             }
 
             
-            InitializeOperationCategories();
 
-            InitializeCurrencies();
             
         }
 
@@ -209,7 +224,7 @@ namespace Monify.Services
                 string data = web.DownloadString(url);
                 return data;
 
-            }
+            } 
         }
 
         public void InitializeCurrencies()
@@ -261,6 +276,7 @@ namespace Monify.Services
             operations.Load();
             operationTypes.Load();
             operationCategories.Load();
+            currencyDates.Load();
         }
 
         public void Save()

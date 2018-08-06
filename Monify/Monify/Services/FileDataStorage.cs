@@ -25,8 +25,7 @@ namespace Monify.Services
         ObservableCollection<Operation> operations;
         ObservableCollection<Account> accounts;
         ObservableCollection<Currency> currencies;
-        DateTime currenciesDate;
-        DateTime lastUpdateDate;
+        
 
         
 
@@ -50,8 +49,7 @@ namespace Monify.Services
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories; set => SetProperty(ref operationCategories, value); }
         public ObservableCollection<Operation> Operations { get => operations; set => SetProperty(ref operations, value); }
         public ObservableCollection<Currency> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
-        public DateTime CurrenciesDate { get => currenciesDate; set => SetProperty(ref currenciesDate, value); }
-        public DateTime LastUpdateDate { get => lastUpdateDate; set => SetProperty(ref lastUpdateDate, value); }
+        public ObservableCollection<CurrencyDate> CurrencyDates { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Initialize()
         {

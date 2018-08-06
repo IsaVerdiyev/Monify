@@ -35,7 +35,7 @@ namespace Monify.Models
             this.id = index;
         }
 
-        public int Id { get => id; set => id = value; }
+        public int Id { get => id; private set => id = value; }
 
         public double? Balance { get => balance; set => SetProperty(ref balance, value); }
 
