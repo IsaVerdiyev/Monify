@@ -1,4 +1,5 @@
 ﻿using Monify.Models;
+using Monify.Services.CurrencyGetterService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,13 +16,19 @@ namespace Monify.Services
         ObservableCollection<OperationCategory> OperationCategories { get; set; }
         ObservableCollection<Operation> Operations { get; set; }
         ObservableCollection<Currency> Currencies { get; set; }
-        ObservableCollection<CurrencyDate> CurrencyDates { get; set; }
+        DateTime? LastActiveDate { get; set; }
+        ObservableCollection<Currency> CurrencyCollectionFromDbSet { get; }
+        DateTime? LastCurrencyUpdateDate { get; set; }
 
-        void InitializeCurrencies();
+        ICurrencyGetter CurrencyGetter { get; }
+
+       
 
         void AddAccount(Account account);
         void AddOperationCategory(OperationCategory category);
         void AddOperation(Operation operation);
+        void AddCurrency(Currency currency);
+        void AddCurrencies(ObservableCollection<Currency> currencies);
 
         
         void Save();
@@ -29,6 +36,8 @@ namespace Monify.Services
         void Load();
 
         void EraseData();
+
+        void EraseCurrencies();
 
         void Initialize();
     }

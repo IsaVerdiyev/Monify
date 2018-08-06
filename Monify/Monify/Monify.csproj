@@ -86,7 +86,7 @@
     <Compile Include="Converters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Currency.cs" />
-    <Compile Include="Models\CurrencyDate.cs" />
+    <Compile Include="Models\AppDate.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationCategory.cs" />
     <Compile Include="Models\OperationType.cs" />
@@ -103,6 +103,9 @@
     <Compile Include="Services\CalculatorService\SubstractOperation.cs" />
     <Compile Include="Services\CalculatorService\SumOperation.cs" />
     <Compile Include="Services\CurrencyConverter.cs" />
+    <Compile Include="Services\CurrencyGetterService\ICurrencyGetter.cs" />
+    <Compile Include="Services\CurrencyGetterService\ProxyCurrencyGetter.cs" />
+    <Compile Include="Services\CurrencyGetterService\RealCurrencyGetter.cs" />
     <Compile Include="Services\DatabaseStorage.cs" />
     <Compile Include="Services\FileDataStorage.cs" />
     <Compile Include="Services\IFileSaveLoader.cs" />

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using Monify.Models;
+using Monify.Services.CurrencyGetterService;
 using Monify.Tools;
 
 namespace Monify.Services
@@ -49,7 +50,15 @@ namespace Monify.Services
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories; set => SetProperty(ref operationCategories, value); }
         public ObservableCollection<Operation> Operations { get => operations; set => SetProperty(ref operations, value); }
         public ObservableCollection<Currency> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
-        public ObservableCollection<CurrencyDate> CurrencyDates { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<AppDate> CurrencyDates { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ICurrencyGetter CurrencyGetter => throw new NotImplementedException();
+
+        public DateTime? LastActiveDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ObservableCollection<Currency> CurrencyCollectionFromDbSet => throw new NotImplementedException();
+
+        public DateTime? LastCurrencyUpdateDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Initialize()
         {
@@ -320,6 +329,21 @@ namespace Monify.Services
         {
             Operations.Add(operation);
             Save();
+        }
+
+        public void AddCurrency(Currency currency)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddCurrencies(ObservableCollection<Currency> currencies)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EraseCurrencies()
+        {
+            throw new NotImplementedException();
         }
     }
 }

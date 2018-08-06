@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Xml;
 using Monify.Models;
+using Monify.Services.CurrencyGetterService;
 
 namespace Monify.Services
 {
     class DatabaseStorage : DbContext, IStorage
     {
-        
 
+
+        ICurrencyGetter currencyGetter;
         public static DatabaseStorage storage;
 
         public DbSet<Account> accounts { get; set; }
@@ -26,12 +28,13 @@ namespace Monify.Services
         public DbSet<Operation> operations { get; set; }
         public DbSet<OperationType> operationTypes { get; set; }
         public DbSet<Currency> currencies { get; set; }
-        public DbSet<CurrencyDate> currencyDates { get; set; }
-        
+        public DbSet<AppDate> appDates { get; set; }
         
 
         private DatabaseStorage(): base("DefaultConnection")
         {
+            currencyGetter = new ProxyCurrencyGetter(this);
+
             if (File.Exists("Monify.db"))
             {
                 Load();
@@ -39,7 +42,6 @@ namespace Monify.Services
             else
             {
                 Initialize();
-                
             }
         }
 
@@ -49,9 +51,30 @@ namespace Monify.Services
         public ObservableCollection<OperationType> OperationTypes { get => operationTypes.Local; set { } }
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories.Local; set { } }
         public ObservableCollection<Operation> Operations { get => operations.Local; set { } }
-        public ObservableCollection<Currency> Currencies { get => currencies.Local; set { } }
-        public ObservableCollection<CurrencyDate> CurrencyDates { get => currencyDates.Local; set { } }
+        public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
        
+        public ObservableCollection<Currency> CurrencyCollectionFromDbSet => currencies.Local;
+
+        ICurrencyGetter IStorage.CurrencyGetter => throw new NotImplementedException();
+
+        public DateTime? LastActiveDate {
+            get => appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date ;
+            set
+            {
+                appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date = value;
+                SaveChanges();
+            }
+        }
+        public DateTime? LastCurrencyUpdateDate {
+            get => appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastCurrencyUpdateDate.ToString()).Date;
+            set
+            {
+                appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastCurrencyUpdateDate.ToString()).Date = value;
+                SaveChanges();
+            }
+        }
+
+        public ICurrencyGetter CurrencyGetter ;
 
         public void AddAccount(Account account)
         {
@@ -78,7 +101,6 @@ namespace Monify.Services
                 return;
             }
 
-            
             operationCategories.AddRange(categories);
             SaveChanges();
         }
@@ -153,20 +175,20 @@ namespace Monify.Services
                     $"FOREIGN KEY({nameof(Operation.AccountIndex)}) REFERENCES {nameof(accounts)}({nameof(Account.Id)}))";
                 command.ExecuteNonQuery();
 
-                command.CommandText = $"CREATE TABLE {nameof(currencyDates)}(" +
-                    $"{nameof(CurrencyDate.Id)} INTEGER PRIMARY KEY, " +
-                    $"{nameof(CurrencyDate.Name)} NVARCHAR(30), " +
-                    $"{nameof(CurrencyDate.Date)} DATETIME)";
+                command.CommandText = $"CREATE TABLE {nameof(appDates)}(" +
+                    $"{nameof(AppDate.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(AppDate.Name)} NVARCHAR(30), " +
+                    $"{nameof(AppDate.Date)} DATETIME)";
                 command.ExecuteNonQuery();
 
-                command.CommandText = $"INSERT INTO {nameof(currencyDates)}({nameof(CurrencyDate.Name)}) VALUES " +
-                    $"('{CurrencyDateNames.CurrencyDate.ToString()}'), " +
-                    $"('{CurrencyDateNames.LastUpdate.ToString()}')";
+                command.CommandText = $"INSERT INTO {nameof(appDates)}({nameof(AppDate.Name)}) VALUES " +
+                    $"('{AppDateEnum.LastCurrencyUpdateDate.ToString()}'), " +
+                    $"('{AppDateEnum.LastActiveDate.ToString()}')";
                 command.ExecuteNonQuery();
                 
                 Load();
                 InitializeOperationCategories();
-                InitializeCurrencies();
+                
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -212,76 +234,48 @@ namespace Monify.Services
             }
         }
 
-        string GetXmlOfCurrencies()
-        {
-            using (WebClient web = new WebClient())
-            {
-                string day = String.Format("{0,2}", DateTime.Now.Day.ToString()).Replace(' ', '0');
-                string month = String.Format("{0,2}", DateTime.Now.Month.ToString()).Replace(' ', '0');
-                string date = day + "." + month + "." + DateTime.Now.Year;
-                string unformattedUrl = "http://www.cbar.az/currencies/" + date + ".xml";
-                string url = string.Format(unformattedUrl);
-                string data = web.DownloadString(url);
-                return data;
+       
 
-            } 
-        }
-
-        public void InitializeCurrencies()
-        {
-            string xmlData = GetXmlOfCurrencies();
-
-            var doc = new XmlDocument();
-            doc.LoadXml(xmlData);
-
-
-
-            var nodes = doc.SelectNodes("/ValCurs/ValType[@Type='Xarici valyutalar']/Valute");
-            foreach (XmlNode item in nodes)
-            {
-                Currency currency = new Currency
-                {
-                    Code = item.Attributes["Code"].InnerText.ToUpper(),
-                    Value = Double.Parse(item["Value"].InnerText)
-                };
-
-
-                Currency searchedCurrency = Currencies.FirstOrDefault(c => c.Code == currency.Code);
-                if (searchedCurrency != null)
-                {
-                    searchedCurrency.Value = currency.Value;
-                }
-                else
-                {
-                    AddCurrency(currency);
-                }
-            }
-
-            if (Currencies.FirstOrDefault(c => c.Code == "AZN") == null)
-            {
-                Currency aznCurrency = new Currency
-                {
-                    Code = "AZN",
-                    Value = 1
-                };
-
-                AddCurrency(aznCurrency);
-            }
-        }
+       
 
         public void Load()
         {
+            appDates.Load();
+            if(LastActiveDate > DateTime.Now.Date)
+            {
+                throw new Exception("Error: Last active date of application is more than current date");
+            }
+            else
+            {
+                LastActiveDate = DateTime.Now.Date;
+            }
             accounts.Load();
             currencies.Load();
             operations.Load();
             operationTypes.Load();
             operationCategories.Load();
-            currencyDates.Load();
         }
 
         public void Save()
         {
             SaveChanges();
         }
+
+        public void EraseCurrencies()
+        {
+            currencies.RemoveRange(currencies);
+        }
+
+        void IStorage.AddCurrency(Currency currency)
+        {
+            currencies.Add(currency);
+        }
+
+        public void AddCurrencies(ObservableCollection<Currency> currencies)
+        {
+            this.currencies.AddRange(currencies);
+        }
+
+        
     }
 }
