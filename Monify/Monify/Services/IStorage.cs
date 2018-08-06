@@ -15,6 +15,8 @@ namespace Monify.Services
         ObservableCollection<OperationCategory> OperationCategories { get; set; }
         ObservableCollection<Operation> Operations { get; set; }
         ObservableCollection<Currency> Currencies { get; set; }
+        DateTime CurrenciesDate { get; set; }
+        DateTime LastUpdateDate { get; set; }
 
         void InitializeCurrencies();
 
