@@ -217,6 +217,7 @@ namespace Monify.Services
                 $"('{OperationCategoryEnum.Sports.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
                 $"('{OperationCategoryEnum.Taxi.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
                 $"('{OperationCategoryEnum.Transport.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
+                $"('{OperationCategoryEnum.Transaction.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Expense.ToString()).Id}'), " +
                 $"('{OperationCategoryEnum.Deposits.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
                 $"('{OperationCategoryEnum.Salary.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
                 $"('{OperationCategoryEnum.Saving.ToString()}', '{OperationTypes.FirstOrDefault(t => t.Name == OperationTypesEnum.Profit.ToString()).Id}'), " +
