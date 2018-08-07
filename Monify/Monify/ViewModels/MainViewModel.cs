@@ -233,6 +233,7 @@ namespace Monify.ViewModels
 
         public Visibility HideAllSideMenusButtonVisibility { get => hideAllSideMenusButtonVisibility; set => SetProperty(ref hideAllSideMenusButtonVisibility, value); }
 
+        public DateTime? LastCurrencyUpdateDate { get => Storage.LastCurrencyUpdateDate; }
 
 
         RelayCommand addExpenseCommand;
@@ -525,19 +526,20 @@ namespace Monify.ViewModels
             
         }
 
-        //private RelayCommand refreshCurrenciesCommand;
+        private RelayCommand refreshCurrenciesCommand;
 
-        //public RelayCommand RefreshCurrenciesCommand
-        //{
-        //    get
-        //    {
-        //        return refreshCurrenciesCommand ??
-        //            (refreshCurrenciesCommand = new RelayCommand(obj =>
-        //            {
-        //                Storage.SetCurrencies();
-        //            }));
-        //    }
-        //}
+        public RelayCommand RefreshCurrenciesCommand
+        {
+            get
+            {
+                return refreshCurrenciesCommand ??
+                    (refreshCurrenciesCommand = new RelayCommand(obj =>
+                    {
+                        OnPropertyChanged(nameof(Currencies));
+                    },
+                    obj => LastCurrencyUpdateDate != Storage.LastActiveDate));
+            }
+        }
 
 
         private RelayCommand hideAllSideMenuButtonCommand;

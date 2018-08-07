@@ -186,7 +186,11 @@
                     Command="{Binding RefreshCurrenciesCommand}">
                     ↺
                 </Button>
-               
+                <TextBlock DockPanel.Dock="Top" TextAlignment="Center">
+                    <Run>Last Update Date: </Run>
+                    <LineBreak/>
+                    <Run Text="{Binding LastCurrencyUpdateDate, StringFormat={}{0:d}, Mode=OneWay}"/>
+                </TextBlock> 
                 <ListBox 
                 ItemsSource="{Binding Currencies}">
                     <ListBox.ItemTemplate>

@@ -58,11 +58,15 @@ namespace Monify.Services
         ICurrencyGetter IStorage.CurrencyGetter => throw new NotImplementedException();
 
         public DateTime? LastActiveDate {
-            get => appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date ;
-            set
+            get
             {
-                appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date = value;
+                if(appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date > DateTime.Now.Date)
+                {
+                    throw new Exception("Incompatibility error of last active time of app and current time");
+                }
+                appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date = DateTime.Now.Date;
                 SaveChanges();
+                return appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date;
             }
         }
         public DateTime? LastCurrencyUpdateDate {
@@ -241,14 +245,6 @@ namespace Monify.Services
         public void Load()
         {
             appDates.Load();
-            if(LastActiveDate > DateTime.Now.Date)
-            {
-                throw new Exception("Error: Last active date of application is more than current date");
-            }
-            else
-            {
-                LastActiveDate = DateTime.Now.Date;
-            }
             accounts.Load();
             currencies.Load();
             operations.Load();
