@@ -227,6 +227,7 @@
                         SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
                         ItemsSource="{Binding Currencies, Mode=OneWay}"/>
                 </Grid>
+                
                 <Button DockPanel.Dock="Bottom"
                         Command="{Binding CleanDataCommand}"
                         CommandParameter="{Binding ElementName=MainViewUserControl}">
