@@ -113,6 +113,9 @@
     <Compile Include="Services\ISaveLoader.cs" />
     <Compile Include="Services\IStorage.cs" />
     <Compile Include="Services\JsonSaveLoader.cs" />
+    <Compile Include="Services\TranslatorService\ITranslator.cs" />
+    <Compile Include="Services\TranslatorService\RealTranslator.cs" />
+    <Compile Include="Services\TranslatorService\TranslatorCash.cs" />
     <Compile Include="Tools\DateTimeExtensions.cs" />
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
@@ -242,9 +245,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\TranslatorService\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
