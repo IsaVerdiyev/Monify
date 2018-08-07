@@ -16,8 +16,9 @@ namespace Monify.Services
         ObservableCollection<OperationCategory> OperationCategories { get; set; }
         ObservableCollection<Operation> Operations { get; set; }
         ObservableCollection<Currency> Currencies { get; set; }
-        DateTime? LastActiveDate { get; }
-        ObservableCollection<Currency> CurrencyCollectionFromDbSet { get; }
+        ObservableCollection<Currency> CurrenciesCash { get; set; }
+
+        DateTime? LastActiveDate { get; set; }
         DateTime? LastCurrencyUpdateDate { get; set; }
 
         
@@ -28,7 +29,9 @@ namespace Monify.Services
         void AddOperationCategory(OperationCategory category);
         void AddOperation(Operation operation);
         void AddCurrency(Currency currency);
-        void AddCurrencies(ObservableCollection<Currency> currencies);
+       
+
+        void UpdateCurrency(Currency currency, Currency newCurrency);
 
         
         void Save();
@@ -37,7 +40,7 @@ namespace Monify.Services
 
         void EraseData();
 
-        void EraseCurrencies();
+        
 
         void Initialize();
     }

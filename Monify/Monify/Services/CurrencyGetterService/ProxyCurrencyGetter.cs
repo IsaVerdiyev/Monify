@@ -26,24 +26,41 @@ namespace Monify.Services.CurrencyGetterService
             {
                 if(storage.LastCurrencyUpdateDate == storage.LastActiveDate)
                 {
-                    return storage.CurrencyCollectionFromDbSet;
+                    return storage.CurrenciesCash;
                 }
                 else
                 {
                     try
                     {
                         ObservableCollection<Currency> newCurrencyData = realCurrencyGetter.Currencies;
-                        storage.EraseCurrencies();
-                        storage.AddCurrencies(newCurrencyData);
+                        Currency currency;
+                        foreach(var newCurrency in newCurrencyData)
+                        {
+                            currency = storage.CurrenciesCash.FirstOrDefault(c => c.Code == newCurrency.Code);
+                            if(currency == null)
+                            {
+                                storage.AddCurrency(newCurrency);
+                            }
+                            else
+                            {
+                                storage.UpdateCurrency(currency, newCurrency);
+                            }
+                        }
+
+                        if((currency = storage.CurrenciesCash.FirstOrDefault(c => c.Code == "AZN")) == null)
+                        {
+                            storage.AddCurrency(new Currency { Code = "AZN", Value = 1 });
+                        }
+                        storage.Save();
                         storage.LastCurrencyUpdateDate = DateTime.Now.Date;
                     }
                     catch (Exception ex) { 
-                        if(storage.CurrencyCollectionFromDbSet.Count == 0)
+                        if(storage.CurrenciesCash.Count == 0)
                         {
                             throw ex;
                         }
                     }
-                    return storage.CurrencyCollectionFromDbSet;
+                    return storage.CurrenciesCash;
                 }
             }
         }

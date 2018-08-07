@@ -28,18 +28,20 @@ namespace Monify.Services
         public void Load()
         {
 
-            var loadedData = JsonConvert.DeserializeObject<Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>>>(File.ReadAllText(SaveFileLocation));
+            var loadedData = JsonConvert.DeserializeObject<Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, DateTime?>>(File.ReadAllText(SaveFileLocation));
             storage.Accounts = loadedData.Item1;
-            storage.Currencies = loadedData.Item2;
+            storage.CurrenciesCash = loadedData.Item2;
             storage.Operations = loadedData.Item3;
             storage.OperationCategories = loadedData.Item4;
             storage.OperationTypes = loadedData.Item5;
+            storage.LastActiveDate = loadedData.Item6;
+            storage.LastCurrencyUpdateDate = loadedData.Item7;
 
         }
 
         public void Save()
         {
-            var savedData = new Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>>(storage.Accounts, storage.Currencies, storage.Operations, storage.OperationCategories, storage.OperationTypes);
+            var savedData = new Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, DateTime?>(storage.Accounts, storage.CurrenciesCash, storage.Operations, storage.OperationCategories, storage.OperationTypes, storage.LastActiveDate, storage.LastCurrencyUpdateDate);
             
             File.WriteAllText(SaveFileLocation, JsonConvert.SerializeObject(savedData));
             

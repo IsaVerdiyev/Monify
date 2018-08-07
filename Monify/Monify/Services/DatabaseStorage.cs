@@ -52,7 +52,7 @@ namespace Monify.Services
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories.Local; set { } }
         public ObservableCollection<Operation> Operations { get => operations.Local; set { } }
        
-        public ObservableCollection<Currency> CurrencyCollectionFromDbSet => currencies.Local;
+        public ObservableCollection<Currency> CurrenciesCash { get => currencies.Local; set => throw new Exception("Cannot use setter of CurrenciesCash in DatabaseStorage"); }
         public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
 
         
@@ -68,6 +68,7 @@ namespace Monify.Services
                 SaveChanges();
                 return appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastActiveDate.ToString()).Date;
             }
+            set => throw new Exception("Cannot use setter LastActiveDate of DatabaseStorage");
         }
         public DateTime? LastCurrencyUpdateDate {
             get => appDates.Local.FirstOrDefault(d => d.Name == AppDateEnum.LastCurrencyUpdateDate.ToString()).Date;
@@ -112,10 +113,13 @@ namespace Monify.Services
         public void AddCurrency(Currency currency)
         {
             currencies.Add(currency);
-            SaveChanges();
         }
 
-        
+        public void UpdateCurrency(Currency currency, Currency newCurrency) {
+            currency.Value = newCurrency.Value;
+        }
+
+
 
         public void EraseData()
         {
@@ -257,19 +261,10 @@ namespace Monify.Services
             SaveChanges();
         }
 
-        public void EraseCurrencies()
-        {
-            currencies.RemoveRange(currencies);
-            Save();
-        }
-
+       
        
 
-        public void AddCurrencies(ObservableCollection<Currency> currencies)
-        {
-            this.currencies.AddRange(currencies);
-            Save();
-        }
+        
 
         
     }

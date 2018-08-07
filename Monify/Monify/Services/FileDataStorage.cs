@@ -19,6 +19,8 @@ namespace Monify.Services
     {
         static FileDataStorage storage;
 
+        ICurrencyGetter currencyGetter;
+
         public IFileSaveLoader FileSaveLoader { get; set; }
 
         ObservableCollection<OperationCategory> operationCategories;
@@ -26,12 +28,15 @@ namespace Monify.Services
         ObservableCollection<Operation> operations;
         ObservableCollection<Account> accounts;
         ObservableCollection<Currency> currencies;
+        DateTime? lastActiveDate;
+        DateTime? lastCurrencyUpdateDate;
         
 
         
 
         private FileDataStorage()
         {
+            currencyGetter = new ProxyCurrencyGetter(this);
             FileSaveLoader = new JsonFileSaveLoader(this);
             try
             {
@@ -49,16 +54,27 @@ namespace Monify.Services
         public ObservableCollection<OperationType> OperationTypes { get => operationTypes; set => SetProperty(ref operationTypes, value); }
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories; set => SetProperty(ref operationCategories, value); }
         public ObservableCollection<Operation> Operations { get => operations; set => SetProperty(ref operations, value); }
-        public ObservableCollection<Currency> Currencies { get => currencies; set => SetProperty(ref currencies, value); }
-        public ObservableCollection<AppDate> CurrencyDates { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public ICurrencyGetter CurrencyGetter => throw new NotImplementedException();
+        public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set => SetProperty(ref currencies, value); }
+        public ObservableCollection<Currency> CurrenciesCash { get => currencies; set => currencies = value; }
 
-        public DateTime? LastActiveDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime? LastActiveDate {
+            get
+            {
+                if(lastActiveDate > DateTime.Now.Date)
+                {
+                    throw new Exception("Incompatibility error of last active time of app and current time");
+                }
+                return (lastActiveDate = DateTime.Now.Date);
+            }
 
-        public ObservableCollection<Currency> CurrencyCollectionFromDbSet => throw new NotImplementedException();
+            set => lastActiveDate = value;
+        }
+        public DateTime? LastCurrencyUpdateDate {
+            get => lastCurrencyUpdateDate;
+            set => lastCurrencyUpdateDate = value;
+        }
 
-        public DateTime? LastCurrencyUpdateDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Initialize()
         {
@@ -78,69 +94,16 @@ namespace Monify.Services
 
             Currencies = new ObservableCollection<Currency>();
 
-            InitializeCurrencies();
+           
 
 
         }
 
 
-        string GetXmlOfCurrencies()
-        {
-            using (WebClient web = new WebClient())
-            {
-                string day = String.Format("{0,2}", DateTime.Now.Day.ToString()).Replace(' ', '0');
-                string month = String.Format("{0,2}", DateTime.Now.Month.ToString()).Replace(' ', '0');
-                string date = day + "." + month + "." + DateTime.Now.Year;
-                string unformattedUrl = "http://www.cbar.az/currencies/" + date + ".xml";
-                string url = string.Format(unformattedUrl);
-                string data = web.DownloadString(url);
-                return data;
-
-            }
-        }
 
 
-        public void InitializeCurrencies()
-        {
-            string xmlData = GetXmlOfCurrencies();
-
-            var doc = new XmlDocument();
-            doc.LoadXml(xmlData);
-
-            
-
-            var nodes = doc.SelectNodes("/ValCurs/ValType[@Type='Xarici valyutalar']/Valute");
-            foreach (XmlNode item in nodes)
-            {
-                Currency currency = new Currency
-                {
-                    Code = item.Attributes["Code"].InnerText.ToUpper(),
-                    Value = Double.Parse(item["Value"].InnerText)
-                };
 
 
-                Currency searchedCurrency = Currencies.FirstOrDefault(c => c.Code == currency.Code);
-                if (searchedCurrency != null)
-                {
-                    searchedCurrency.Value = currency.Value;
-                }
-                else
-                {
-                    Currencies.Add(currency);
-                }
-            }
-
-            if(Currencies.FirstOrDefault(c => c.Code == "AZN") == null)
-            {
-                Currency aznCurrency = new Currency
-                {
-                    Code = "AZN",
-                    Value = 1
-                };
-
-                Currencies.Add(aznCurrency);
-            }
-        }
 
         void RetryInitialize()
         {
@@ -333,17 +296,12 @@ namespace Monify.Services
 
         public void AddCurrency(Currency currency)
         {
-            throw new NotImplementedException();
+            CurrenciesCash.Add(currency);
         }
 
-        public void AddCurrencies(ObservableCollection<Currency> currencies)
+        public void UpdateCurrency(Currency currency, Currency newCurrency)
         {
-            throw new NotImplementedException();
-        }
-
-        public void EraseCurrencies()
-        {
-            throw new NotImplementedException();
+            currency.Value = newCurrency.Value;
         }
     }
 }
