@@ -18,5 +18,10 @@ namespace Monify.Services.TranslatorService
             realTranslator = new RealTranslator();
             storage = StorageGetter.Storage;
         }
+
+        public string GetWord(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

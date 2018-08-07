@@ -85,8 +85,11 @@
     <Compile Include="Converters\OperationToCategoryAmountCurrencyMultiConverter.cs" />
     <Compile Include="Converters\PropertyMarginConverterForHidingControl.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\AppString.cs" />
+    <Compile Include="Models\Translation.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\AppDate.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Operation.cs" />
     <Compile Include="Models\OperationCategory.cs" />
     <Compile Include="Models\OperationType.cs" />

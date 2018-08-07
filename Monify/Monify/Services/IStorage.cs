@@ -18,6 +18,10 @@ namespace Monify.Services
         ObservableCollection<Currency> Currencies { get; set; }
         ObservableCollection<Currency> CurrenciesCash { get; set; }
 
+        ObservableCollection<AppString> AppStrings { get; set; }
+        ObservableCollection<Translation> Translations { get; set; }
+        ObservableCollection<Language> Languages { get; set; }
+
         DateTime? LastActiveDate { get; set; }
         DateTime? LastCurrencyUpdateDate { get; set; }
 

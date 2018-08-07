@@ -29,6 +29,10 @@ namespace Monify.Services
         public DbSet<OperationType> operationTypes { get; set; }
         public DbSet<Currency> currencies { get; set; }
         public DbSet<AppDate> appDates { get; set; }
+        public DbSet<AppString> appStrings { get; set; }
+        public DbSet<Language> languages { get; set; }
+        public DbSet<Translation> translations { get; set; }
+        
         
 
         private DatabaseStorage(): base("DefaultConnection")
@@ -52,6 +56,8 @@ namespace Monify.Services
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories.Local; set { } }
         public ObservableCollection<Operation> Operations { get => operations.Local; set { } }
        
+        
+
         public ObservableCollection<Currency> CurrenciesCash { get => currencies.Local; set => throw new Exception("Cannot use setter of CurrenciesCash in DatabaseStorage"); }
         public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
 
@@ -193,9 +199,32 @@ namespace Monify.Services
                     $"('{AppDateEnum.LastCurrencyUpdateDate.ToString()}'), " +
                     $"('{AppDateEnum.LastActiveDate.ToString()}')";
                 command.ExecuteNonQuery();
-                
+
+                command.CommandText = $"CREATE TABLE {nameof(appStrings)}(" +
+                    $"{nameof(AppString.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(AppString.Word)} NVARCHAR(30))";
+                command.ExecuteNonQuery();
+
+                command.CommandText = $"CREATE TABLE {nameof(languages)}(" +
+                    $"{nameof(Language.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(Language.FullName)} NVARCHAR(30), " +
+                    $"{nameof(Language.Code)} NVARCHAR(5))";
+                command.ExecuteNonQuery();
+
+                command.CommandText = $"CREATE TABLE {nameof(translations)}(" +
+                    $"{nameof(Translation.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(Translation.Id_Lang)} INTEGER, " +
+                    $"{nameof(Translation.Id_Word)} INTEGER, " +
+                    $"{nameof(Translation.Result)} NVARCHAR(30), " +
+                    $"FOREIGN KEY({nameof(Translation.Id_Lang)}) REFERENCES {nameof(languages)}({nameof(Language.Id)}), " +
+                    $"FOREIGN KEY({nameof(Translation.Id_Word)}) REFERENCES {nameof(appStrings)}({nameof(AppString.Id)}))";
+                command.ExecuteNonQuery();
+
+
+
                 Load();
                 InitializeOperationCategories();
+                InitializeAppStrings();
                 
             }catch(Exception ex)
             {
@@ -209,6 +238,26 @@ namespace Monify.Services
             
 
             
+        }
+
+        void InitializeAppStrings()
+        {
+            List<string> list = Enum.GetValues(typeof(AppStringEnum)).Cast<string>().ToList();
+            foreach(string word in list)
+            {
+                appStrings.Add(new AppString { Word = word });
+            }
+            list = Enum.GetValues(typeof(OperationCategoryEnum)).Cast<string>().ToList();
+            foreach(string word in list)
+            {
+                appStrings.Add(new AppString { Word = word});
+            }
+            list = Enum.GetValues(typeof(OperationTypesEnum)).Cast<string>().ToList();
+            foreach(string word in list)
+            {
+                appStrings.Add(new AppString { Word = word });
+            }
+            Save();
         }
 
         void InitializeOperationCategories()
