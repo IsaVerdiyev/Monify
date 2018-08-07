@@ -51,11 +51,11 @@ namespace Monify.Services
         public ObservableCollection<OperationType> OperationTypes { get => operationTypes.Local; set { } }
         public ObservableCollection<OperationCategory> OperationCategories { get => operationCategories.Local; set { } }
         public ObservableCollection<Operation> Operations { get => operations.Local; set { } }
-        public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
        
         public ObservableCollection<Currency> CurrencyCollectionFromDbSet => currencies.Local;
+        public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
 
-        ICurrencyGetter IStorage.CurrencyGetter => throw new NotImplementedException();
+        
 
         public DateTime? LastActiveDate {
             get
@@ -78,7 +78,7 @@ namespace Monify.Services
             }
         }
 
-        public ICurrencyGetter CurrencyGetter ;
+        
 
         public void AddAccount(Account account)
         {
@@ -109,7 +109,7 @@ namespace Monify.Services
             SaveChanges();
         }
 
-        void AddCurrency(Currency currency)
+        public void AddCurrency(Currency currency)
         {
             currencies.Add(currency);
             SaveChanges();
@@ -260,16 +260,15 @@ namespace Monify.Services
         public void EraseCurrencies()
         {
             currencies.RemoveRange(currencies);
+            Save();
         }
 
-        void IStorage.AddCurrency(Currency currency)
-        {
-            currencies.Add(currency);
-        }
+       
 
         public void AddCurrencies(ObservableCollection<Currency> currencies)
         {
             this.currencies.AddRange(currencies);
+            Save();
         }
 
         

@@ -20,7 +20,7 @@ namespace Monify.Services
         ObservableCollection<Currency> CurrencyCollectionFromDbSet { get; }
         DateTime? LastCurrencyUpdateDate { get; set; }
 
-        ICurrencyGetter CurrencyGetter { get; }
+        
 
        
 
