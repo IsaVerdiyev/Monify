@@ -118,7 +118,8 @@
     <Compile Include="Services\JsonSaveLoader.cs" />
     <Compile Include="Services\TranslatorService\ITranslator.cs" />
     <Compile Include="Services\TranslatorService\RealTranslator.cs" />
-    <Compile Include="Services\TranslatorService\TranslatorCash.cs" />
+    <Compile Include="Services\TranslatorService\YandexTranslator.cs" />
+    <Compile Include="Services\TranslatorService\TranslatorProxy.cs" />
     <Compile Include="Tools\DateTimeExtensions.cs" />
     <Compile Include="Tools\ObservableObject.cs" />
     <Compile Include="Tools\RelayCommand.cs" />

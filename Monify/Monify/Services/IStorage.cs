@@ -17,13 +17,16 @@ namespace Monify.Services
         ObservableCollection<Operation> Operations { get; set; }
         ObservableCollection<Currency> Currencies { get; set; }
         ObservableCollection<Currency> CurrenciesCash { get; set; }
+        ObservableCollection<Translation> TranslationCash { get; set; }
 
         ObservableCollection<AppString> AppStrings { get; set; }
-        ObservableCollection<Translation> Translations { get; set; }
+        string GetDisplayString(string appString);
         ObservableCollection<Language> Languages { get; set; }
 
         DateTime? LastActiveDate { get; set; }
         DateTime? LastCurrencyUpdateDate { get; set; }
+
+        Language ChosenLanguage { get; set; }
 
         
 
@@ -33,6 +36,7 @@ namespace Monify.Services
         void AddOperationCategory(OperationCategory category);
         void AddOperation(Operation operation);
         void AddCurrency(Currency currency);
+        void AddTranslation(Translation translation);
        
 
         void UpdateCurrency(Currency currency, Currency newCurrency);

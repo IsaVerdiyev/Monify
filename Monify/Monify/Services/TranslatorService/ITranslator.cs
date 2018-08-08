@@ -8,6 +8,6 @@ namespace Monify.Services.TranslatorService
 {
     interface ITranslator
     {
-        string GetWord(string key);
+        string Translate(string word);
     }
 }
