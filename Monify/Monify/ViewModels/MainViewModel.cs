@@ -226,6 +226,18 @@ namespace Monify.ViewModels
             }
         }
 
+        public ObservableCollection<Language> Languages { get => Storage.Languages; }
+
+        public Language SelectedLanguage {
+            get => Storage.SelectedLanguage;
+            set
+            {
+                Storage.SelectedLanguage = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(Storage));
+            }
+        }
+
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
         public Visibility CurrenciesControlVisibility { get => currenciesControlVisibility; set => SetProperty(ref currenciesControlVisibility, value); }

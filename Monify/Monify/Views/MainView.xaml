@@ -314,6 +314,32 @@
                         SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
                         ItemsSource="{Binding Currencies, Mode=OneWay}"/>
                 </Grid>
+
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Column="0">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                <Binding Path="Storage" Mode="OneWay"/>
+                                <Binding Mode="OneWay">
+                                    <Binding.Source>
+                                        <sys:String>Language</sys:String>
+                                    </Binding.Source>
+                                </Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <ComboBox Grid.Column="1"
+                        SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                        ItemsSource="{Binding Languages, Mode=OneWay}"/>
+                    
+                </Grid>
                 
                 <Button DockPanel.Dock="Bottom"
                         Command="{Binding CleanDataCommand}"
