@@ -40,24 +40,23 @@ namespace Monify.Services.TranslatorService
             }
         }
 
-        //string GetAvailableLanguagesFromInternet()
-        //{
-        //    using (WebClient webClient = new WebClient())
-        //    {
-        //        return String.Format($"{startOfUrl}getLangs?key={apiKey}&ui=en");
+        string GetAvailableLanguagesFromInternet()
+        {
+            using (WebClient webClient = new WebClient())
+            {
+                return webClient.DownloadString(String.Format($"{startOfUrl}getLangs?key={apiKey}&ui=en"));
 
-        //    }
-        //}
+            }
+        }
 
-        //public IList<Tuple<string, string>> GetAvailableLanguages()
-        //{
-        //    string jsonResult = GetAvailableLanguagesFromInternet();
-        //    JObject results = JObject.Parse(jsonResult);
-        //    IList<Tuple<string, string>> tuples = new List<Tuple<string, string>>();
-        //    foreach(var item in results["langs"].Values())
-        //    {
-        //        tuples.Add(new Tuple<string, string>(item.Type.ToString(), item.Value().ToString()));
-        //    }
-        //}
+        public IList<Tuple<string, string>> GetAvailableLanguages()
+        {
+            string jsonResult = GetAvailableLanguagesFromInternet();
+            JObject results = JObject.Parse(jsonResult);
+
+            IList<Tuple<string, string>> tuples = new List<Tuple<string, string>>(JObject.Parse(results["langs"].ToString()).Properties().Select(p => new Tuple<string, string>(p.Value.ToString(), p.Name)));
+
+            return tuples;
+        }
     }
 }
