@@ -21,6 +21,11 @@ namespace Monify.Services.TranslatorService
             storage = StorageGetter.Storage;
         }
 
+        public IList<Tuple<string, string>> GetAvailableLanguages()
+        {
+            return realTranslator.GetAvailableLanguages();
+        }
+
         public string Translate(string key)
         {
             Translation translation = storage.TranslationCash.FirstOrDefault

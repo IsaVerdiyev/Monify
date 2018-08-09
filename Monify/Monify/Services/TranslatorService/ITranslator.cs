@@ -9,5 +9,7 @@ namespace Monify.Services.TranslatorService
     interface ITranslator
     {
         string Translate(string word);
+
+        IList<Tuple<string, string>> GetAvailableLanguages();
     }
 }
