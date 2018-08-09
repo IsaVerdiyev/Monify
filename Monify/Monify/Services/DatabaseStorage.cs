@@ -13,6 +13,7 @@ using System.Windows;
 using System.Xml;
 using Monify.Models;
 using Monify.Services.CurrencyGetterService;
+using Monify.Services.TranslatorService;
 
 namespace Monify.Services
 {
@@ -21,6 +22,7 @@ namespace Monify.Services
 
 
         ICurrencyGetter currencyGetter;
+        ITranslator translator;
         public static DatabaseStorage storage;
 
         public DbSet<Account> accounts { get; set; }
@@ -39,6 +41,7 @@ namespace Monify.Services
         private DatabaseStorage(): base("DefaultConnection")
         {
             currencyGetter = new ProxyCurrencyGetter(this);
+            translator = new TranslatorProxy(this);
 
             if (File.Exists("Monify.db"))
             {
@@ -62,7 +65,11 @@ namespace Monify.Services
         public ObservableCollection<Currency> CurrenciesCash { get => currencies.Local; set => throw new Exception("Cannot use setter of CurrenciesCash in DatabaseStorage"); }
         public ObservableCollection<Currency> Currencies { get => currencyGetter.Currencies; set { } }
 
-        
+        public ObservableCollection<Translation> TranslationCash { get => translations.Local; set => throw new NotImplementedException(); }
+        public string GetTranslation(string key)
+        {
+            return translator.Translate(key);
+        }
 
         public DateTime? LastActiveDate {
             get
@@ -86,10 +93,35 @@ namespace Monify.Services
             }
         }
 
-        public ObservableCollection<Translation> TranslationCash { get => translations.Local; set => throw new NotImplementedException(); }
         public ObservableCollection<AppString> AppStrings { get => appStrings.Local; set => throw new NotImplementedException(); }
         public ObservableCollection<Language> Languages { get => languages.Local; set => throw new NotImplementedException(); }
-        public Language SelectedLanguage { get => Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault().Id_Language); set => chosenLanguages.FirstOrDefault().Id_Language = value.Id; }
+        public Language SelectedLanguage {
+            get
+            {
+                Language language = Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault().Id_Language);
+                if (language != null)
+                {
+                    return language;
+                }
+                else
+                {
+                    chosenLanguages.Add(new ChosenLanguage { Id_Language = Languages.FirstOrDefault(l => l.Code == "en").Id });
+                    Save();
+                    return SelectedLanguage;
+                }
+            }
+            set {
+                ChosenLanguage language = chosenLanguages.FirstOrDefault();
+                if(language != null)
+                {
+                    language.Id_Language = value.Id;
+                }else
+                {
+                    chosenLanguages.Add(new ChosenLanguage { Id_Language = value.Id });
+                }
+                Save();
+            }
+        }
 
         public void AddAccount(Account account)
         {
@@ -232,6 +264,7 @@ namespace Monify.Services
 
                 Load();
                 InitializeOperationCategories();
+                InitializeLanguages();
                 
                 
             }catch(Exception ex)
@@ -248,25 +281,7 @@ namespace Monify.Services
             
         }
 
-        //void InitializeAppStrings()
-        //{
-        //    List<string> list = Enum.GetValues(typeof(AppStringEnum)).Cast<string>().ToList();
-        //    foreach(string word in list)
-        //    {
-        //        appStrings.Add(new AppString { Word = word });
-        //    }
-        //    list = Enum.GetValues(typeof(OperationCategoryEnum)).Cast<string>().ToList();
-        //    foreach(string word in list)
-        //    {
-        //        appStrings.Add(new AppString { Word = word});
-        //    }
-        //    list = Enum.GetValues(typeof(OperationTypesEnum)).Cast<string>().ToList();
-        //    foreach(string word in list)
-        //    {
-        //        appStrings.Add(new AppString { Word = word });
-        //    }
-        //    Save();
-        //}
+        
 
         void InitializeOperationCategories()
         {
@@ -300,7 +315,16 @@ namespace Monify.Services
         }
 
        
+        void InitializeLanguages()
+        {
+            IList<Tuple<string, string>> tuples = translator.GetAvailableLanguages();
 
+            foreach(var tuple in tuples)
+            {
+                languages.Add(new Language { FullName = tuple.Item1, Code = tuple.Item2 });
+            }
+            Save();
+        }
        
 
         public void Load()

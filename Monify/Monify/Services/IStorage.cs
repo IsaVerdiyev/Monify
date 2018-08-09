@@ -18,6 +18,7 @@ namespace Monify.Services
         ObservableCollection<Currency> Currencies { get; set; }
         ObservableCollection<Currency> CurrenciesCash { get; set; }
         ObservableCollection<Translation> TranslationCash { get; set; }
+        string GetTranslation(string key);
 
         ObservableCollection<AppString> AppStrings { get; set; }
         

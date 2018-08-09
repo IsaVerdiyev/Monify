@@ -6,29 +6,7 @@ using System.Threading.Tasks;
 
 namespace Monify.Models
 {
-    public enum AppStringEnum
-    {
-        AllUsers,
-        Balance,
-        Day,
-        Week,
-        Month,
-        Year,
-        All,
-        Currencies,
-        Accounts,
-        Categories,
-        Settings,
-        LastUpdateDate,
-        Currency,
-        CleanData,
-        NewAccount,
-        ValuteOfAccount,
-        InitialAmountOfMoney,
-        Add,
-        Choose,
-        Category
-    }
+    
 
     class AppString
     {

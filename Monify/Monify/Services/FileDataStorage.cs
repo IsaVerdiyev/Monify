@@ -316,5 +316,10 @@ namespace Monify.Services
         {
             throw new NotImplementedException();
         }
+
+        public string GetTranslation(string key)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

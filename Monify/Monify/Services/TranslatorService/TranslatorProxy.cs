@@ -15,10 +15,10 @@ namespace Monify.Services.TranslatorService
 
         IStorage storage;
 
-        public TranslatorProxy()
+        public TranslatorProxy(IStorage storage)
         {
-            realTranslator = new RealTranslator();
-            storage = StorageGetter.Storage;
+            realTranslator = new RealTranslator(storage);
+            this.storage = storage;
         }
 
         public IList<Tuple<string, string>> GetAvailableLanguages()
