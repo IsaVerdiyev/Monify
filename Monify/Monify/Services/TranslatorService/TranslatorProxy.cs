@@ -28,29 +28,37 @@ namespace Monify.Services.TranslatorService
 
         public string Translate(string key)
         {
-            Translation translation = storage.TranslationCash.FirstOrDefault
-                (t => t.Id_Word == storage.AppStrings.FirstOrDefault(s => s.Word == key).Id
-                && t.Id_Lang == storage.ChosenLanguage.Id);
-            if(translation != null)
+            Translation translation;
+            if (storage.AppStrings.FirstOrDefault(s => s.Word == key) != null)
             {
-                return translation.Result;
+                translation = storage.TranslationCash.FirstOrDefault
+                   (t => t.Id_Word == storage.AppStrings.FirstOrDefault(s => s.Word == key).Id
+                   && t.Id_Lang == storage.SelectedLanguage.Id);
+                if(translation != null)
+                {
+                    return translation.Result;
+                }
             }
             else
             {
-               
-                    string result = realTranslator.Translate(key);
-
-                    translation = new Translation
-                    {
-                        Id_Lang = storage.ChosenLanguage.Id,
-                        Id_Word = storage.AppStrings.FirstOrDefault(s => s.Word == key).Id,
-                        Result = result
-                    };
-                    storage.AddTranslation(translation);
-                    return translation.Result;
-                
-                
+                storage.AddAppString(new AppString { Word = key });
             }
+
+
+
+            string result = realTranslator.Translate(key);
+
+            translation = new Translation
+            {
+                Id_Lang = storage.SelectedLanguage.Id,
+                Id_Word = storage.AppStrings.FirstOrDefault(s => s.Word == key).Id,
+                Result = result
+            };
+            storage.AddTranslation(translation);
+            return translation.Result;
+
+
+
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Monify.Services
         public DbSet<AppString> appStrings { get; set; }
         public DbSet<Language> languages { get; set; }
         public DbSet<Translation> translations { get; set; }
+        public DbSet<ChosenLanguage> chosenLanguages { get; set; }
         
         
 
@@ -85,7 +86,10 @@ namespace Monify.Services
             }
         }
 
-        
+        public ObservableCollection<Translation> TranslationCash { get => translations.Local; set => throw new NotImplementedException(); }
+        public ObservableCollection<AppString> AppStrings { get => appStrings.Local; set => throw new NotImplementedException(); }
+        public ObservableCollection<Language> Languages { get => languages.Local; set => throw new NotImplementedException(); }
+        public Language SelectedLanguage { get => Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault().Id_Language); set => chosenLanguages.FirstOrDefault().Id_Language = value.Id; }
 
         public void AddAccount(Account account)
         {
@@ -220,11 +224,15 @@ namespace Monify.Services
                     $"FOREIGN KEY({nameof(Translation.Id_Word)}) REFERENCES {nameof(appStrings)}({nameof(AppString.Id)}))";
                 command.ExecuteNonQuery();
 
-
+                command.CommandText = $"CREATE TABLE {nameof(chosenLanguages)}(" +
+                    $"{nameof(ChosenLanguage.Id)} INTEGER PRIMARY KEY, " +
+                    $"{nameof(ChosenLanguage.Id_Language)} INTEGER, " +
+                    $"FOREIGN KEY({nameof(ChosenLanguage.Id_Language)}) REFERENCES {nameof(languages)}({nameof(Language.Id)}))";
+                command.ExecuteNonQuery();
 
                 Load();
                 InitializeOperationCategories();
-                InitializeAppStrings();
+                
                 
             }catch(Exception ex)
             {
@@ -240,25 +248,25 @@ namespace Monify.Services
             
         }
 
-        void InitializeAppStrings()
-        {
-            List<string> list = Enum.GetValues(typeof(AppStringEnum)).Cast<string>().ToList();
-            foreach(string word in list)
-            {
-                appStrings.Add(new AppString { Word = word });
-            }
-            list = Enum.GetValues(typeof(OperationCategoryEnum)).Cast<string>().ToList();
-            foreach(string word in list)
-            {
-                appStrings.Add(new AppString { Word = word});
-            }
-            list = Enum.GetValues(typeof(OperationTypesEnum)).Cast<string>().ToList();
-            foreach(string word in list)
-            {
-                appStrings.Add(new AppString { Word = word });
-            }
-            Save();
-        }
+        //void InitializeAppStrings()
+        //{
+        //    List<string> list = Enum.GetValues(typeof(AppStringEnum)).Cast<string>().ToList();
+        //    foreach(string word in list)
+        //    {
+        //        appStrings.Add(new AppString { Word = word });
+        //    }
+        //    list = Enum.GetValues(typeof(OperationCategoryEnum)).Cast<string>().ToList();
+        //    foreach(string word in list)
+        //    {
+        //        appStrings.Add(new AppString { Word = word});
+        //    }
+        //    list = Enum.GetValues(typeof(OperationTypesEnum)).Cast<string>().ToList();
+        //    foreach(string word in list)
+        //    {
+        //        appStrings.Add(new AppString { Word = word });
+        //    }
+        //    Save();
+        //}
 
         void InitializeOperationCategories()
         {
@@ -303,6 +311,10 @@ namespace Monify.Services
             operations.Load();
             operationTypes.Load();
             operationCategories.Load();
+            appStrings.Load();
+            translations.Load();
+            languages.Load();
+            chosenLanguages.Load();
         }
 
         public void Save()
@@ -310,11 +322,18 @@ namespace Monify.Services
             SaveChanges();
         }
 
-       
-       
-
         
 
-        
+        public void AddTranslation(Translation translation)
+        {
+            translations.Add(translation);
+            Save();
+        }
+
+        public void AddAppString(AppString appString)
+        {
+            appStrings.Add(appString);
+            Save();
+        }
     }
 }

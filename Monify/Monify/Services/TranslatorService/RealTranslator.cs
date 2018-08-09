@@ -20,7 +20,7 @@ namespace Monify.Services.TranslatorService
 
         public string Translate(string word)
         {
-            return translator.Translate(word, "en", storage.ChosenLanguage.Code);
+            return translator.Translate(word, "en", storage.SelectedLanguage.Code);
         }
 
         public IList<Tuple<string, string>> GetAvailableLanguages()

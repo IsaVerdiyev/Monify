@@ -20,13 +20,13 @@ namespace Monify.Services
         ObservableCollection<Translation> TranslationCash { get; set; }
 
         ObservableCollection<AppString> AppStrings { get; set; }
-        string GetDisplayString(string appString);
+        
         ObservableCollection<Language> Languages { get; set; }
 
         DateTime? LastActiveDate { get; set; }
         DateTime? LastCurrencyUpdateDate { get; set; }
 
-        Language ChosenLanguage { get; set; }
+        Language SelectedLanguage { get; set; }
 
         
 
@@ -37,7 +37,7 @@ namespace Monify.Services
         void AddOperation(Operation operation);
         void AddCurrency(Currency currency);
         void AddTranslation(Translation translation);
-       
+        void AddAppString(AppString appString);
 
         void UpdateCurrency(Currency currency, Currency newCurrency);
 

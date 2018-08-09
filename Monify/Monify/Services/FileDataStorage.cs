@@ -74,7 +74,10 @@ namespace Monify.Services
             get => lastCurrencyUpdateDate;
             set => lastCurrencyUpdateDate = value;
         }
-
+        public ObservableCollection<Translation> TranslationCash { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<AppString> AppStrings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<Language> Languages { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Language SelectedLanguage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void Initialize()
         {
@@ -302,6 +305,16 @@ namespace Monify.Services
         public void UpdateCurrency(Currency currency, Currency newCurrency)
         {
             currency.Value = newCurrency.Value;
+        }
+
+        public void AddTranslation(Translation translation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddAppString(AppString appString)
+        {
+            throw new NotImplementedException();
         }
     }
 }
