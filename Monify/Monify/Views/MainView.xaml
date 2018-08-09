@@ -106,28 +106,73 @@
             <Button DockPanel.Dock="Top" 
                     Command="{Binding ChangeDateIntervalCommand}"
                     CommandParameter="{x:Static dt:DateInterval.Day}">
-               
-                Day
+
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Day</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
             </Button>
             <Button DockPanel.Dock="Top"
                     Command="{Binding ChangeDateIntervalCommand}"
                     CommandParameter="{x:Static dt:DateInterval.Week}">
-                Week
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Week</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
             </Button>
             <Button DockPanel.Dock="Top"
                     Command="{Binding ChangeDateIntervalCommand}"
                     CommandParameter="{x:Static dt:DateInterval.Month}">
-                Month
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Month</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
             </Button>
             <Button DockPanel.Dock="Top"
                     Command="{Binding ChangeDateIntervalCommand}"
                     CommandParameter="{x:Static dt:DateInterval.Year}">
-                Year
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Year</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
             </Button>
             <Button DockPanel.Dock="Top"
                     Command="{Binding ChangeDateIntervalCommand}"
                     CommandParameter="{x:Static dt:DateInterval.All}">
-                All
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>All</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
             </Button>
             <DatePicker Margin="20"/>
         </DockPanel>
@@ -172,7 +217,16 @@
                 <Button DockPanel.Dock="Top" 
                     Margin="2"
                         Command="{Binding AddAccountCommand}">
-                    Add Account
+                    <Button.Content>
+                        <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                            <Binding Path="Storage" Mode="OneWay"/>
+                            <Binding>
+                                <Binding.Source>
+                                    <sys:String>Add Account</sys:String>
+                                </Binding.Source>
+                            </Binding>
+                        </MultiBinding>
+                    </Button.Content>
                 </Button>
                 <ListBox ItemsSource="{Binding Accounts}"/>
             </DockPanel>
@@ -187,10 +241,21 @@
                     ↺
                 </Button>
                 <TextBlock DockPanel.Dock="Top" TextAlignment="Center">
-                    <Run>Last Update Date: </Run>
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                <Binding Path="Storage" Mode="OneWay"/>
+                                <Binding Mode="OneWay">
+                                    <Binding.Source>
+                                        <sys:String>Last Update Date</sys:String>
+                                    </Binding.Source>
+                                </Binding>
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
                     <LineBreak/>
                     <Run Text="{Binding LastCurrencyUpdateDate, StringFormat={}{0:d}, Mode=OneWay}"/>
-                </TextBlock> 
+                </TextBlock>
                 <ListBox 
                 ItemsSource="{Binding Currencies}">
                     <ListBox.ItemTemplate>
@@ -218,9 +283,31 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0"> 
-                        <Run> All Users </Run>
+                        <Run> 
+                            <Run.Text>
+                                <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                    <Binding Mode="OneWay">
+                                        <Binding.Source>
+                                            <sys:String>All Users</sys:String>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </Run.Text>     
+                        </Run>
                         <LineBreak/>
-                        <Run> Currency</Run>
+                        <Run> 
+                            <Run.Text>
+                                <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                    <Binding Mode="OneWay">
+                                        <Binding.Source>
+                                            <sys:String>Currency</sys:String>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </Run.Text> 
+                        </Run>
                     </TextBlock>
                     <ComboBox
                         Grid.Column="1"
@@ -231,7 +318,14 @@
                 <Button DockPanel.Dock="Bottom"
                         Command="{Binding CleanDataCommand}"
                         CommandParameter="{Binding ElementName=MainViewUserControl}">
-                    Clean data
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding Mode="OneWay">
+                            <Binding.Source>
+                                <sys:String>Clean data</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
                 </Button>
             </DockPanel>
         </Grid>

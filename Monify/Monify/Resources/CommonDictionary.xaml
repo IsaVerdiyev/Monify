@@ -10,6 +10,7 @@
     <converters:OperationToCategoryAmountCurrencyMultiConverter x:Key="OperationToCategoryAmountMultiConverter"/>
     <converters:OperationCategoryTypeIndexToColorMultiConverter x:Key="OperationCategoryTypeIndexToColorConverter"/>
     <converters:PropertyMarginConverterForHidingControl x:Key="PropertyMarginConverterForHidingControl"/>
+    <converters:StringTranslationMultiConverter x:Key="StringTranslationMultiConverter"/>
 
     <SolidColorBrush x:Key="CommonForeground">White</SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundColor">Green</SolidColorBrush>

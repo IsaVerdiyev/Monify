@@ -98,7 +98,7 @@ namespace Monify.Services
         public Language SelectedLanguage {
             get
             {
-                Language language = Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault().Id_Language);
+                Language language = Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault()?.Id_Language);
                 if (language != null)
                 {
                     return language;
