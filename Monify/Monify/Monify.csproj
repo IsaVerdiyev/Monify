@@ -84,6 +84,7 @@
     <Compile Include="Converters\OperationCategoryTypeIndexToColorMultiConverter.cs" />
     <Compile Include="Converters\OperationToCategoryAmountCurrencyMultiConverter.cs" />
     <Compile Include="Converters\PropertyMarginConverterForHidingControl.cs" />
+    <Compile Include="Converters\StringTranslationMultiConverter.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AppString.cs" />
     <Compile Include="Models\ChosenLanguage.cs" />
