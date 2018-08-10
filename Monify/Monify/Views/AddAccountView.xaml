@@ -63,7 +63,18 @@
 
         <DockPanel
             Grid.Row="2">
-            <TextBlock DockPanel.Dock="Top">Valute of account</TextBlock>
+            <TextBlock DockPanel.Dock="Top">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Valute of account</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <DatePicker DockPanel.Dock="Right" SelectedDate="{Binding SelectedDate}"></DatePicker>
             <ComboBox Width="90"
                       HorizontalAlignment="Left"

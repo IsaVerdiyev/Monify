@@ -16,7 +16,7 @@ namespace Monify.Converters
             IStorage storage = values[0] as IStorage;
             string sourceString = values[1] as string;
 
-            return storage.GetTranslation(sourceString);
+            return storage?.GetTranslation(sourceString);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

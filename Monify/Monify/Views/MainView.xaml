@@ -196,19 +196,60 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button>Categories</Button>
+            <Button>
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Categories</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
             <Button 
                 Grid.Row="{Binding AccountsRow, Mode=OneWay}"
-                Content="Accounts"
-                Command="{Binding ShowHideAccountsCommand}"/>
+                Command="{Binding ShowHideAccountsCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Accounts</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
             <Button
                 Grid.Row="{Binding CurrenciesRow, Mode=OneWay}"
-                Command="{Binding ShowHideCurrenciesCommand}"
-                Content="Currencies"/>
+                Command="{Binding ShowHideCurrenciesCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Currencies</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
             <Button 
                 Grid.Row="{Binding SettingsRow, Mode=OneWay}"
-                Command="{Binding ShowHideSettingsCommand}"
-                Content="Settings"/> 
+                Command="{Binding ShowHideSettingsCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Settings</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
 
             <DockPanel Grid.Row="1"
                 Grid.RowSpan="4"
@@ -452,7 +493,18 @@
                             DockPanel.Dock="Right"> ☰</TextBlock>
                         <TextBlock
                             HorizontalAlignment="Center">
-                            Balance:  
+                            <Run>
+                                <Run.Text>
+                                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                        <Binding Path="Storage" Mode="OneWay"/>
+                                        <Binding Mode="OneWay">
+                                            <Binding.Source>
+                                                <sys:String>Balance</sys:String>
+                                            </Binding.Source>
+                                        </Binding>
+                                    </MultiBinding>
+                                </Run.Text>
+                            </Run>
                             <Run Text="{Binding Balance}" />
                             <Run Text=" "/>
                             <Run>
