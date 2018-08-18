@@ -1,5 +1,5 @@
-# Monify
-Monify is a window application for accounting for own costs and revenues.  
+# MyMonify
+MyMonify is a window application for accounting for own costs and revenues.  
 The application is written in C# with the use of `WPF`.   
 Application's data is saved in database by using `SQLite` (though saving in file is also implemented in code which you can use by changing type of created IStorage in `StorageGetter` file).  
 
