@@ -1,8 +1,10 @@
 ﻿using MyMonify.Models;
 using MyMonify.Tools;
+using MyMonify.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -44,9 +46,19 @@ namespace MyMonify.Services.TranslatorService
                 storage.AddAppString(new AppString { Word = key });
             }
 
+            string result;
 
+            try
+            {
 
-            string result = realTranslator.Translate(key);
+                result = realTranslator.Translate(key);
+            }
+            catch (WebException ex)
+            {
+                MessageBox.Show("Error while translating due to no network connection and translations in cash. App's language is chosen English");
+                storage.SelectedLanguage = storage.Languages.FirstOrDefault(l => l.Code == "en");
+                return Translate(key);
+            }
 
             translation = new Translation
             {
