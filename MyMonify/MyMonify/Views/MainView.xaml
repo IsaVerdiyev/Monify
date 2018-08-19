@@ -1,0 +1,571 @@
+﻿<UserControl x:Class="MyMonify.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyMonify.Views"
+             xmlns:dt="clr-namespace:MyMonify.Tools"
+             xmlns:sys ="clr-namespace:System;assembly=mscorlib" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="MainViewUserControl">
+    <UserControl.Resources>
+        <sys:Double x:Key="param">5</sys:Double>
+
+
+        <Style x:Key="VisibilitySettingsButton"  TargetType="Button"
+                    BasedOn="{StaticResource HorizontalSameSizeControl}">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style.Setters>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5*" x:Name="StatisticsRow"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <!-- First Row-->
+        <DockPanel
+            
+            Background="Green">
+            <Button DockPanel.Dock="Left"
+                    Background="Transparent"
+                    Foreground="White"
+                    Style="{StaticResource HorizontalSameSizeControl}"
+                    Command="{Binding VisibilitySettingsButtonCommands}"
+                    CommandParameter="{Binding ElementName=MainViewUserControl}">
+                ☰
+            </Button>
+
+            <Button 
+                DockPanel.Dock="Right"
+                Style="{StaticResource HorizontalSameSizeControl}"
+                Background="Transparent"
+                Foreground="White"
+                Command="{Binding OtherSettingsButtonCommands}"
+                CommandParameter="{Binding ElementName=MainViewUserControl}">
+                ┇
+            </Button>
+            <Button 
+                DockPanel.Dock="Right"
+                Style="{StaticResource HorizontalSameSizeControl}"
+                Background="Transparent"
+                Foreground="White"
+                Command="{Binding OpenTransactionMenuCommand}">
+                ⇄
+            </Button>
+            <TextBlock 
+                Margin="4, 0">
+                <Run
+                    FontFamily="Tahoma"
+                    FontStyle="Italic">Monify</Run>
+                <LineBreak/>
+                <Run Text="{Binding SelectedAccount.Name}"/>
+            </TextBlock>
+        </DockPanel>
+
+        
+        <!--Second Row-->
+
+        <Button Grid.Row="1" 
+            x:Name="HideAllMenus" 
+            Grid.RowSpan="3"
+            VerticalAlignment="Stretch"
+            Opacity="0.5"
+            Panel.ZIndex="1"
+            Visibility="{Binding HideAllSideMenusButtonVisibility, Mode=OneWay}"
+            Command="{Binding HideAllSideMenuButtonCommand}"
+            CommandParameter="{Binding ElementName=MainViewUserControl}"/>
+
+
+
+        <DockPanel  Grid.Row="1"  Grid.RowSpan="3"
+             x:Name="VisibilitySettingsStackPanel"
+             HorizontalAlignment="Left"
+             Panel.ZIndex="1"
+             Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='left'}"
+             Background="White">
+            <DockPanel.Width>
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.5</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </DockPanel.Width>
+            <ComboBox DockPanel.Dock="Top"
+                SelectedItem="{Binding Path=SelectedAccount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                ItemsSource="{Binding AccountsWithAllUsers, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource CurrencyComboboxItemTemplateStyle}"
+                Width="Auto">
+            </ComboBox>
+            <Button DockPanel.Dock="Top" 
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Day}">
+
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Day</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Week}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Week</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Month}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Month</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.Year}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Year</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button DockPanel.Dock="Top"
+                    Command="{Binding ChangeDateIntervalCommand}"
+                    CommandParameter="{x:Static dt:DateInterval.All}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>All</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <DatePicker Margin="20"/>
+        </DockPanel>
+
+        <Grid Grid.Row="1" Grid.RowSpan="3"
+                    x:Name="OtherSettingsStackPanel"
+                    HorizontalAlignment="Right"
+                    Panel.ZIndex="1"
+                    Margin="{Binding Path=ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource PropertyMarginConverterForHidingControl}, ConverterParameter='right'}"
+                    Background="White">
+            <Grid.Width>
+                <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=Window}" Converter="{StaticResource DoubleTypeVariableConverter}">
+                    <Binding.ConverterParameter>
+                        <sys:Double>0.5</sys:Double>
+                    </Binding.ConverterParameter>
+                </Binding>
+            </Grid.Width>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button>
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Categories</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button 
+                Grid.Row="{Binding AccountsRow, Mode=OneWay}"
+                Command="{Binding ShowHideAccountsCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Accounts</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button
+                Grid.Row="{Binding CurrenciesRow, Mode=OneWay}"
+                Command="{Binding ShowHideCurrenciesCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Currencies</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <Button 
+                Grid.Row="{Binding SettingsRow, Mode=OneWay}"
+                Command="{Binding ShowHideSettingsCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:String>Settings</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+
+            <DockPanel Grid.Row="1"
+                Grid.RowSpan="4"
+                Visibility="{Binding AccountsControlVisibility}" 
+                Panel.ZIndex="2">
+                <Button DockPanel.Dock="Top" 
+                    Margin="2"
+                        Command="{Binding AddAccountCommand}">
+                    <Button.Content>
+                        <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                            <Binding Path="Storage" Mode="OneWay"/>
+                            <Binding>
+                                <Binding.Source>
+                                    <sys:String>Add Account</sys:String>
+                                </Binding.Source>
+                            </Binding>
+                        </MultiBinding>
+                    </Button.Content>
+                </Button>
+                <ListBox ItemsSource="{Binding Accounts}"/>
+            </DockPanel>
+            <DockPanel Grid.Row="1"
+                       Background="LightGreen"
+                  Grid.RowSpan="4"
+                        Visibility="{Binding CurrenciesControlVisibility}"
+                        Panel.ZIndex="2">
+                <Button DockPanel.Dock="Top"
+                    Margin="2"
+                    Command="{Binding RefreshCurrenciesCommand}">
+                    ↺
+                </Button>
+                <TextBlock DockPanel.Dock="Top" TextAlignment="Center">
+                    <Run>
+                        <Run.Text>
+                            <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                <Binding Path="Storage" Mode="OneWay"/>
+                                <Binding Mode="OneWay">
+                                    <Binding.Source>
+                                        <sys:String>Last Update Date</sys:String>
+                                    </Binding.Source>
+                                </Binding>
+                            </MultiBinding>
+                        </Run.Text>
+                    </Run>
+                    <LineBreak/>
+                    <Run Text="{Binding LastCurrencyUpdateDate, StringFormat={}{0:d}, Mode=OneWay}"/>
+                </TextBlock>
+                <ListBox 
+                ItemsSource="{Binding Currencies}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                            <Run Text="{Binding Code}"/>
+                            -
+                            <Run Text="{Binding Value}"/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+            </DockPanel>
+
+            <DockPanel Grid.Row="1"
+                       Grid.RowSpan="4"
+                       Visibility="{Binding SettingsControlVisibility}" 
+                       Panel.ZIndex="2"
+                       Background="White">
+                <Grid DockPanel.Dock="Top"
+                    VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0"> 
+                        <Run> 
+                            <Run.Text>
+                                <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                    <Binding Mode="OneWay">
+                                        <Binding.Source>
+                                            <sys:String>All Users</sys:String>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </Run.Text>     
+                        </Run>
+                        <LineBreak/>
+                        <Run> 
+                            <Run.Text>
+                                <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                    <Binding Mode="OneWay">
+                                        <Binding.Source>
+                                            <sys:String>Currency</sys:String>
+                                        </Binding.Source>
+                                    </Binding>
+                                </MultiBinding>
+                            </Run.Text> 
+                        </Run>
+                    </TextBlock>
+                    <ComboBox
+                        Grid.Column="1"
+                        SelectedItem="{Binding AllUsersCurrency, Mode=TwoWay}"
+                        ItemsSource="{Binding Currencies, Mode=OneWay}"/>
+                </Grid>
+
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Column="0">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                <Binding Path="Storage" Mode="OneWay"/>
+                                <Binding Mode="OneWay">
+                                    <Binding.Source>
+                                        <sys:String>Language</sys:String>
+                                    </Binding.Source>
+                                </Binding>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <ComboBox Grid.Column="1"
+                        SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                        ItemsSource="{Binding Languages, Mode=OneWay}"/>
+                    
+                </Grid>
+                
+                <Button DockPanel.Dock="Bottom"
+                        Command="{Binding CleanDataCommand}"
+                        CommandParameter="{Binding ElementName=MainViewUserControl}">
+                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                        <Binding Path="Storage" Mode="OneWay"/>
+                        <Binding Mode="OneWay">
+                            <Binding.Source>
+                                <sys:String>Clean data</sys:String>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button>
+            </DockPanel>
+        </Grid>
+
+
+
+
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Button 
+                Grid.Column="0"
+                BorderThickness="0"
+                Background="Transparent"
+                Command="{Binding NavigateToPastCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
+                        <Binding Path="PastDate"/>
+                        <Binding Path="StatisticsDateInterval"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Boolean>False</sys:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+            <TextBlock
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Background="Transparent"
+                TextAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
+                        <Binding Path="SelectedDate"/>
+                        <Binding Path="StatisticsDateInterval"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Boolean>True</sys:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Button 
+                Grid.Column="2"
+                BorderThickness="0"
+                Background="Transparent"
+                Command="{Binding NavigateToNextCommand}">
+                <Button.Content>
+                    <MultiBinding Converter="{StaticResource DateToStringMultiConverter}">
+                        <Binding Path="NextDate"/>
+                        <Binding Path="StatisticsDateInterval"/>
+                        <Binding>
+                            <Binding.Source>
+                                <sys:Boolean>False</sys:Boolean>
+                            </Binding.Source>
+                        </Binding>
+                    </MultiBinding>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+
+        <!-- Third Row-->
+
+        <Grid Grid.Row="2"
+                    Background="Aqua">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="1*" x:Name="OperationsListRow" MinHeight="50"/>
+            </Grid.RowDefinitions>
+
+            <ListBox 
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                ItemsSource="{Binding Categories}" 
+                />
+
+            <GridSplitter 
+                Grid.Row="1"
+                Height="3"
+                HorizontalAlignment="Stretch"
+                ShowsPreview="False"/>
+            
+            <DockPanel Grid.Row="2">
+                <Button DockPanel.Dock="top"
+                    Height="{Binding Path=MinHeight, ElementName=OperationsListRow}" 
+                    HorizontalContentAlignment="Stretch">
+                    <DockPanel>
+                        <TextBlock 
+                            DockPanel.Dock="Left"> ☰</TextBlock>
+                        <TextBlock 
+                            DockPanel.Dock="Right"> ☰</TextBlock>
+                        <TextBlock
+                            HorizontalAlignment="Center">
+                            <Run>
+                                <Run.Text>
+                                    <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                        <Binding Path="Storage" Mode="OneWay"/>
+                                        <Binding Mode="OneWay">
+                                            <Binding.Source>
+                                                <sys:String>Balance</sys:String>
+                                            </Binding.Source>
+                                        </Binding>
+                                    </MultiBinding>
+                                </Run.Text>
+                            </Run>
+                            <Run Text="{Binding Balance}" />
+                            <Run Text=" "/>
+                            <Run>
+                                <MultiBinding Converter="{StaticResource CurrencyIndexToCodeMultiConverter}">
+                                    <Binding Path="SelectedAccount"/>
+                                    <Binding Path="Storage" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Run>
+                        </TextBlock>
+                    </DockPanel>
+                </Button>
+                <ListBox Grid.ColumnSpan="2"
+                         Background="Aqua"
+                         ItemsSource="{Binding Operations, Mode=OneWay}"
+                         HorizontalContentAlignment="Stretch">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <Label DockPanel.Dock="Left"
+                                    Style="{StaticResource HorizontalAutoSizedRoundLabel}"
+                                    Margin="10, 5">
+                                    <Label.Background>
+                                        <MultiBinding Converter="{StaticResource OperationCategoryTypeIndexToColorConverter}">
+                                            <Binding/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </Label.Background>
+                                </Label>
+                                <TextBlock DockPanel.Dock="Left">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource OperationToCategoryAmountMultiConverter}">
+                                            <Binding Mode="OneWay"/>
+                                            <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Grid.Column="2"
+                                           TextAlignment="Right"
+                                           Text="{Binding Date, StringFormat='{}{00:d/M/yyyy}'}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+
+                </ListBox>
+            </DockPanel>
+
+        </Grid>
+
+
+        <!-- Fourth row-->
+        <DockPanel Grid.Row="3"
+                    LastChildFill="False">
+            <Button DockPanel.Dock="Left" 
+                    Style="{StaticResource BottomExpenseProfitButtons}"
+                    Command="{Binding AddExpenseCommand}">
+                -
+            </Button>
+            <Button DockPanel.Dock="Right" 
+                    Style="{StaticResource BottomExpenseProfitButtons}"
+                    Command="{Binding AddProfitCommand}">+</Button>
+        </DockPanel>
+    </Grid>
+</UserControl>
