@@ -34,7 +34,7 @@ namespace MyMonify.Services
         public DbSet<AppString> appStrings { get; set; }
         public DbSet<Language> languages { get; set; }
         public DbSet<Translation> translations { get; set; }
-        public DbSet<ChosenLanguage> chosenLanguage { get; set; }
+        public DbSet<ChosenLanguage> chosenLanguages { get; set; }
         
         
 
@@ -98,26 +98,26 @@ namespace MyMonify.Services
         public Language SelectedLanguage {
             get
             {
-                Language language = Languages.FirstOrDefault(l => l.Id == chosenLanguage.FirstOrDefault()?.Id_Language);
+                Language language = Languages.FirstOrDefault(l => l.Id == chosenLanguages.FirstOrDefault()?.Id_Language);
                 if (language != null)
                 {
                     return language;
                 }
                 else
                 {
-                    chosenLanguage.Add(new ChosenLanguage { Id_Language = Languages.FirstOrDefault(l => l.Code == "en").Id });
+                    chosenLanguages.Add(new ChosenLanguage { Id_Language = Languages.FirstOrDefault(l => l.Code == "en").Id });
                     Save();
                     return SelectedLanguage;
                 }
             }
             set {
-                ChosenLanguage language = chosenLanguage.FirstOrDefault();
+                ChosenLanguage language = chosenLanguages.FirstOrDefault();
                 if(language != null)
                 {
                     language.Id_Language = value.Id;
                 }else
                 {
-                    chosenLanguage.Add(new ChosenLanguage { Id_Language = value.Id });
+                    chosenLanguages.Add(new ChosenLanguage { Id_Language = value.Id });
                 }
                 Save();
             }
@@ -256,7 +256,7 @@ namespace MyMonify.Services
                     $"FOREIGN KEY({nameof(Translation.Id_Word)}) REFERENCES {nameof(appStrings)}({nameof(AppString.Id)}))";
                 command.ExecuteNonQuery();
 
-                command.CommandText = $"CREATE TABLE {nameof(chosenLanguage)}(" +
+                command.CommandText = $"CREATE TABLE {nameof(chosenLanguages)}(" +
                     $"{nameof(ChosenLanguage.Id)} INTEGER PRIMARY KEY, " +
                     $"{nameof(ChosenLanguage.Id_Language)} INTEGER, " +
                     $"FOREIGN KEY({nameof(ChosenLanguage.Id_Language)}) REFERENCES {nameof(languages)}({nameof(Language.Id)}))";
@@ -338,7 +338,7 @@ namespace MyMonify.Services
             appStrings.Load();
             translations.Load();
             languages.Load();
-            chosenLanguage.Load();
+            chosenLanguages.Load();
         }
 
         public void Save()

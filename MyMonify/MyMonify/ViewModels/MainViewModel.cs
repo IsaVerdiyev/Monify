@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing.Printing;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -232,12 +233,17 @@ namespace MyMonify.ViewModels
             get => Storage.SelectedLanguage;
             set
             {
-                Storage.SelectedLanguage = value;
-                OnPropertyChanged();
-                OnPropertyChanged(nameof(Storage));
+                
+               
+                    Storage.SelectedLanguage = value;
+                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Storage));
+                
+                
             }
         }
 
+        
 
         public Visibility AccountsControlVisibility { get => accountsControlVisibility; set => SetProperty(ref accountsControlVisibility, value); }
         public Visibility CurrenciesControlVisibility { get => currenciesControlVisibility; set => SetProperty(ref currenciesControlVisibility, value); }

@@ -20,7 +20,7 @@ namespace MyMonify.Models
             id = iterator++;
         }
 
-        public int Id { get => id; private set => id = value; }
+        public int Id { get => id; set => id = value; }
         public string FullName { get => fullName; set => fullName = value; }
         public string Code { get => code; set => code = value; }
 

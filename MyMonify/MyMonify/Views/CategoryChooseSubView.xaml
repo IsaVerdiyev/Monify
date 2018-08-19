@@ -9,6 +9,19 @@
     <Grid>
         <ListBox 
             ItemsSource="{Binding GetSpecifiedCategories}"
-            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"/>
+            SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
+                                <Binding Path="Name" Mode="OneWay"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

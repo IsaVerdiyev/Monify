@@ -84,7 +84,21 @@ namespace MyMonify.Services
         public ObservableCollection<Translation> TranslationCash { get => translations; set => translations = value; }
         public ObservableCollection<AppString> AppStrings { get => appStrings; set => appStrings = value; }
         public ObservableCollection<Language> Languages { get => languages; set => languages = value; }
-        public Language SelectedLanguage { get => chosenLanguage ?? (chosenLanguage = Languages.FirstOrDefault(l => l.Code == "en")); set => chosenLanguage = value; }
+        public Language SelectedLanguage {
+            get {
+                if (chosenLanguage == null)
+                {
+                    chosenLanguage = Languages.FirstOrDefault(l => l.Code == "en");
+                   
+                }
+                return chosenLanguage;
+
+            }
+            set
+            {
+                chosenLanguage = value;
+            }
+        }
 
         public void Initialize()
         {

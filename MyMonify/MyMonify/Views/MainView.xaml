@@ -473,8 +473,20 @@
 
             <ListBox 
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                ItemsSource="{Binding Categories}" 
-                />
+                ItemsSource="{Binding Categories}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource StringTranslationMultiConverter}">
+                                    <Binding RelativeSource="{RelativeSource AncestorType=UserControl}" Path="DataContext.Storage" Mode="OneWay"/>
+                                    <Binding Path="Name" Mode="OneWay"/>
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <GridSplitter 
                 Grid.Row="1"

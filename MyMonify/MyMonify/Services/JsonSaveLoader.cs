@@ -39,7 +39,8 @@ namespace MyMonify.Services
             storage.TranslationCash = loadedData.Item7.Item2;
             storage.Languages = loadedData.Item7.Item3;
             storage.AppStrings = loadedData.Item7.Item4;
-            storage.SelectedLanguage = loadedData.Item7.Item5;
+            storage.SelectedLanguage = storage.Languages.FirstOrDefault(l => l.Id == loadedData.Item7.Item5.Id);
+            
 
         }
 
