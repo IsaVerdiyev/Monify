@@ -14,7 +14,7 @@ namespace MyMonify.Tools
         {
             get
             {
-                return storage ?? (storage = DatabaseStorage.Storage);
+                return storage ?? (storage = FileDataStorage.Storage);
             }
         }
     }

@@ -28,20 +28,24 @@ namespace MyMonify.Services
         public void Load()
         {
 
-            var loadedData = JsonConvert.DeserializeObject<Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, DateTime?>>(File.ReadAllText(SaveFileLocation));
+            var loadedData = JsonConvert.DeserializeObject<Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, Tuple<DateTime?, ObservableCollection<Translation>, ObservableCollection<Language>, ObservableCollection<AppString>, Language>>>(File.ReadAllText(SaveFileLocation));
             storage.Accounts = loadedData.Item1;
             storage.CurrenciesCash = loadedData.Item2;
             storage.Operations = loadedData.Item3;
             storage.OperationCategories = loadedData.Item4;
             storage.OperationTypes = loadedData.Item5;
             storage.LastActiveDate = loadedData.Item6;
-            storage.LastCurrencyUpdateDate = loadedData.Item7;
+            storage.LastCurrencyUpdateDate = loadedData.Item7.Item1;
+            storage.TranslationCash = loadedData.Item7.Item2;
+            storage.Languages = loadedData.Item7.Item3;
+            storage.AppStrings = loadedData.Item7.Item4;
+            storage.SelectedLanguage = loadedData.Item7.Item5;
 
         }
 
         public void Save()
         {
-            var savedData = new Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, DateTime?>(storage.Accounts, storage.CurrenciesCash, storage.Operations, storage.OperationCategories, storage.OperationTypes, storage.LastActiveDate, storage.LastCurrencyUpdateDate);
+            var savedData = new Tuple<ObservableCollection<Account>, ObservableCollection<Currency>, ObservableCollection<Operation>, ObservableCollection<OperationCategory>, ObservableCollection<OperationType>, DateTime?, Tuple<DateTime?, ObservableCollection<Translation>, ObservableCollection<Language>, ObservableCollection<AppString>, Language>>(storage.Accounts, storage.CurrenciesCash, storage.Operations, storage.OperationCategories, storage.OperationTypes, storage.LastActiveDate, new Tuple<DateTime?, ObservableCollection<Translation>, ObservableCollection<Language>, ObservableCollection<AppString>, Language>(storage.LastCurrencyUpdateDate, storage.TranslationCash, storage.Languages, storage.AppStrings, storage.SelectedLanguage));
             
             File.WriteAllText(SaveFileLocation, JsonConvert.SerializeObject(savedData));
             

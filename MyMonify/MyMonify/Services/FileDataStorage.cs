@@ -11,6 +11,7 @@ using System.Windows;
 using System.Xml;
 using MyMonify.Models;
 using MyMonify.Services.CurrencyGetterService;
+using MyMonify.Services.TranslatorService;
 using MyMonify.Tools;
 
 namespace MyMonify.Services
@@ -19,6 +20,7 @@ namespace MyMonify.Services
     {
         static FileDataStorage storage;
 
+        ITranslator translator;
         ICurrencyGetter currencyGetter;
 
         public IFileSaveLoader FileSaveLoader { get; set; }
@@ -30,13 +32,18 @@ namespace MyMonify.Services
         ObservableCollection<Currency> currencies;
         DateTime? lastActiveDate;
         DateTime? lastCurrencyUpdateDate;
-        
+
+        ObservableCollection<Translation> translations;
+        ObservableCollection<AppString> appStrings;
+        ObservableCollection<Language> languages;
+        Language chosenLanguage;
 
         
 
         private FileDataStorage()
         {
             currencyGetter = new ProxyCurrencyGetter(this);
+            translator = new TranslatorProxy(this);
             FileSaveLoader = new JsonFileSaveLoader(this);
             try
             {
@@ -74,10 +81,10 @@ namespace MyMonify.Services
             get => lastCurrencyUpdateDate;
             set => lastCurrencyUpdateDate = value;
         }
-        public ObservableCollection<Translation> TranslationCash { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<AppString> AppStrings { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ObservableCollection<Language> Languages { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Language SelectedLanguage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ObservableCollection<Translation> TranslationCash { get => translations; set => translations = value; }
+        public ObservableCollection<AppString> AppStrings { get => appStrings; set => appStrings = value; }
+        public ObservableCollection<Language> Languages { get => languages; set => languages = value; }
+        public Language SelectedLanguage { get => chosenLanguage ?? (chosenLanguage = Languages.FirstOrDefault(l => l.Code == "en")); set => chosenLanguage = value; }
 
         public void Initialize()
         {
@@ -97,6 +104,13 @@ namespace MyMonify.Services
 
             Currencies = new ObservableCollection<Currency>();
 
+            TranslationCash = new ObservableCollection<Translation>();
+
+            Languages = new ObservableCollection<Language>();
+
+            AppStrings = new ObservableCollection<AppString>();
+
+            InitializeLanguages();
            
 
 
@@ -237,8 +251,17 @@ namespace MyMonify.Services
             });
         }
 
+        void InitializeLanguages()
+        {
+            IList<Tuple<string, string>> tuples = translator.GetAvailableLanguages();
 
-      
+            foreach (var tuple in tuples)
+            {
+                languages.Add(new Language { FullName = tuple.Item1, Code = tuple.Item2 });
+            }
+            Save();
+        }
+
 
         public void Save()
         {
@@ -309,17 +332,19 @@ namespace MyMonify.Services
 
         public void AddTranslation(Translation translation)
         {
-            throw new NotImplementedException();
+            TranslationCash.Add(translation);
+            Save();
         }
 
         public void AddAppString(AppString appString)
         {
-            throw new NotImplementedException();
+            AppStrings.Add(appString);
+            Save();
         }
 
         public string GetTranslation(string key)
         {
-            throw new NotImplementedException();
+            return translator.Translate(key);
         }
     }
 }
